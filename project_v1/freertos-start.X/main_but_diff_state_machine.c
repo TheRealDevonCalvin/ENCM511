@@ -1,3 +1,14 @@
+/*
+ * File:   main.c
+ * Author: Chloe Fulbrook, Ethan Lee, Devon Calvin
+ *
+ * Created FOR ENCM 511
+ * PLEASE ADD DATE CREATED HERE: 2025-11-08
+ * 
+ * FAILURE TO UPDATE THIS HEADER WITH YOUR GROUP MEMBER NAMES
+ * MAY RESULT IN PENALTIES
+ */
+
 // FSEC
 #pragma config BWRP = OFF    //Boot Segment Write-Protect bit->Boot Segment may be written
 #pragma config BSS = DISABLED    //Boot Segment Code-Protect Level bits->No Protection (other than BWRP)
@@ -76,13 +87,13 @@ void vApplicationIdleHook( void )
 }
 /*-----------------------------------------------------------*/
 
-uint8_t broked = 0;
+uint8_t broked = 0;     // DEBUG VARIABLE
 void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
 {
 	( void ) pcTaskName;
 	( void ) pxTask;
 
-    broked = 1;
+    broked = 1; // DEBUG
 	/* Run time stack overflow checking is performed if
 	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
 	function is called if a stack overflow is detected. */
@@ -91,53 +102,16 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
 	for( ;; );
 }
 
-static int counter = 0;
 
-void vTask1(void *pvParameters)
-{
-    for(;;)
-    {
-        xSemaphoreTake(uart_sem, portMAX_DELAY);
-        Disp2String("hello from Task 1\n\r");
-        xSemaphoreGive(uart_sem);
-        
-        vTaskDelay(pdMS_TO_TICKS(1000));
-    }
-}
 
-void vTask2(void *pvParameters)
-{
-    for(;;)
-    {
 
-        xSemaphoreTake(uart_sem, portMAX_DELAY);
-        Disp2String("hello from Task 2\n\r");
-        xSemaphoreGive(uart_sem);
-        
-        vTaskDelay(pdMS_TO_TICKS(500));
-    }
-}
-
-void vTask3(void *pvParameters)
-{
-    for(;;)
-    {
-
-        _LATB5 ^= 1;
-        
-        vTaskDelay(pdMS_TO_TICKS(200));
-    }
-}
-
-void prvHardwareSetup(void)
-{
+void prvHardwareSetup(void){
+    // this function calls the initializer functions required for the application
     TRISBbits.TRISB5 = 0;
     InitUART2();
     IOinit();
     timerInit();
-    
-    ADC1_init();
-    
+    ADC1_init();  
 }
 
 /*--------------- LED vars --------------------*/
@@ -322,6 +296,7 @@ typedef enum{
 
 #define tmr5ms pdMS_TO_TICKS(5)
 
+volatile uint16_t raw_adc_result;
 volatile uint16_t adc_result;
 
 volatile uint16_t led2_intensity;   // ideally, will be used to discover the relative(%maybe?) intensity of LED2 based on adc
@@ -342,10 +317,15 @@ typedef enum{
 typedef struct{
     display_cmd_t cmd;
     
-    uint16_t val1;
-    uint16_t val2;
+//    uint16_t val1;
+//    uint16_t val2;
     
-    char text[32];
+    char time[10];
+    uint16_t adc;
+    uint16_t intensity;
+    
+//    char text[32];
+    
 } display_msg_t;
 
 // vv currently used (above not rn)
@@ -462,14 +442,12 @@ void v_button_task(void *pvParameters){
                         }
                     }
                     
-                    // __________________________________________-
                     processed_event_t pevt;
                     pevt.ts = ts;
                     pevt.buttons_mask = candidates_mask;
                     pevt.type = all_long ? EVT_LONG_COMBO : EVT_COMBO;
                     
                     xQueueSend(ProcessedButtonQueue, &pevt, 0);
-                    // __________________________________________-
                     
                     if(all_long){
 //                        Disp2String("LONG combo: ");
@@ -573,22 +551,26 @@ void v_button_task(void *pvParameters){
 } // end button task
 
 void v_blink_callback_count(TimerHandle_t xTimer){
-    
-    led2_blink_phase ^= 1;  // toggles blinking phase
-                            // this is fine to run always, as we pick and choose when it is used
-
+    // this timer callback is responsible for creating the 1s blink rates of LEDs 1 and 2
+    led2_blink_phase ^= 1;  // toggles blinking phase of LED2. this is used in the LED2 state machine
     if(led1_blink_en){
+        // if LED1 is enabled to blink, toggles the pin at 1s intervals
         LED1 ^= 1;
     }
 }
 
 void v_blink_callback_alternating(TimerHandle_t xTimer){
+    // this timer callback is responsible for LEDs 0 and 1 blinking rapidly in an alternating fashion
+    // each LED state is toggled, but are alternating because upon starting the timer, they are in opposite states
     LED0 ^= 1;
     LED1 ^= 1;
 }
 
 void v_end_callback(TimerHandle_t xTimer){
+    // this timer callback runs once the 5 seconds of timeout have elapsed after the completion of the countdown
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+    
+    // the callback notifies the main state task that the timer has elapsed, and the main state deals with the transition
     xTaskNotifyFromISR(main_state_task_handler, (1<<NOTIFY_END_TIMEOUT), eSetBits, &xHigherPriorityTaskWoken);
     if(xHigherPriorityTaskWoken){
         portYIELD();
@@ -597,6 +579,7 @@ void v_end_callback(TimerHandle_t xTimer){
 
 
 void int_to_str_dec(uint16_t dec, char *str){
+    // a function that converts a decimal number to a string. this allows it to be used by the UART
     int i = 0;
     if(dec == 0){
         // if the number is just zero, put that in the string and move on
@@ -614,28 +597,44 @@ void int_to_str_dec(uint16_t dec, char *str){
     int start = 0;
     int end = i - 1;
     while(start < end){
-        // this loop just reverses the string so its the right order
+        // this loop just reverses the string so it's the right order
         char temp = str[start];
         str[start] = str[end];
         str[end] = temp;
         start++;
         end --;
     }
-    str[i] = '\0';
+    str[i] = '\0';  // null-terminate the string 
     return; 
 }
 
 void v_countdown_task(void *pvParameters){
+    // this task is responsible for the actual 
     TickType_t xLastWakeTime = xTaskGetTickCount();
     
     display_msg_t msg;
     
     for(;;){
         if(countdown_running && time_seconds > 0){
+            // if the countdown is running, and there is time left on it,
+            // we wait one second (using delayuntil to have better timing)
             vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(1000));
             
-            time_seconds--;
             
+            // --------------------------------------------------------------------------
+            // this needs to be checked with the timing of the countdown
+            // trying to use it to stop the prints after the pause/abort message
+            if(!countdown_running){
+                // resync timer anchor????
+                xLastWakeTime = xTaskGetTickCount();
+                continue;
+            }
+            // --------------------------------------------------------------------------
+            
+            
+            time_seconds--; // decrement the time remaining
+            
+            // calculate the minutes and seconds for display and package into a time string
             uint16_t t = time_seconds;
             uint8_t mm = t / 60;
             uint8_t ss = t % 60;
@@ -648,30 +647,43 @@ void v_countdown_task(void *pvParameters){
             time_string[5] = '\0';
             
             
+            uint8_t i; 
+            for(i = 0; time_string[i] != '\0'; i++){
+                msg.time[i] = time_string[i];
+            }
+            msg.time[i] = '\0';
+//            msg.time = time_string;
+            msg.adc = raw_adc_result;
+            msg.intensity = led2_intensity;
+            
+            // ------------------------------------------------------------------------------------
             // this should really go in a display function
             // i do not like how this is here. also like modularity ig
             // also eventually do one-line display or overwriting so its less spammy on the uart
+            // ------------------------------------------------------------------------------------
             if(display_mode == DISP_MODE_TIME){
-                xSemaphoreTake(uart_sem, portMAX_DELAY);
-                Disp2String(time_string);
-                Disp2String("\n\r");
-                xSemaphoreGive(uart_sem);
+//                xSemaphoreTake(uart_sem, portMAX_DELAY);
+//                Disp2String(time_string);
+//                Disp2String("\n\r");
+//                xSemaphoreGive(uart_sem);
+                msg.cmd = DISP_TIME;
             }
             else if(display_mode == DISP_MODE_FULL){
-                xSemaphoreTake(uart_sem, portMAX_DELAY);
-                Disp2String(time_string);
-                XmitUART2(' ', 1);
-                Disp2String("ADC reading: ");
-                char adc_str[10];
-                int_to_str_dec(adc_result, adc_str);
-                Disp2String(adc_str);
-                Disp2String(" LED2 Intensity: ");
-                char led_intensity_str[10];
-                led2_intensity = led2_variable_duty * 100 / 400;
-                int_to_str_dec(led2_intensity, led_intensity_str);
-                Disp2String(led_intensity_str);
-                Disp2String("\n\r");
-                xSemaphoreGive(uart_sem);
+//                xSemaphoreTake(uart_sem, portMAX_DELAY);
+//                Disp2String(time_string);
+//                XmitUART2(' ', 1);
+//                Disp2String("ADC reading: ");
+//                char adc_str[10];
+//                int_to_str_dec(raw_adc_result, adc_str);
+//                Disp2String(adc_str);
+//                Disp2String(" LED2 Intensity: ");
+//                char led_intensity_str[10];
+//                led2_intensity = led2_variable_duty * 100 / 400;
+//                int_to_str_dec(led2_intensity, led_intensity_str);
+//                Disp2String(led_intensity_str);
+//                Disp2String("%\n\r");
+//                xSemaphoreGive(uart_sem);
+                msg.cmd = DISP_FULL;
             }
             
 //            uint8_t i; 
@@ -680,22 +692,18 @@ void v_countdown_task(void *pvParameters){
 //            }
 //            msg.text[i] = '\0';
 //            msg.cmd = DISP_TIME;
-//            xQueueSend(DisplayQueue, &msg, 0);
+            xQueueSend(DisplayQueue, &msg, 0);
                 
             if(time_seconds == 0){
+                // once the timer has run out, notify the main task, and turn off the countdown
                 countdown_running = 0;
-                
-                // do we transition here or pass to main task to handle
-//                xTaskNotifyGive(main_state_task_handler);
-                
                 xTaskNotify(main_state_task_handler, (1<<NOTIFY_COUNTDOWN), eSetBits);
             }
-            
-            
         }
         else{
+            // if the countdown isn't running, we don't want to get stuck waiting for something to happen in this
+            // high priority task, so a short else-block runs to avoid starvation
             vTaskDelay(pdMS_TO_TICKS(10));
-            
             xLastWakeTime = xTaskGetTickCount();
         }
     }
@@ -716,10 +724,22 @@ void v_display_task(void *pvParametes){
                     
                     break;
                 case DISP_TIME:
-                    Disp2String(msg.text);
+                    Disp2String(msg.time);
                     Disp2String("\n\r");
                     break;
                 case DISP_FULL:
+                    Disp2String(msg.time);
+                    XmitUART2(' ', 1);
+                    Disp2String("ADC reading: ");
+                    char adc_str[10];
+                    int_to_str_dec(msg.adc, adc_str);
+                    Disp2String(adc_str);
+                    Disp2String(" LED2 Intensity: ");
+                    char led_intensity_str[10];
+//                    led2_intensity = led2_variable_duty * 100 / 400;
+                    int_to_str_dec(msg.intensity, led_intensity_str);
+                    Disp2String(led_intensity_str);
+                    Disp2String("%\n\r");
                     
                     break;
                 case DISP_TEXT:
@@ -737,258 +757,44 @@ void v_display_task(void *pvParametes){
         
         
     }// end for(;;)
-    
-    
-    
 }
-
-//void v_adc_task(void *pvParameters){
-//    uint16_t adc_val;
-//    //LED5 ^= 1;
-//    
-//    for(;;){
-//        if(xQueueReceive(adcQueue, &adc_val, portMAX_DELAY)){
-////            led2_variable_duty = adc_val;
-//            LED5 = (adc_val > 512);
-//            
-//            uint32_t temp = (uint32_t)adc_val * (uint32_t)PWM_PER;
-//            temp = temp / 1023U;
-//            if(temp > PWM_PER) temp = PWM_PER;
-//            if(led2_mode == LED_MODE_ON || led2_mode == LED_MODE_BLINK){
-//                led2_variable_duty = (uint16_t)temp;
-//            }
-//        }
-//    }// end for(;;)
-//}
-
-
 
 
 void v_main_state_task(void *pvParameters){
-
+    // this is the main task controlling the finite state machine running the application
 //    Disp2String("hello in main\n\r");
     
     processed_event_t pevt;
     uint32_t ulNotifiedValue = 0;
     for(;;){
-        // state logic?
-        while(xQueueReceive(ProcessedButtonQueue, &pevt, 0) == pdTRUE){     // funny if statement? wowuld if be better?
-            switch(pevt.type){
-                case EVT_CLICK:
-                    Disp2String("main see click");
-                    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-                        if(pevt.buttons_mask & (1 << i)){
-                            Disp2Dec(i + 1);
-                            Disp2String("\n\r");
-                        }
-                    }
-                    // deal with transition out of STATE_WAIT
-//                    if(curr_state == STATE_WAIT && (pevt.buttons_mask & (1 << 0))){
-                    if(curr_state == STATE_WAIT && (pevt.buttons_mask & PB1_MASK)){
-                        curr_state = STATE_INPUT;
-                        time_ready = 0;
-                        xSemaphoreTake(uart_sem, portMAX_DELAY);
-                        Disp2String("Enter a Time: mm:ss");
-                        Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
-                                                        // (the 15th character in the display)
-                        xSemaphoreGive(uart_sem);
-                    }        
-                    
-                    if(curr_state == STATE_COUNT && (pevt.buttons_mask & PB3_MASK)){
-                        countdown_running ^= 1;
-                        
-                        if(countdown_running == 0){
-                            xSemaphoreTake(uart_sem, portMAX_DELAY);
-                            Disp2String("Countdown Paused\n\r");
-                            xSemaphoreGive(uart_sem);
-                            if(xTimerIsTimerActive(led_blink_timer) == pdTRUE){
-                                xTimerStop(led_blink_timer, 0);
-                            }
-                        }
-                        else if(countdown_running == 1){
-                            xSemaphoreTake(uart_sem, portMAX_DELAY);
-                            Disp2String("Countdown Resumed\n\r");
-                            xSemaphoreGive(uart_sem);
-                            if(xTimerIsTimerActive(led_blink_timer) == pdFALSE){
-                                xTimerStart(led_blink_timer, 0);
-                            }
-                        }
-                    }
-                    break;
-                case EVT_LONG:
-                    Disp2String("main see LONG");
-                    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-                        if(pevt.buttons_mask & (1 << i)){
-                            Disp2Dec(i + 1);
-                            Disp2String("\n\r");
-                        }
-                    }
-                    
-                    if(curr_state == STATE_COUNT && (pevt.buttons_mask & PB3_MASK)){
-                        led1_blink_en = 0;
-                        led2_mode = LED_MODE_ON;
-                        LED0 = 1;
-                        LED1 = 0;
-                        xTimerStart(led_alternate_timer, 0);
-                        if(xTimerIsTimerActive(end_timer) == pdFALSE){
-                            xTimerStart(end_timer, 0);
-                        }
-                        
-                        time_seconds = 0;       // does time_seconds need a semaphore????
-                        countdown_running = 0;
-
-                        xSemaphoreTake(uart_sem, portMAX_DELAY);
-                        Disp2String("Countdown Aborted\n\r");
-                        xSemaphoreGive(uart_sem);
-
-                        curr_state = STATE_END;
-                    }
-                    break;
-                case EVT_COMBO:
-                    Disp2String("main see combo");
-                    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-                        if(pevt.buttons_mask & (1 << i)){
-                            Disp2Dec(i + 1);
-                            Disp2String("+");
-                        }
-                    }
-                    Disp2String("\n\r");
-                    
-                    // deal with pb2/pb3 clicks out of STATE_INPUT
-//                    if(curr_state == STATE_INPUT && (pevt.buttons_mask & (11 << 1))){
-                    if(curr_state == STATE_INPUT && (pevt.buttons_mask & PB2_PB3_MASK)){
-                        if(time_ready){
-                            curr_state = STATE_COUNT;
-                            Disp2String("yay count!\n\r");
-                            
-                            countdown_running = 1;
-                            
-                            // check these. aiming to use them to sync the blinking
-                            LED1 = 1;
-                            LED2 = 1;
-                            led1_blink_en = 1;
-                            led2_blink_phase = 1;
-                            
-                            led2_mode = LED_MODE_BLINK;     //moved here cause overwriting in fsm
-                        }
-                        else if(!time_ready){
-                            curr_state = STATE_INPUT;
-                            
-                            time_ready = 0;
-                            time_entry_index = 0;
-                            xSemaphoreTake(uart_sem, portMAX_DELAY);
-                            Disp2String("oops, time not ready!\n\r");
-                            Disp2String("Enter a Time: mm:ss");
-                            Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
-                                                            // (the 15th character in the display)
-                            xSemaphoreGive(uart_sem);
-                            for(uint8_t j = 0; j < NUM_ENTRY; j++){
-                                time_entry[j] = 0;
-                            }
-                            xQueueReset(UartRxQueue);       // clears the queue! so no carryover of jankiness
-                        }
-                    }
-                    
-                    break;
-                case EVT_LONG_COMBO:
-                    Disp2String("main see LONG combo");
-                    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-                        if(pevt.buttons_mask & (1 << i)){
-                            Disp2Dec(i + 1);
-                            Disp2String("+");
-                        }
-                    }
-                    Disp2String("\n\r");
-                    
-                    // deal w long PB2/PB3 to reset input in STATE_INPUT
-//                    if(curr_state == STATE_INPUT && (pevt.buttons_mask & (11 << 1))){
-                    if(curr_state == STATE_INPUT && (pevt.buttons_mask & PB2_PB3_MASK)){
-                        curr_state = STATE_INPUT; 
-                        time_ready = 0;
-                        time_entry_index = 0;
-                        xSemaphoreTake(uart_sem, portMAX_DELAY);
-                        Disp2String("Enter a Time: mm:ss");
-                        Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
-                                                        // (the 15th character in the display)
-                        xSemaphoreGive(uart_sem);
-                        for(uint8_t j = 0; j < NUM_ENTRY; j++){
-                            time_entry[j] = 0;
-                        }
-                        xQueueReset(UartRxQueue);
-                    }
-                    
-                    break;
-                    
-            }   // end switch(pevt.type)
-        }// end while(xQueueReceive)
-        
-        
-        
-        // signal end of countdown???
-//        if(ulTaskNotifyTake(pdTRUE, 0) > 0){
-//            
-//            if(curr_state != STATE_END){
-//                led1_blink_en = 0;
-//                led2_mode = LED_MODE_ON;
-//                LED0 = 1;
-//                LED1 = 0;
-//                xTimerStart(led_alternate_timer, 0);
-//                
-//                if(xTimerIsTimerActive(end_timer) == pdFALSE){
-//                    xTimerStart(end_timer, 0);
-//                }
-//                curr_state = STATE_END;
-//            }
-//            
-//        }
-        
-        if(xTaskNotifyWait(0x00, 0xFFFFFFFF, &ulNotifiedValue, pdMS_TO_TICKS(50)) == pdTRUE){
-            if(ulNotifiedValue & (1<<NOTIFY_COUNTDOWN)){
-                if(curr_state == STATE_COUNT){
-                    led1_blink_en = 0;
-                    led2_mode = LED_MODE_ON;
-                    LED0 = 1;
-                    LED1 = 0;
-                    xTimerStart(led_alternate_timer, 0);
-
-                    if(xTimerIsTimerActive(end_timer) == pdFALSE){
-                        xTimerStart(end_timer, 0);
-                    }
-                    
-                    xSemaphoreTake(uart_sem, portMAX_DELAY);
-                    Disp2String("Countdown Complete\n\r");
-                    xSemaphoreGive(uart_sem);
-                    
-                    curr_state = STATE_END;
-                }
-            }
-            if(ulNotifiedValue & (1<<NOTIFY_END_TIMEOUT)){
-                if(curr_state == STATE_END){
-                    LED0 = 0;
-                    LED1 = 0;
-                    if(xTimerIsTimerActive(led_alternate_timer) == pdTRUE){
-                        xTimerStop(led_alternate_timer, portMAX_DELAY);
-                    }
-                    
-                    xSemaphoreTake(uart_sem, portMAX_DELAY);
-                    Disp2String("Press PB1 to begin!\n\r");
-                    xSemaphoreGive(uart_sem);
-                    curr_state = STATE_WAIT;
-                }
-            }
-        }
-
+        uint8_t got_button = xQueueReceive(ProcessedButtonQueue, &pevt, 0) == pdTRUE;
+        uint8_t got_notify = xTaskNotifyWait(0x00, 0xFFFFFFFFUL, &ulNotifiedValue, 0) == pdTRUE;
         
         switch(curr_state){
             case STATE_WAIT:
                 // handle waiting behaviour
                 // this is LED pulsing
                 // click of PB1 to do the transition
-                //Disp2String("in wait state\n\r");
                 
                 pulse = 1;      // set LED2 to pulse according to the timer2
                 led2_mode = LED_MODE_PULSE;
                 
+                if(got_button){
+                    // deal with transition out of STATE_WAIT
+                    if(pevt.type == EVT_CLICK && (pevt.buttons_mask & PB1_MASK)){
+                        // transition occurs when PB1 is clicked in STATE_WAIT
+                        // essentially, if the button mask is the PB1 mask and we're in wait, because we're in the click 
+                        // part of the button type, this is a pb1 click
+                        curr_state = STATE_INPUT;   // transition state
+                        time_ready = 0;             // set the time ready flag to 0 (user hasn't inputted time yet)
+                        xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore to protect shared UART
+                        // display the time entry message
+                        Disp2String("Enter a Time: mm:ss");
+                        Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
+                                                        // (the 15th character in the display)
+                        xSemaphoreGive(uart_sem);   // return the semaphore so others can use UART
+                    }
+                }// end if(got_button)
                 break;
                 
             case STATE_INPUT:
@@ -1002,7 +808,68 @@ void v_main_state_task(void *pvParameters){
                 led2_mode = LED_MODE_OFF;
                 
                 
-                LED5 = 1;       // THIS IS A DEBUG!!! KILL LATER!!!!             
+                if(got_button){
+                    // deal with pb2/pb3 clicks out of STATE_INPUT
+                    if(pevt.type == EVT_COMBO && (pevt.buttons_mask & PB2_PB3_MASK)){
+                        // if in state input, and the combo event was on PB2 and PB3, 
+                        // we want to start the countdown (if the time is ready to go)
+                        if(time_ready){
+                            // if time is ready (user has input valid time)
+                            curr_state = STATE_COUNT;       // transition state to the count state
+                            
+                            // DEBUG ---------------------------------------------------------
+                            Disp2String("yay count!\n\r");
+                            //----------------------------------------------------------------
+                            
+                            countdown_running = 1;  // set the countdown running flag on
+                            
+                            //----------------------------------------------------------------
+                            // check these. aiming to use them to sync the blinking
+                            //----------------------------------------------------------------
+                            LED1 = 1;               // force LED1 and LED2 to be in the same phase??
+                            LED2 = 1;
+                            led1_blink_en = 1;      // enable the blinking of LED1
+                            led2_blink_phase = 1;   // force the blink phase of LED2 to on
+                            
+                            led2_mode = LED_MODE_BLINK; // set the mode of the led2 state machine to blink
+                        }
+                        else if(!time_ready){
+                            // if the time is not ready (user clicked before entering all digits or something)
+                            curr_state = STATE_INPUT;   // loop back to the input state
+                            
+                            time_ready = 0;         // set time ready flag to 0
+                            time_entry_index = 0;   // reset the time entry index for input collection
+                            xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore print message, return semaphore
+                            Disp2String("oops, time not ready!\n\r");
+                            Disp2String("Enter a Time: mm:ss");
+                            Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
+                                                            // (the 15th character in the display)
+                            xSemaphoreGive(uart_sem);
+                            for(uint8_t j = 0; j < NUM_ENTRY; j++){
+                                // loop over the time entry buffer and reset all of the values back to zero
+                                time_entry[j] = 0;
+                            }
+                            xQueueReset(UartRxQueue);       // clears the UART receive queue so no carryover of prev. chars
+                        }
+                    }
+                    // deal w long PB2/PB3 to reset input in STATE_INPUT
+                    if(pevt.type == EVT_LONG_COMBO && (pevt.buttons_mask & PB2_PB3_MASK)){
+                        // if in input state and the long combo was on PB2 and PB3, we want to reset the input
+                        curr_state = STATE_INPUT;   // loop back to state input
+                        time_ready = 0;             // set the ready flag to 0, as time is not ready
+                        time_entry_index = 0;       // reset the time entry index
+                        xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore, print, and return semaphore
+                        Disp2String("Enter a Time: mm:ss");
+                        Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
+                                                        // (the 15th character in the display)
+                        xSemaphoreGive(uart_sem);
+                        for(uint8_t j = 0; j < NUM_ENTRY; j++){
+                            // loop over the time entry buffer to reset it back to zero
+                            time_entry[j] = 0;
+                        }
+                        xQueueReset(UartRxQueue);   // clear the uart receive queue 
+                    }
+                }// end if(got_button)
                 
                 uint8_t recv_byte;
                 if(!time_ready){
@@ -1032,21 +899,10 @@ void v_main_state_task(void *pvParameters){
                             time_seconds = (time_entry[0] - '0') * 600 
                                          + (time_entry[1] - '0') * 60
                                          + (time_entry[2] - '0') * 10
-                                         + (time_entry[3] - '0');
-                            
-                            
-//                            Disp2String("\n\rtime in seconds: ");
-//                            Disp2Dec(time_seconds);
-//                            Disp2String("\n\r");
-                            
+                                         + (time_entry[3] - '0');                            
                         }
                     }
-                }
-                
-                
-                
-                //Disp2String("STATE INPUT!!");
-                
+                }                
                 break;
                 
             case STATE_COUNT:
@@ -1062,15 +918,89 @@ void v_main_state_task(void *pvParameters){
                 // if 'b' entered on UART, toggle LED2 blinking or solid
                 
                 // exit upon timer elapse
+
                 
+                if(got_button){
+                    // deal w the pause/restart of the count
+                    if(pevt.type == EVT_CLICK && (pevt.buttons_mask & PB3_MASK)){
+                        // if we're in the count state and the processed button mask was the PB3 mask
+                        // bc we're in the click part of the button type, it was a pb3 click
+                        countdown_running ^= 1; // so toggle whether the countdown is running
+                        
+                        if(countdown_running == 0){
+                            // if the countdown is no longer running, 
+                            xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the UART semaphore
+                            Disp2String("Countdown Paused\n\r");        // print that the countdown has been paused
+                            xSemaphoreGive(uart_sem);                   // return the semaphore!
+                            if(xTimerIsTimerActive(led_blink_timer) == pdTRUE){
+                                // if the blinking timer is running, we want to stop it, as on countdown pause the 
+                                // blinking lights should also pause
+                                xTimerStop(led_blink_timer, 0); // so stop timer
+                            }
+                        }
+                        else if(countdown_running == 1){
+                            // otherwise if the countdown is now running, 
+                            xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the UART semaphore
+                            Disp2String("Countdown Resumed\n\r");       // print that the countdown has resumed
+                            xSemaphoreGive(uart_sem);                   // give the semaphore back
+                            if(xTimerIsTimerActive(led_blink_timer) == pdFALSE){
+                                // if the blinking timer is NOT running, we need to start it up again
+                                xTimerStart(led_blink_timer, 0);    // so call it to start
+                            }
+                        }
+                    }
+                    // to abort the countdown
+                    if(pevt.type == EVT_LONG && (pevt.buttons_mask & PB3_MASK)){
+                        // if we are in the count state and the long press was on PB3, we want to abort countdown
+                        led1_blink_en = 0;          // disable the LED1 blinking
+                        led2_mode = LED_MODE_ON;    // turn LED2 to its constant on state
+                        LED0 = 1;                   // set LED0 and LED1 to opposite states, to allow for alternating blinking
+                        LED1 = 0;
+                        xTimerStart(led_alternate_timer, 0);    // start the alternating timer
+                        if(xTimerIsTimerActive(end_timer) == pdFALSE){
+                            // if the end timer is not currently running, start it 
+                            // this is the 5s timeout before returning to the waiting state
+                            xTimerStart(end_timer, 0);
+                        }
+                        
+                        //----------------------------------------------------------------
+                        // does time_seconds need a semaphore????
+                        //----------------------------------------------------------------
+                        
+                        time_seconds = 0;       // force the countdown amount back to 0 to reset
+                        countdown_running = 0;  // stop the counter running
+
+                        xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore, print that countdown aborted, and return sem
+                        Disp2String("Countdown Aborted\n\r");
+                        xSemaphoreGive(uart_sem);
+
+                        curr_state = STATE_END;     // transition the current state to STATE_END
+                    }                    
+                }// end if(got_button)
                 
-                // vv moved to the transition to avoid rapid resetting
-                // still debating whether the initial displays should be in the state or on the transition edge???
-                //led1_blink_en = 1;
-                //led2_mode = LED_MODE_BLINK;
+                if(got_notify && (ulNotifiedValue & (1<<NOTIFY_COUNTDOWN))){
+                    // if the current state is the countdown state,
+                    led1_blink_en = 0;          // enable the led1 to blink 
+                    led2_mode = LED_MODE_ON;    // force led2 to constant on
+                    LED0 = 1;                   // force LEDs 0 and 1 to opposite states so the alternating blink works
+                    LED1 = 0;
+                    xTimerStart(led_alternate_timer, 0);    // and start the alternating blink timer
+
+                    if(xTimerIsTimerActive(end_timer) == pdFALSE){
+                        // if the end timeout timer is not currently running, we start it
+                        // this provides the 5s timeout after the countdown completes
+                        xTimerStart(end_timer, 0);
+                    }
+
+                    xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the semaphore, print completion message, give back sem
+                    Disp2String("Countdown Complete\n\r");
+                    xSemaphoreGive(uart_sem);
+
+                    curr_state = STATE_END; // transition the state to the end state
+                }
                 
-                /*-----------current working on---------------*/
                 if(xQueueReceive(UartRxQueue, &recv_byte, 10) == pdTRUE){
+                    
                     char c = (char)recv_byte;
                     if(c == 'b'){
                         Disp2String("char b was entered\n\r");
@@ -1083,32 +1013,9 @@ void v_main_state_task(void *pvParameters){
                         
                         if(display_mode == DISP_MODE_TIME) display_mode = DISP_MODE_FULL;
                         else if(display_mode == DISP_MODE_FULL) display_mode = DISP_MODE_TIME;
-                        
-                        
                     }              
-                    
-                    
-                    // forces transition
-                    // THIS IS A DEBUG TAKE IT OUT LATER!!!!!!!!!!!!!!!!
-//                    if(c == 't'){
-//                        led1_blink_en = 0;
-//                        led2_mode = LED_MODE_ON;
-//                        LED0 = 1;
-//                        LED1 = 0;
-//                        xTimerStart(led_alternate_timer, 0);
-//                        xTimerStart(end_timer, 0);
-//                        curr_state = STATE_END;
-//                    }
-                    
-                    
                     xQueueReset(UartRxQueue);       // idk if this is exactly how this should be??
-                }
-                    
-                    
-                /*-----------END current working on ---------------*/
-                
-                
-                
+                }                
                 break;
                 
             case STATE_END:
@@ -1117,24 +1024,27 @@ void v_main_state_task(void *pvParameters){
                 // LED2 solidly on (still pot for brightness)
                 
                 // after 5s elapsed, go back to wait
-                
-                //xTimerStart(led_alternate_timer, 0);
-                
-                
-                // vv this is good, just needs to go on the edge transition. 
-//                led1_blink_en = 0;
-//                led2_mode = LED_MODE_ON;
-//                LED0 = 1;
-//                LED1 = 0;
-//                xTimerStart(led_alternate_timer, 0);
-                
+                                
+                if(got_notify && (ulNotifiedValue & (1 << NOTIFY_END_TIMEOUT))){
+                    // if the notified value was the timeout end notification (after the 5s timeout after countdown)
+     
+                    // if current state is the end state
+                    LED0 = 0;       // turn LEDs 1 and 0 off
+                    LED1 = 0;
+                    if(xTimerIsTimerActive(led_alternate_timer) == pdTRUE){
+                        // if the alternating timer is currently on, we turn it off
+                        xTimerStop(led_alternate_timer, portMAX_DELAY);
+                    }
+                    
+                    xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the semaphore, print the wait state message, and return sem
+                    Disp2String("Press PB1 to begin!\n\r");
+                    xSemaphoreGive(uart_sem);
+                    curr_state = STATE_WAIT;    // transition back to the waiting state                   
+                }                
                 break;
-            
-        }   // end switch(curr_state)
+        }// end switch
     }// end for(;;)
 }// end main_state_task()
-
-
 
 
 int main(void) {
@@ -1144,41 +1054,32 @@ int main(void) {
     ANSELA = 0x0000; /* keep this line as it sets I/O pins that can also be analog to be digital */
     ANSELB = 0x0000; /* keep this line as it sets I/O pins that can also be analog to be digital */
     
-    ANSELB |= 0b1000; // set RB3 (pin 7) to be analog input 
+    ANSELB |= 0b1000; // set RB3 (pin 7) to be analog input for ADC potentiometer
     
-    //ANSELBbits.ANSB9 = 0;
+    // DEBUGS again, take them out!!!
+    // ----------------------------------------------------------------
     TRISBbits.TRISB9 = 1;
     TRISBbits.TRISB15 = 0;
     TRISBbits.TRISB14 = 0;
     LED4 = 0;
     LED5 = 0;
+    // ----------------------------------------------------------------
 
     // help w init bounce maybe?
     b_after_debounce[0] = PORTAbits.RA4;
     b_after_debounce[1] = PORTBbits.RB8;
     b_after_debounce[2] = PORTBbits.RB9;
-    
-    
-//	xTaskCreate( vTask1, "Task1", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
-//    xTaskCreate( vTask2, "Task2", configMINIMAL_STACK_SIZE, NULL, 2, NULL );
-//    xTaskCreate( vTask3, "Task3", configMINIMAL_STACK_SIZE, NULL, 3, NULL );
-    
-    
+   
     uart_sem = xSemaphoreCreateMutex();
-    
     led2_sem = xSemaphoreCreateMutex();
     
     ButtonQueueHandle = xQueueCreate(10, sizeof(button_event_t));
-    
     ProcessedButtonQueue = xQueueCreate(10, sizeof(processed_event_t));
-    
     UartRxQueue = xQueueCreate(32, sizeof(uint8_t));    // uint8_t == char so all is well
-    
     DisplayQueue = xQueueCreate(10, sizeof(display_msg_t));
+
     
-    adcQueue = xQueueCreate(10, sizeof(uint16_t));
-    
-    
+    // CONSIDER if we swap prio of button and countdown, do we fix that overflow stuff?
     xTaskCreate(v_button_task, "Button Task", configMINIMAL_STACK_SIZE * 2, NULL, 3, NULL);
     xTaskCreate(v_main_state_task, "Main State", configMINIMAL_STACK_SIZE * 4, NULL, 2, &main_state_task_handler);
     
@@ -1186,14 +1087,12 @@ int main(void) {
     
     xTaskCreate(v_display_task, "Display Task", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
     
-    //xTaskCreate(v_adc_task, "ADC Task", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
     
     static uint8_t timer_ids[NUM_BUTTONS];
     for(uint8_t i = 0; i < NUM_BUTTONS; i++){
         timer_ids[i] = i;
         DebounceTimers[i] = xTimerCreate("Debounce Timer", DEBOUNCE_DELAY, pdFALSE, (void *)(uintptr_t)i, v_timer_callback);
     }
-    
     
     led_blink_timer = xTimerCreate("Blink Timer", BLINK_RATE, pdTRUE, (void *)0, v_blink_callback_count);
     xTimerStart(led_blink_timer, 0);
@@ -1207,14 +1106,16 @@ int main(void) {
     Disp2String("Press PB1 to begin!\n\r");
     xSemaphoreGive(uart_sem);
     
+    // some of this is DEBUG
     LED1 = 0;
     LED0 = 1;
     LED5 = 1;
     LED4 = 0;
+    
+    
     TMR2 = 0;
     PR2 = PWM_TON;
     T2CONbits.TON = 1;
-    
     
     
     TMR3 = 0;
@@ -1228,71 +1129,86 @@ int main(void) {
     for(;;);
 }
 
-
-
 void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void){
     /*
-     * pulsing?????
+     * the T2 interrupt handles the small state machine on LED2. This LED must be able to pulse, blink, 
+     * and be steady on/off, as well as maintain a variable intensity as given by the ADC potentiometer.
+     * Because of the multiple modes, it makes sense to implement the LED as a state machine.
+     * 
+     * We use a hardware timer for this to ensure responsiveness to the PWM changes. 
      */
-    //LED0 ^= 1;
     
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
     TMR2 = 0;               // reset the timer start count
     IFS0bits.T2IF = 0;      // clear the interrupt flag
-    uint16_t duty;
+    uint16_t duty;          // an intermediate/internal variable to hold the current duty cycle
     
     switch(led2_mode){
+        // switch on the mode of the LED2 state machine
         case LED_MODE_OFF:
+            // if the led should be off, disable output and set the duty to 0
             led2_output_en = 0;
             duty = 0;
             break;
         case LED_MODE_ON:
+            // if the led should be constantly on, enable the output and adjust the variable duty according to the ADC reading
             led2_output_en = 1;
-            xSemaphoreTakeFromISR(led2_sem, &xHigherPriorityTaskWoken);
+            xSemaphoreTakeFromISR(led2_sem, &xHigherPriorityTaskWoken); // semaphore protected bc duty gets modified in the adc isr also
             duty = led2_variable_duty;
             xSemaphoreGiveFromISR(led2_sem, &xHigherPriorityTaskWoken);
             break;
         case LED_MODE_BLINK:
+            // if the led should be blinking, set the variably duty according to the adc
+            xSemaphoreTakeFromISR(led2_sem, &xHigherPriorityTaskWoken);
             duty = led2_variable_duty;
-            led2_output_en = led2_blink_phase;            
+            xSemaphoreGiveFromISR(led2_sem, &xHigherPriorityTaskWoken);
+            led2_output_en = led2_blink_phase;  // and enable the output based on the phase of the blinking        
             break;
         case LED_MODE_PULSE:
-            led2_output_en = 1;
+            // if the led should be pulsing (as in the wait state of the fsm)
+            led2_output_en = 1; // enable output
             if(dec){
+                // if the decreasing flag is on, we decrease the pwm on time by pulse_step_size to decrease duty
                 PWM_TON -= PULSE_STEP_SIZE;
                 if(PWM_TON <= PULSE_STEP_SIZE){
+                    // now if the next step will wrap the variable, change the decreasing flag to increasing
                     dec = 0;
                 }
             }
             if(!dec){
+                // if the decreasing flag is off, increase the pwm on time by pulse_step_size to increase duty
                 PWM_TON += PULSE_STEP_SIZE;
                 if(PWM_TON >= PWM_PER - PULSE_STEP_SIZE){
+                    // if the next step will go past the period of the pwm, swap to be increasing
                     dec = 1;
                 }
             }
-            duty = PWM_TON;
+            duty = PWM_TON; // assign the on time of the pwm to the duty for later use
             break;        
     }// end switch(led2_mode)
 
     if(led2_output_en){
+        // if the output is enabled, create the pwm based on the earlier assigned duty
         if(pwm_on){
-            LED2 = 0;
-            PR2 = PWM_PER - duty;
-            pwm_on = 0;
+            // if the pwm_on is high, do one phase of the pwm
+            LED2 = 0;               // turn led2 off
+            PR2 = PWM_PER - duty;   // set the timer count to the period-duty
+            pwm_on = 0;             // switch the flag
         }
         else{
-            LED2 = 1;
-            PR2 = duty;
-            pwm_on = 1;
+            LED2 = 1;               // turn led2 on
+            PR2 = duty;             // set timer count to the duty cycle 
+            pwm_on = 1;             // switch the flag
         }
     }
     else{
+        // if the led2 output is not enabled, force LED2 off
         LED2 = 0;
     }
     
     if(xHigherPriorityTaskWoken) {
-        portYIELD();  // triggers context switch
+        portYIELD();  // triggers context switch if a higher priority task is woken
     }
 }
 
@@ -1343,7 +1259,6 @@ void __attribute__ ((interrupt, no_auto_psv)) _IOCInterrupt(void){
         b_before_debounce[2] = PORTBbits.RB9;
         if(b_before_debounce[2] != b_last_valid[2]){
             debounce_done[2] = 0;
-
             if(debounce_active[2]){
             }
             else{
@@ -1363,47 +1278,49 @@ void __attribute__ ((interrupt, no_auto_psv)) _IOCInterrupt(void){
 
 
 void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void){
+    /*
+     * The adc interrupt handles the potentiometer-set variable brightness of LED2. 
+     * For this application, we are not polling the done bit, rather relying on the ISR. 
+     * The adc is set according to the running of T3, so it runs periodically to allow for responsiveness
+     */
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-    uint32_t sum = 0;
-    LED4 ^= 1;
+
+    // --------------------------------------------------------------------------
+    LED4 ^= 1;      // DEBUG remove later
+    // --------------------------------------------------------------------------
     
-//    sum += ADC1BUF0;
-//    sum += ADC1BUF1;
-//    sum += ADC1BUF2;
-//    sum += ADC1BUF3;
-//    
-//    uint16_t avg = (uint16_t)(sum >> 2);    // div with right shift cause faster than floating point
+    raw_adc_result = ADC1BUF0;      // store the result in the adc buffer as the raw result
+                                    // necessary as raw result is used to display the adc reading on the screen
     
-    // ^^ was gonna average but that takes longer and makes the intensity less like 
+    adc_result = raw_adc_result;    // set the adc result as the raw to help with clipping
     
-    adc_result = ADC1BUF0;
+    // --------------------------------------------------------------------------
+    // not entirely sure what happens, but if these aren't clipped it janks and the LED gets stuck at an extreme
+    // (though idk if its this clipping or the one with temp that actually fixes it?)
+    // there's some sort of overflow problem basically im pretty sure
+    // --------------------------------------------------------------------------
     
+    // here we're clipping the adc result to avoid overflowing or breaking the pwm
     if(adc_result >= 1023) adc_result = 1022;
     if(adc_result <= 0) adc_result = 1;
-    
-//    uint32_t temp = (uint32_t)(((uint64_t)avg * (uint64_t)PWM_PER) / 1023U);
-
+        
+    // transform the adc result into essentially a duty cycle, clipping if necessary
     uint32_t temp = ((uint32_t)adc_result * PWM_PER) / 1023U;
-    //temp = temp / 1023U;
     if(temp > PWM_PER) temp = PWM_PER;
     if(temp <= 1) temp = 1;
 
+    // we protect the variable duty with a semaphore to avoid races when both the adc may be modifying the variable 
+    // and the led2 state machine may be reading it
     xSemaphoreTakeFromISR(led2_sem, &xHigherPriorityTaskWoken);
     led2_variable_duty = (uint16_t)temp;
+    led2_intensity = led2_variable_duty * 100 / 400;
     xSemaphoreGiveFromISR(led2_sem, &xHigherPriorityTaskWoken);
     
     
-//    if(led2_mode == LED_MODE_ON || led2_mode == LED_MODE_BLINK){
-//        led2_variable_duty = (uint16_t)temp;
-//    }
-
     
-    //xQueueSendFromISR(adcQueue, &avg, &xHigherPriorityTaskWoken);
-    // ^^ was gonna queue but again, takes additional time and makes less responsive
-    
-    IFS0bits.AD1IF = 0;
+    IFS0bits.AD1IF = 0; // clear the adc interrupt flag
     
     if(xHigherPriorityTaskWoken) {
-        portYIELD();  // triggers context switch
+        portYIELD();  // triggers context switch if a higher priority task is woken
     }
 }

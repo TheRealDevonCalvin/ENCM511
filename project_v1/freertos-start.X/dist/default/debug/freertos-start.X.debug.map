@@ -4,13 +4,13 @@ Tool Name:
   c:\program files\microchip\xc16\v2.10\bin\bin\..\bin/elf-ld.exe
 
 Command:
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.00 \
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.01 \
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.02 \
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.03 \
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.04 \
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.05 \
-  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00004d74.06 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.00 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.01 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.02 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.03 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.04 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.05 \
+  -TC:\\Users\\fulbr\\AppData\\Local\\Temp\\tmp00000d6c.06 \
   -p24FJ256GA702 \
   --mdfp=C:/Program Files/Microchip/MPLABX/v6.25/packs/Microchip/PIC24F-GA-GB_DFP/1.10.375/xc16 \
   -o \
@@ -37,8 +37,8 @@ Command:
   build/default/debug/FreeRTOS/timers.o \
   build/default/debug/uart.o \
   build/default/debug/init.o \
-  build/default/debug/another_testmain_v3_current_work.o \
   build/default/debug/adc.o \
+  build/default/debug/main_but_new_debounce_current.o \
   --local-stack \
   --defsym=__MPLAB_BUILD=1 \
   --defsym=__MPLAB_DEBUG=1 \
@@ -93,10 +93,6 @@ c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spack
                               c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o) (__spackf)
 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
                               c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o) (__unpackf)
-c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
-                              build/default/debug/another_testmain_v3_current_work.o (___udivdi3)
-c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(muldi3.DA_o)
-                              build/default/debug/another_testmain_v3_current_work.o (___muldi3)
 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
                               c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o) (_errno)
 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
@@ -105,8 +101,6 @@ c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(float
                               c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o) (___floatundisf)
 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
                               c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o) (__fpack)
-c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
-                              c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(muldi3.DA_o) (___umuldi3)
 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
                               build/default/debug/uart.o (_pow)
 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(scalbn.DA_o)
@@ -188,13 +182,13 @@ Default Scalar Model: Small
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x100              0x1eb2          0x2e0b  (11787)
-.const                      0x1fb2               0x22c           0x342  (834)
-.text                       0x21de              0x4b5c          0x710a  (28938)
-.dinit                      0x6d3a                0x86            0xc9  (201)
-.text                       0x6dc0                0xd8           0x144  (324)
+.text                        0x100              0x1b60          0x2910  (10512)
+.const                      0x1c60               0x1fc           0x2fa  (762)
+.text                       0x1e5c              0x4890          0x6cd8  (27864)
+.dinit                      0x66ec                0x88            0xcc  (204)
+.text                       0x6774                0xd8           0x144  (324)
 
-                 Total "program" memory used (bytes):         0xa464  (42084) 15%
+                 Total "program" memory used (bytes):         0x9af2  (39666) 15%
 
 
 "data" Memory  [Origin = 0x800, Length = 0x4000]
@@ -209,17 +203,17 @@ reserve_data_0x822           0x822                 0x2             0x2  (2)
 reserve_data_0x824           0x824                 0x4             0x4  (4)
 .ndata                       0x828                   0             0x2  (2)
 reserve_data_0x82a           0x82a                0x26            0x26  (38)
-.nbss                        0x850                   0            0x56  (86)
-.ndata                       0x8a6                   0             0xc  (12)
-.nbss                        0x8b2                   0             0xe  (14)
-.nbss                        0x8c0                   0             0x4  (4)
-.bss                         0x8c4                   0          0x14ae  (5294)
-.data                       0x1d72                   0            0x18  (24)
-.bss                        0x1d8a                   0            0x14  (20)
-.data                       0x1d9e                   0             0x6  (6)
-.bss                        0x1da4                   0             0x2  (2)
+.nbss                        0x850                   0            0x60  (96)
+.ndata                       0x8b0                   0             0xe  (14)
+.nbss                        0x8be                   0             0xe  (14)
+.nbss                        0x8cc                   0             0x4  (4)
+.bss                         0x8d0                   0          0x14ae  (5294)
+.data                       0x1d7e                   0            0x18  (24)
+.bss                        0x1d96                   0            0x14  (20)
+.data                       0x1daa                   0             0x6  (6)
+.bss                        0x1db0                   0             0x2  (2)
 
-                 Total "data" memory used (bytes):         0x15a6  (5542) 33%
+                 Total "data" memory used (bytes):         0x15b2  (5554) 33%
 
 
 Dynamic Memory Usage
@@ -227,9 +221,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                       0x1da6                              0x2a5a  (10842)
+stack                       0x1db2                              0x2a4e  (10830)
 
-                 Maximum dynamic memory (bytes):         0x2a5a  (10842)
+                 Maximum dynamic memory (bytes):         0x2a4e  (10830)
 
 Info: Project is using a large data memory model when small data memory model is sufficient.
 
@@ -239,7 +233,8 @@ External Symbols in Data Memory (by address):
                     0x0828                  _uxCriticalNesting
                     0x0850                  _uart_sem
                     0x0852                  _led2_sem
-                    0x0854                  _broked
+                    0x0854                  _button_sem
+                    0x0856                  _broked
                     0x0858                  _led_blink_timer
                     0x085a                  _led_alternate_timer
                     0x085c                  _led2_mode
@@ -252,625 +247,616 @@ External Symbols in Data Memory (by address):
                     0x0868                  _UartRxQueue
                     0x086a                  _DisplayQueue
                     0x086c                  _adcQueue
-                    0x086e                  _main_state_task_handler
-                    0x0870                  _time_ready
-                    0x0871                  _time_entry_index
-                    0x0872                  _time_seconds
-                    0x0874                  _countdown_running
-                    0x0876                  _end_timer
-                    0x0878                  _adc_result
-                    0x087a                  _led2_intensity
-                    0x087c                  _pxCurrentTCB
-                    0x087e                  _pxDelayedTaskList
-                    0x0880                  _pxOverflowDelayedTaskList
-                    0x0882                  _uxCurrentNumberOfTasks
-                    0x0884                  _xTickCount
-                    0x0886                  _uxTopReadyPriority
-                    0x0888                  _xSchedulerRunning
-                    0x088a                  _xPendedTicks
-                    0x088c                  _xYieldPendings
-                    0x088e                  _xNumOfOverflows
-                    0x0890                  _uxTaskNumber
-                    0x0892                  _xNextTaskUnblockTime
-                    0x0894                  _xIdleTaskHandles
-                    0x0896                  _uxSchedulerSuspended
-                    0x0898                  _pxDelayedCoRoutineList
-                    0x089a                  _pxOverflowDelayedCoRoutineList
-                    0x089c                  _pxCurrentCoRoutine
-                    0x089e                  _uxTopCoRoutineReadyPriority
-                    0x08a0                  _xCoRoutineTickCount
-                    0x08a2                  _xLastTickCount
-                    0x08a4                  _xPassedTicks
-                    0x08a6                  _PWM_TON
-                    0x08a8                  _PWM_TOFF
-                    0x08aa                  _PWM_PER
-                    0x08ac                  _pwm_on
-                    0x08ad                  _dec
-                    0x08ae                  _pulse
-                    0x08b0                  _led2_variable_duty
-                    0x08c0                  _received_char
-                    0x08c1                  _RXFlag
-                    0x1cc4                  _pxReadyTasksLists
-                    0x1cec                  _xDelayedTaskList1
-                    0x1cf6                  _xDelayedTaskList2
-                    0x1d00                  _xPendingReadyList
-                    0x1d0a                  _xSuspendedTaskList
-                    0x1d14                  _pxReadyCoRoutineLists
-                    0x1d28                  _xDelayedCoRoutineList1
-                    0x1d32                  _xDelayedCoRoutineList2
-                    0x1d3c                  _xPendingReadyCoRoutineList
-                    0x1d46                  _DebounceTimers
-                    0x1d4c                  _b_before_debounce
-                    0x1d4f                  _b_after_debounce
-                    0x1d52                  _b_press_times
-                    0x1d58                  _b_release_times
-                    0x1d5e                  _debounce_active
-                    0x1d61                  _debounce_done
-                    0x1d64                  _time_entry
-                    0x1d68                  _time_string
-                    0x1d9e                  _b_last_valid
-                    0x1da1                  _b_handled
-                    0x1da4                  ___errno_val
+                    0x086e                  _DebounceQueue
+                    0x0870                  _main_state_task_handler
+                    0x0872                  _active_press
+                    0x0876                  _time_ready
+                    0x0877                  _time_entry_index
+                    0x0878                  _time_seconds
+                    0x087a                  _countdown_running
+                    0x087c                  _end_timer
+                    0x087e                  _raw_adc_result
+                    0x0880                  _adc_result
+                    0x0882                  _led2_intensity
+                    0x0884                  _display_mode
+                    0x0886                  _pxCurrentTCB
+                    0x0888                  _pxDelayedTaskList
+                    0x088a                  _pxOverflowDelayedTaskList
+                    0x088c                  _uxCurrentNumberOfTasks
+                    0x088e                  _xTickCount
+                    0x0890                  _uxTopReadyPriority
+                    0x0892                  _xSchedulerRunning
+                    0x0894                  _xPendedTicks
+                    0x0896                  _xYieldPendings
+                    0x0898                  _xNumOfOverflows
+                    0x089a                  _uxTaskNumber
+                    0x089c                  _xNextTaskUnblockTime
+                    0x089e                  _xIdleTaskHandles
+                    0x08a0                  _uxSchedulerSuspended
+                    0x08a2                  _pxDelayedCoRoutineList
+                    0x08a4                  _pxOverflowDelayedCoRoutineList
+                    0x08a6                  _pxCurrentCoRoutine
+                    0x08a8                  _uxTopCoRoutineReadyPriority
+                    0x08aa                  _xCoRoutineTickCount
+                    0x08ac                  _xLastTickCount
+                    0x08ae                  _xPassedTicks
+                    0x08b0                  _PWM_TON
+                    0x08b2                  _PWM_TOFF
+                    0x08b4                  _PWM_PER
+                    0x08b6                  _pwm_on
+                    0x08b7                  _dec
+                    0x08b8                  _pulse
+                    0x08ba                  _led2_variable_duty
+                    0x08bc                  _last_stable_state
+                    0x08cc                  _received_char
+                    0x08cd                  _RXFlag
+                    0x1cd0                  _pxReadyTasksLists
+                    0x1cf8                  _xDelayedTaskList1
+                    0x1d02                  _xDelayedTaskList2
+                    0x1d0c                  _xPendingReadyList
+                    0x1d16                  _xSuspendedTaskList
+                    0x1d20                  _pxReadyCoRoutineLists
+                    0x1d34                  _xDelayedCoRoutineList1
+                    0x1d3e                  _xDelayedCoRoutineList2
+                    0x1d48                  _xPendingReadyCoRoutineList
+                    0x1d52                  _DebounceTimers
+                    0x1d58                  _b_before_debounce
+                    0x1d5b                  _b_after_debounce
+                    0x1d5e                  _b_press_times
+                    0x1d64                  _b_release_times
+                    0x1d6a                  _debounce_active
+                    0x1d6d                  _debounce_done
+                    0x1d70                  _time_entry
+                    0x1d74                  _time_string
+                    0x1daa                  _b_last_valid
+                    0x1dad                  _b_handled
+                    0x1db0                  ___errno_val
 
 External Symbols in Data Memory (by name):
 
                     0x0864                  _ButtonQueueHandle
-                    0x1d46                  _DebounceTimers
+                    0x086e                  _DebounceQueue
+                    0x1d52                  _DebounceTimers
                     0x086a                  _DisplayQueue
-                    0x08aa                  _PWM_PER
-                    0x08a8                  _PWM_TOFF
-                    0x08a6                  _PWM_TON
+                    0x08b4                  _PWM_PER
+                    0x08b2                  _PWM_TOFF
+                    0x08b0                  _PWM_TON
                     0x0866                  _ProcessedButtonQueue
-                    0x08c1                  _RXFlag
+                    0x08cd                  _RXFlag
                     0x0868                  _UartRxQueue
-                    0x1da4                  ___errno_val
+                    0x1db0                  ___errno_val
+                    0x0872                  _active_press
                     0x086c                  _adcQueue
-                    0x0878                  _adc_result
-                    0x1d4f                  _b_after_debounce
-                    0x1d4c                  _b_before_debounce
-                    0x1da1                  _b_handled
-                    0x1d9e                  _b_last_valid
-                    0x1d52                  _b_press_times
-                    0x1d58                  _b_release_times
-                    0x0854                  _broked
-                    0x0874                  _countdown_running
+                    0x0880                  _adc_result
+                    0x1d5b                  _b_after_debounce
+                    0x1d58                  _b_before_debounce
+                    0x1dad                  _b_handled
+                    0x1daa                  _b_last_valid
+                    0x1d5e                  _b_press_times
+                    0x1d64                  _b_release_times
+                    0x0856                  _broked
+                    0x0854                  _button_sem
+                    0x087a                  _countdown_running
                     0x0862                  _curr_state
-                    0x1d5e                  _debounce_active
-                    0x1d61                  _debounce_done
-                    0x08ad                  _dec
-                    0x0876                  _end_timer
+                    0x1d6a                  _debounce_active
+                    0x1d6d                  _debounce_done
+                    0x08b7                  _dec
+                    0x0884                  _display_mode
+                    0x087c                  _end_timer
+                    0x08bc                  _last_stable_state
                     0x085f                  _led1_blink_en
                     0x085e                  _led2_blink_phase
-                    0x087a                  _led2_intensity
+                    0x0882                  _led2_intensity
                     0x085c                  _led2_mode
                     0x0860                  _led2_output_en
                     0x0852                  _led2_sem
-                    0x08b0                  _led2_variable_duty
+                    0x08ba                  _led2_variable_duty
                     0x085a                  _led_alternate_timer
                     0x0858                  _led_blink_timer
-                    0x086e                  _main_state_task_handler
-                    0x08ae                  _pulse
-                    0x08ac                  _pwm_on
-                    0x089c                  _pxCurrentCoRoutine
-                    0x087c                  _pxCurrentTCB
-                    0x0898                  _pxDelayedCoRoutineList
-                    0x087e                  _pxDelayedTaskList
-                    0x089a                  _pxOverflowDelayedCoRoutineList
-                    0x0880                  _pxOverflowDelayedTaskList
-                    0x1d14                  _pxReadyCoRoutineLists
-                    0x1cc4                  _pxReadyTasksLists
-                    0x08c0                  _received_char
-                    0x1d64                  _time_entry
-                    0x0871                  _time_entry_index
-                    0x0870                  _time_ready
-                    0x0872                  _time_seconds
-                    0x1d68                  _time_string
+                    0x0870                  _main_state_task_handler
+                    0x08b8                  _pulse
+                    0x08b6                  _pwm_on
+                    0x08a6                  _pxCurrentCoRoutine
+                    0x0886                  _pxCurrentTCB
+                    0x08a2                  _pxDelayedCoRoutineList
+                    0x0888                  _pxDelayedTaskList
+                    0x08a4                  _pxOverflowDelayedCoRoutineList
+                    0x088a                  _pxOverflowDelayedTaskList
+                    0x1d20                  _pxReadyCoRoutineLists
+                    0x1cd0                  _pxReadyTasksLists
+                    0x087e                  _raw_adc_result
+                    0x08cc                  _received_char
+                    0x1d70                  _time_entry
+                    0x0877                  _time_entry_index
+                    0x0876                  _time_ready
+                    0x0878                  _time_seconds
+                    0x1d74                  _time_string
                     0x0850                  _uart_sem
                     0x0828                  _uxCriticalNesting
-                    0x0882                  _uxCurrentNumberOfTasks
-                    0x0896                  _uxSchedulerSuspended
-                    0x0890                  _uxTaskNumber
-                    0x089e                  _uxTopCoRoutineReadyPriority
-                    0x0886                  _uxTopReadyPriority
-                    0x08a0                  _xCoRoutineTickCount
-                    0x1d28                  _xDelayedCoRoutineList1
-                    0x1d32                  _xDelayedCoRoutineList2
-                    0x1cec                  _xDelayedTaskList1
-                    0x1cf6                  _xDelayedTaskList2
-                    0x0894                  _xIdleTaskHandles
-                    0x08a2                  _xLastTickCount
-                    0x0892                  _xNextTaskUnblockTime
-                    0x088e                  _xNumOfOverflows
-                    0x08a4                  _xPassedTicks
-                    0x088a                  _xPendedTicks
-                    0x1d3c                  _xPendingReadyCoRoutineList
-                    0x1d00                  _xPendingReadyList
-                    0x0888                  _xSchedulerRunning
-                    0x1d0a                  _xSuspendedTaskList
-                    0x0884                  _xTickCount
-                    0x088c                  _xYieldPendings
+                    0x088c                  _uxCurrentNumberOfTasks
+                    0x08a0                  _uxSchedulerSuspended
+                    0x089a                  _uxTaskNumber
+                    0x08a8                  _uxTopCoRoutineReadyPriority
+                    0x0890                  _uxTopReadyPriority
+                    0x08aa                  _xCoRoutineTickCount
+                    0x1d34                  _xDelayedCoRoutineList1
+                    0x1d3e                  _xDelayedCoRoutineList2
+                    0x1cf8                  _xDelayedTaskList1
+                    0x1d02                  _xDelayedTaskList2
+                    0x089e                  _xIdleTaskHandles
+                    0x08ac                  _xLastTickCount
+                    0x089c                  _xNextTaskUnblockTime
+                    0x0898                  _xNumOfOverflows
+                    0x08ae                  _xPassedTicks
+                    0x0894                  _xPendedTicks
+                    0x1d48                  _xPendingReadyCoRoutineList
+                    0x1d0c                  _xPendingReadyList
+                    0x0892                  _xSchedulerRunning
+                    0x1d16                  _xSuspendedTaskList
+                    0x088e                  _xTickCount
+                    0x0896                  _xYieldPendings
 
 External Symbols in Program Memory (by address):
 
                   0x000100                  __resetPRI
                   0x00013c                  __psv_init
-                  0x000152                  __data_init
                   0x000152                  __data_init_da
-                  0x00022c                  __T1Interrupt
-                  0x000264                  __U2RXInterrupt
-                  0x0002a4                  __U2TXInterrupt
-                  0x0002ac                  __T2Interrupt
-                  0x000378                  __IOCInterrupt
-                  0x000490                  __ADC1Interrupt
-                  0x00053c                  __DefaultInterrupt
-                  0x000542                  ___fixunssfsi
-                  0x000578                  ___floatsisf
-                  0x00057e                  ___floatunsisf
-                  0x000582                  __funpack
-                  0x0005ac                  ___udivsi3
-                  0x0005cc                  ___divsf3x
-                  0x0005cc                  ___divsf3
-                  0x00075e                  __sdivf
-                  0x00078a                  __typef
-                  0x0007be                  __spackf
-                  0x000864                  __unpackf
-                  0x000916                  ___udivmoddi3
-                  0x0009fc                  ___udivdi3
-                  0x000a0a                  ___umoddi3
-                  0x000a12                  ___divdi3
-                  0x000a72                  ___moddi3
-                  0x000ace                  ___muldi3
-                  0x000b20                  ___floatdisf
-                  0x000b40                  ___floatundisf
-                  0x000b9e                  __fpack
-                  0x000bea                  ___umuldi3
-                  0x000c2e                  _pow
-                  0x001648                  _scalbn
-                  0x00169c                  _sqrt
-                  0x001942                  _fabs
-                  0x00195a                  _memcmp
-                  0x001976                  _memcpy
-                  0x001984                  _memset
-                  0x001a4c                  _strlen
-                  0x001a7c                  ___extendsfdf2
-                  0x001aba                  ___eqsf2
-                  0x001aba                  ___ltsf2
-                  0x001aba                  ___lesf2
-                  0x001abe                  ___gtsf2
-                  0x001abe                  ___gesf2
-                  0x001ac2                  ___truncdfsf2
-                  0x001b18                  ___mulp32peds3
-                  0x001b18                  ___mulp32eds3
-                  0x001b18                  ___mulsi3
-                  0x001b24                  ___subsf3x
-                  0x001b24                  ___subsf3
-                  0x001b36                  ___addsf3
-                  0x001b36                  ___addsf3x
-                  0x001d00                  ___mulsf3
-                  0x001d00                  ___mulsf3x
-                  0x001e0c                  __dnrmpackf
-                  0x001e60                  __unpackdnrmf
-                  0x001ebe                  __propnanf
-                  0x001ed0                  __dunpack
-                  0x001f1e                  __dunpack2
-                  0x001f40                  __dreturnNaN
-                  0x001f46                  __dunpack2exit
-                  0x001f50                  __fcompare
-                  0x001f86                  __funpack2
-                  0x001f96                  __dPropagateNaN
-                  0x0021ae                  _uxTopUsedPriority
-                  0x0021de                  _prvCreateTask
-                  0x00223a                  _xTaskCreate
-                  0x002272                  _prvInitialiseNewTask
-                  0x00233c                  _prvAddNewTaskToReadyList
-                  0x002404                  _xTaskDelayUntil
-                  0x002482                  _vTaskDelay
-                  0x0024ac                  _vTaskPrioritySet
-                  0x0025da                  _vTaskSuspend
-                  0x00266a                  _prvTaskIsTaskSuspended
-                  0x0026c0                  _vTaskResume
-                  0x002766                  _xTaskResumeFromISR
-                  0x00281e                  _prvCreateIdleTasks
-                  0x0028ac                  _vTaskStartScheduler
-                  0x0028e2                  _vTaskEndScheduler
-                  0x0028fa                  _vTaskSuspendAll
-                  0x002906                  _xTaskResumeAll
-                  0x002a86                  _xTaskGetTickCount
-                  0x002a92                  _xTaskGetTickCountFromISR
-                  0x002aa2                  _uxTaskGetNumberOfTasks
-                  0x002aaa                  _pcTaskGetName
-                  0x002ac4                  _xTaskCatchUpTicks
-                  0x002ae0                  _xTaskIncrementTick
-                  0x002c78                  _vTaskSwitchContext
-                  0x002d16                  _vTaskPlaceOnEventList
-                  0x002d30                  _vTaskPlaceOnUnorderedEventList
-                  0x002d80                  _vTaskPlaceOnEventListRestricted
-                  0x002dd2                  _xTaskRemoveFromEventList
-                  0x002f20                  _vTaskRemoveFromUnorderedEventList
-                  0x00302c                  _vTaskSetTimeOutState
-                  0x003044                  _vTaskInternalSetTimeOutState
-                  0x003058                  _xTaskCheckForTimeOut
-                  0x0030ce                  _vTaskMissedYield
-                  0x0030d8                  _prvIdleTask
-                  0x0030ee                  _prvInitialiseTaskLists
-                  0x003126                  _prvCheckTasksWaitingTermination
-                  0x00312c                  _prvResetNextTaskUnblockTime
-                  0x003148                  _xTaskGetCurrentTaskHandle
-                  0x003154                  _xTaskGetCurrentTaskHandleForCore
-                  0x00316c                  _xTaskGetSchedulerState
-                  0x003190                  _xTaskPriorityInherit
-                  0x003276                  _xTaskPriorityDisinherit
-                  0x003336                  _vTaskPriorityDisinheritAfterTimeout
-                  0x003418                  _uxTaskResetEventItemValue
-                  0x003430                  _pvTaskIncrementMutexHeldCount
-                  0x00344c                  _ulTaskGenericNotifyTake
-                  0x003516                  _xTaskGenericNotifyWait
-                  0x00362a                  _xTaskGenericNotify
-                  0x0037ca                  _xTaskGenericNotifyFromISR
-                  0x0039ae                  _vTaskGenericNotifyGiveFromISR
-                  0x003af4                  _xTaskGenericNotifyStateClear
-                  0x003b34                  _ulTaskGenericNotifyValueClear
-                  0x003b9e                  _prvAddCurrentTaskToDelayedList
-                  0x003c2c                  _vTaskResetState
-                  0x003c60                  _vApplicationIdleHook
-                  0x003c66                  _vApplicationStackOverflowHook
-                  0x003c84                  _vTask1
-                  0x003ca2                  _vTask2
-                  0x003cc0                  _vTask3
-                  0x003ce2                  _prvHardwareSetup
-                  0x003cf2                  _v_timer_callback
-                  0x003d9c                  _v_button_task
-                  0x004130                  _v_blink_callback_count
-                  0x00415c                  _v_blink_callback_alternating
-                  0x004194                  _v_end_callback
-                  0x0041bc                  _v_countdown_task
-                  0x0042a0                  _v_display_task
-                  0x0042f4                  _v_main_state_task
-                  0x00478a                  _main
-                  0x0048d8                  _xQueueGenericReset
-                  0x00498e                  _xQueueGenericCreate
-                  0x004a54                  _xQueueCreateMutex
-                  0x004a74                  _xQueueGenericSend
-                  0x004b52                  _xQueueGenericSendFromISR
-                  0x004bd8                  _xQueueGiveFromISR
-                  0x004c52                  _xQueueReceive
-                  0x004d2a                  _xQueueSemaphoreTake
-                  0x004e38                  _xQueuePeek
-                  0x004f14                  _xQueueReceiveFromISR
-                  0x004f92                  _xQueuePeekFromISR
-                  0x004fca                  _uxQueueMessagesWaiting
-                  0x004fde                  _uxQueueSpacesAvailable
-                  0x004ffc                  _uxQueueMessagesWaitingFromISR
-                  0x005010                  _vQueueDelete
-                  0x005020                  _uxQueueGetQueueItemSize
-                  0x00502c                  _uxQueueGetQueueLength
-                  0x0051f0                  _xQueueIsQueueEmptyFromISR
-                  0x005234                  _xQueueIsQueueFullFromISR
-                  0x005258                  _xQueueCRSend
-                  0x005302                  _xQueueCRReceive
-                  0x0053dc                  _xQueueCRSendFromISR
-                  0x00541e                  _xQueueCRReceiveFromISR
-                  0x00549e                  _vQueueWaitForMessageRestricted
-                  0x0054e4                  _xStreamBufferGenericCreate
-                  0x005552                  _vStreamBufferDelete
-                  0x005578                  _xStreamBufferReset
-                  0x0055ca                  _xStreamBufferResetFromISR
-                  0x00561c                  _xStreamBufferSetTriggerLevel
-                  0x005650                  _xStreamBufferSpacesAvailable
-                  0x00568e                  _xStreamBufferBytesAvailable
-                  0x0056a2                  _xStreamBufferSend
-                  0x005798                  _xStreamBufferSendFromISR
-                  0x005874                  _xStreamBufferReceive
-                  0x005946                  _xStreamBufferNextMessageLengthBytes
-                  0x00598e                  _xStreamBufferReceiveFromISR
-                  0x005a72                  _xStreamBufferIsEmpty
-                  0x005a9a                  _xStreamBufferIsFull
-                  0x005ad4                  _xStreamBufferSendCompletedFromISR
-                  0x005b12                  _xStreamBufferReceiveCompletedFromISR
-                  0x005c74                  _uxStreamBufferGetStreamBufferNotificationIndex
-                  0x005c84                  _vStreamBufferSetStreamBufferNotificationIndex
-                  0x005c98                  _xTimerCreateTimerTask
-                  0x005cbc                  _xTimerCreate
-                  0x005d30                  _xTimerGenericCommandFromTask
-                  0x005d84                  _xTimerGenericCommandFromISR
-                  0x005dc4                  _xTimerGetTimerDaemonTaskHandle
-                  0x005dcc                  _xTimerGetPeriod
-                  0x005ddc                  _vTimerSetReloadMode
-                  0x005e0e                  _xTimerGetReloadMode
-                  0x005e36                  _uxTimerGetReloadMode
-                  0x005e46                  _xTimerGetExpiryTime
-                  0x005e5a                  _pcTimerGetName
-                  0x005ee0                  build/default/debug/FreeRTOS/timers.o:_prvTimerTask
-                  0x006178                  _xTimerIsTimerActive
-                  0x0061a0                  _pvTimerGetTimerID
-                  0x0061b8                  _vTimerSetTimerID
-                  0x0061d0                  _vTimerResetState
-                  0x0061da                  _xEventGroupCreate
-                  0x0061f8                  _xEventGroupSync
-                  0x0062b4                  _xEventGroupWaitBits
-                  0x006394                  _xEventGroupClearBits
-                  0x0063bc                  _xEventGroupGetBitsFromISR
-                  0x0063d4                  _xEventGroupSetBits
-                  0x0064a2                  _vEventGroupDelete
-                  0x0064cc                  _vEventGroupSetBitsCallback
-                  0x0064de                  _vEventGroupClearBitsCallback
-                  0x006528                  _xCoRoutineCreate
-                  0x0065be                  _vCoRoutineAddToDelayedList
-                  0x006604                  _prvCheckPendingReadyList
-                  0x00665c                  _prvCheckDelayedList
-                  0x006708                  _vCoRoutineSchedule
-                  0x006776                  _prvInitialiseCoRoutineLists
-                  0x0067aa                  _xCoRoutineRemoveFromEventList
-                  0x0067e2                  _vCoRoutineResetState
-                  0x0067f6                  _InitUART2
-                  0x00684a                  _Disp2String
-                  0x00686c                  _XmitUART2
-                  0x0068a4                  _RecvUart
-                  0x0068fc                  _RecvUartChar
-                  0x006946                  _Disp2Dec
-                  0x0069a6                  _pxPortInitialiseStack
-                  0x006a40                  _xPortStartScheduler
-                  0x006a70                  _vPortEndScheduler
-                  0x006a9e                  _vPortEnterCritical
-                  0x006ab8                  _vPortExitCritical
-                  0x006ad4                  _vListInitialise
-                  0x006b06                  _vListInitialiseItem
-                  0x006b14                  _vListInsertEnd
-                  0x006b50                  _vListInsert
-                  0x006bb4                  _uxListRemove
-                  0x006bfc                  _ADC1_init
-                  0x006c52                  _do_ADC
-                  0x006c6c                  _do_ADC_avg
-                  0x006ca4                  _pvPortMalloc
-                  0x006d16                  _vPortFree
-                  0x006d1e                  _vPortInitialiseBlocks
-                  0x006d26                  _xPortGetFreeHeapSize
-                  0x006d32                  _vPortHeapResetState
-                  0x006dc0                  _IOinit
-                  0x006e06                  _timerInit
-                  0x006e44                  _vPortYield
+                  0x000152                  __data_init
+                  0x000228                  __T1Interrupt
+                  0x000260                  __U2RXInterrupt
+                  0x0002a0                  __U2TXInterrupt
+                  0x0002a8                  __T2Interrupt
+                  0x000384                  __IOCInterrupt
+                  0x0003bc                  __ADC1Interrupt
+                  0x000484                  __DefaultInterrupt
+                  0x00048a                  ___fixunssfsi
+                  0x0004c0                  ___floatsisf
+                  0x0004c6                  ___floatunsisf
+                  0x0004ca                  __funpack
+                  0x0004f4                  ___udivsi3
+                  0x000514                  ___divsf3
+                  0x000514                  ___divsf3x
+                  0x0006a6                  __sdivf
+                  0x0006d2                  __typef
+                  0x000706                  __spackf
+                  0x0007ac                  __unpackf
+                  0x000812                  ___floatdisf
+                  0x000832                  ___floatundisf
+                  0x000890                  __fpack
+                  0x0008dc                  _pow
+                  0x0012f6                  _scalbn
+                  0x00134a                  _sqrt
+                  0x0015f0                  _fabs
+                  0x001608                  _memcmp
+                  0x001624                  _memcpy
+                  0x001632                  _memset
+                  0x0016fa                  _strlen
+                  0x00172a                  ___extendsfdf2
+                  0x001768                  ___ltsf2
+                  0x001768                  ___eqsf2
+                  0x001768                  ___lesf2
+                  0x00176c                  ___gesf2
+                  0x00176c                  ___gtsf2
+                  0x001770                  ___truncdfsf2
+                  0x0017c6                  ___mulp32peds3
+                  0x0017c6                  ___mulp32eds3
+                  0x0017c6                  ___mulsi3
+                  0x0017d2                  ___subsf3
+                  0x0017d2                  ___subsf3x
+                  0x0017e4                  ___addsf3x
+                  0x0017e4                  ___addsf3
+                  0x0019ae                  ___mulsf3x
+                  0x0019ae                  ___mulsf3
+                  0x001aba                  __dnrmpackf
+                  0x001b0e                  __unpackdnrmf
+                  0x001b6c                  __propnanf
+                  0x001b7e                  __dunpack
+                  0x001bcc                  __dunpack2
+                  0x001bee                  __dreturnNaN
+                  0x001bf4                  __dunpack2exit
+                  0x001bfe                  __fcompare
+                  0x001c34                  __funpack2
+                  0x001c44                  __dPropagateNaN
+                  0x001e2c                  _uxTopUsedPriority
+                  0x001e5c                  _prvCreateTask
+                  0x001eb8                  _xTaskCreate
+                  0x001ef0                  _prvInitialiseNewTask
+                  0x001fba                  _prvAddNewTaskToReadyList
+                  0x002082                  _xTaskDelayUntil
+                  0x002100                  _vTaskDelay
+                  0x00212a                  _vTaskPrioritySet
+                  0x002258                  _vTaskSuspend
+                  0x0022e8                  _prvTaskIsTaskSuspended
+                  0x00233e                  _vTaskResume
+                  0x0023e4                  _xTaskResumeFromISR
+                  0x00249c                  _prvCreateIdleTasks
+                  0x00252a                  _vTaskStartScheduler
+                  0x002560                  _vTaskEndScheduler
+                  0x002578                  _vTaskSuspendAll
+                  0x002584                  _xTaskResumeAll
+                  0x002704                  _xTaskGetTickCount
+                  0x002710                  _xTaskGetTickCountFromISR
+                  0x002720                  _uxTaskGetNumberOfTasks
+                  0x002728                  _pcTaskGetName
+                  0x002742                  _xTaskCatchUpTicks
+                  0x00275e                  _xTaskIncrementTick
+                  0x0028f6                  _vTaskSwitchContext
+                  0x002994                  _vTaskPlaceOnEventList
+                  0x0029ae                  _vTaskPlaceOnUnorderedEventList
+                  0x0029fe                  _vTaskPlaceOnEventListRestricted
+                  0x002a50                  _xTaskRemoveFromEventList
+                  0x002b9e                  _vTaskRemoveFromUnorderedEventList
+                  0x002caa                  _vTaskSetTimeOutState
+                  0x002cc2                  _vTaskInternalSetTimeOutState
+                  0x002cd6                  _xTaskCheckForTimeOut
+                  0x002d4c                  _vTaskMissedYield
+                  0x002d56                  _prvIdleTask
+                  0x002d6c                  _prvInitialiseTaskLists
+                  0x002da4                  _prvCheckTasksWaitingTermination
+                  0x002daa                  _prvResetNextTaskUnblockTime
+                  0x002dc6                  _xTaskGetCurrentTaskHandle
+                  0x002dd2                  _xTaskGetCurrentTaskHandleForCore
+                  0x002dea                  _xTaskGetSchedulerState
+                  0x002e0e                  _xTaskPriorityInherit
+                  0x002ef4                  _xTaskPriorityDisinherit
+                  0x002fb4                  _vTaskPriorityDisinheritAfterTimeout
+                  0x003096                  _uxTaskResetEventItemValue
+                  0x0030ae                  _pvTaskIncrementMutexHeldCount
+                  0x0030ca                  _ulTaskGenericNotifyTake
+                  0x003194                  _xTaskGenericNotifyWait
+                  0x0032a8                  _xTaskGenericNotify
+                  0x003448                  _xTaskGenericNotifyFromISR
+                  0x00362c                  _vTaskGenericNotifyGiveFromISR
+                  0x003772                  _xTaskGenericNotifyStateClear
+                  0x0037b2                  _ulTaskGenericNotifyValueClear
+                  0x00381c                  _prvAddCurrentTaskToDelayedList
+                  0x0038aa                  _vTaskResetState
+                  0x0038de                  _xQueueGenericReset
+                  0x003994                  _xQueueGenericCreate
+                  0x003a5a                  _xQueueCreateMutex
+                  0x003a7a                  _xQueueGenericSend
+                  0x003b58                  _xQueueGenericSendFromISR
+                  0x003bde                  _xQueueGiveFromISR
+                  0x003c58                  _xQueueReceive
+                  0x003d30                  _xQueueSemaphoreTake
+                  0x003e3e                  _xQueuePeek
+                  0x003f1a                  _xQueueReceiveFromISR
+                  0x003f98                  _xQueuePeekFromISR
+                  0x003fd0                  _uxQueueMessagesWaiting
+                  0x003fe4                  _uxQueueSpacesAvailable
+                  0x004002                  _uxQueueMessagesWaitingFromISR
+                  0x004016                  _vQueueDelete
+                  0x004026                  _uxQueueGetQueueItemSize
+                  0x004032                  _uxQueueGetQueueLength
+                  0x0041f6                  _xQueueIsQueueEmptyFromISR
+                  0x00423a                  _xQueueIsQueueFullFromISR
+                  0x00425e                  _xQueueCRSend
+                  0x004308                  _xQueueCRReceive
+                  0x0043e2                  _xQueueCRSendFromISR
+                  0x004424                  _xQueueCRReceiveFromISR
+                  0x0044a4                  _vQueueWaitForMessageRestricted
+                  0x0044ea                  _vApplicationIdleHook
+                  0x0044f0                  _vApplicationStackOverflowHook
+                  0x00450e                  _prvHardwareSetup
+                  0x00451e                  _v_button_task
+                  0x0046ba                  _v_blink_callback_count
+                  0x0046e6                  _v_blink_callback_alternating
+                  0x00471e                  _v_end_callback
+                  0x004746                  _int_to_str_dec
+                  0x0047e0                  _v_countdown_task
+                  0x004906                  _v_display_task
+                  0x004982                  _v_main_state_task
+                  0x004d5a                  _main
+                  0x004e96                  _xStreamBufferGenericCreate
+                  0x004f04                  _vStreamBufferDelete
+                  0x004f2a                  _xStreamBufferReset
+                  0x004f7c                  _xStreamBufferResetFromISR
+                  0x004fce                  _xStreamBufferSetTriggerLevel
+                  0x005002                  _xStreamBufferSpacesAvailable
+                  0x005040                  _xStreamBufferBytesAvailable
+                  0x005054                  _xStreamBufferSend
+                  0x00514a                  _xStreamBufferSendFromISR
+                  0x005226                  _xStreamBufferReceive
+                  0x0052f8                  _xStreamBufferNextMessageLengthBytes
+                  0x005340                  _xStreamBufferReceiveFromISR
+                  0x005424                  _xStreamBufferIsEmpty
+                  0x00544c                  _xStreamBufferIsFull
+                  0x005486                  _xStreamBufferSendCompletedFromISR
+                  0x0054c4                  _xStreamBufferReceiveCompletedFromISR
+                  0x005626                  _uxStreamBufferGetStreamBufferNotificationIndex
+                  0x005636                  _vStreamBufferSetStreamBufferNotificationIndex
+                  0x00564a                  _xTimerCreateTimerTask
+                  0x00566e                  _xTimerCreate
+                  0x0056e2                  _xTimerGenericCommandFromTask
+                  0x005736                  _xTimerGenericCommandFromISR
+                  0x005776                  _xTimerGetTimerDaemonTaskHandle
+                  0x00577e                  _xTimerGetPeriod
+                  0x00578e                  _vTimerSetReloadMode
+                  0x0057c0                  _xTimerGetReloadMode
+                  0x0057e8                  _uxTimerGetReloadMode
+                  0x0057f8                  _xTimerGetExpiryTime
+                  0x00580c                  _pcTimerGetName
+                  0x005892                  build/default/debug/FreeRTOS/timers.o:_prvTimerTask
+                  0x005b2a                  _xTimerIsTimerActive
+                  0x005b52                  _pvTimerGetTimerID
+                  0x005b6a                  _vTimerSetTimerID
+                  0x005b82                  _vTimerResetState
+                  0x005b8c                  _xEventGroupCreate
+                  0x005baa                  _xEventGroupSync
+                  0x005c66                  _xEventGroupWaitBits
+                  0x005d46                  _xEventGroupClearBits
+                  0x005d6e                  _xEventGroupGetBitsFromISR
+                  0x005d86                  _xEventGroupSetBits
+                  0x005e54                  _vEventGroupDelete
+                  0x005e7e                  _vEventGroupSetBitsCallback
+                  0x005e90                  _vEventGroupClearBitsCallback
+                  0x005eda                  _xCoRoutineCreate
+                  0x005f70                  _vCoRoutineAddToDelayedList
+                  0x005fb6                  _prvCheckPendingReadyList
+                  0x00600e                  _prvCheckDelayedList
+                  0x0060ba                  _vCoRoutineSchedule
+                  0x006128                  _prvInitialiseCoRoutineLists
+                  0x00615c                  _xCoRoutineRemoveFromEventList
+                  0x006194                  _vCoRoutineResetState
+                  0x0061a8                  _InitUART2
+                  0x0061fc                  _Disp2String
+                  0x00621e                  _XmitUART2
+                  0x006256                  _RecvUart
+                  0x0062ae                  _RecvUartChar
+                  0x0062f8                  _Disp2Dec
+                  0x006358                  _pxPortInitialiseStack
+                  0x0063f2                  _xPortStartScheduler
+                  0x006422                  _vPortEndScheduler
+                  0x006450                  _vPortEnterCritical
+                  0x00646a                  _vPortExitCritical
+                  0x006486                  _vListInitialise
+                  0x0064b8                  _vListInitialiseItem
+                  0x0064c6                  _vListInsertEnd
+                  0x006502                  _vListInsert
+                  0x006566                  _uxListRemove
+                  0x0065ae                  _ADC1_init
+                  0x006604                  _do_ADC
+                  0x00661e                  _do_ADC_avg
+                  0x006656                  _pvPortMalloc
+                  0x0066c8                  _vPortFree
+                  0x0066d0                  _vPortInitialiseBlocks
+                  0x0066d8                  _xPortGetFreeHeapSize
+                  0x0066e4                  _vPortHeapResetState
+                  0x006774                  _IOinit
+                  0x0067ba                  _timerInit
+                  0x0067f8                  _vPortYield
                   0x02af00                  __FSEC.sec
 
 External Symbols in Program Memory (by name):
 
-                  0x006bfc                  _ADC1_init
-                  0x006946                  _Disp2Dec
-                  0x00684a                  _Disp2String
-                  0x006dc0                  _IOinit
-                  0x0067f6                  _InitUART2
-                  0x0068a4                  _RecvUart
-                  0x0068fc                  _RecvUartChar
-                  0x00686c                  _XmitUART2
-                  0x000490                  __ADC1Interrupt
-                  0x00053c                  __DefaultInterrupt
+                  0x0065ae                  _ADC1_init
+                  0x0062f8                  _Disp2Dec
+                  0x0061fc                  _Disp2String
+                  0x006774                  _IOinit
+                  0x0061a8                  _InitUART2
+                  0x006256                  _RecvUart
+                  0x0062ae                  _RecvUartChar
+                  0x00621e                  _XmitUART2
+                  0x0003bc                  __ADC1Interrupt
+                  0x000484                  __DefaultInterrupt
                   0x02af00                  __FSEC.sec
-                  0x000378                  __IOCInterrupt
-                  0x00022c                  __T1Interrupt
-                  0x0002ac                  __T2Interrupt
-                  0x000264                  __U2RXInterrupt
-                  0x0002a4                  __U2TXInterrupt
-                  0x001b36                  ___addsf3
-                  0x001b36                  ___addsf3x
-                  0x000a12                  ___divdi3
-                  0x0005cc                  ___divsf3
-                  0x0005cc                  ___divsf3x
-                  0x001aba                  ___eqsf2
-                  0x001a7c                  ___extendsfdf2
-                  0x000542                  ___fixunssfsi
-                  0x000b20                  ___floatdisf
-                  0x000578                  ___floatsisf
-                  0x000b40                  ___floatundisf
-                  0x00057e                  ___floatunsisf
-                  0x001abe                  ___gesf2
-                  0x001abe                  ___gtsf2
-                  0x001aba                  ___lesf2
-                  0x001aba                  ___ltsf2
-                  0x000a72                  ___moddi3
-                  0x000ace                  ___muldi3
-                  0x001b18                  ___mulp32eds3
-                  0x001b18                  ___mulp32peds3
-                  0x001d00                  ___mulsf3
-                  0x001d00                  ___mulsf3x
-                  0x001b18                  ___mulsi3
-                  0x001b24                  ___subsf3
-                  0x001b24                  ___subsf3x
-                  0x001ac2                  ___truncdfsf2
-                  0x0009fc                  ___udivdi3
-                  0x000916                  ___udivmoddi3
-                  0x0005ac                  ___udivsi3
-                  0x000a0a                  ___umoddi3
-                  0x000bea                  ___umuldi3
-                  0x001f96                  __dPropagateNaN
+                  0x000384                  __IOCInterrupt
+                  0x000228                  __T1Interrupt
+                  0x0002a8                  __T2Interrupt
+                  0x000260                  __U2RXInterrupt
+                  0x0002a0                  __U2TXInterrupt
+                  0x0017e4                  ___addsf3
+                  0x0017e4                  ___addsf3x
+                  0x000514                  ___divsf3
+                  0x000514                  ___divsf3x
+                  0x001768                  ___eqsf2
+                  0x00172a                  ___extendsfdf2
+                  0x00048a                  ___fixunssfsi
+                  0x000812                  ___floatdisf
+                  0x0004c0                  ___floatsisf
+                  0x000832                  ___floatundisf
+                  0x0004c6                  ___floatunsisf
+                  0x00176c                  ___gesf2
+                  0x00176c                  ___gtsf2
+                  0x001768                  ___lesf2
+                  0x001768                  ___ltsf2
+                  0x0017c6                  ___mulp32eds3
+                  0x0017c6                  ___mulp32peds3
+                  0x0019ae                  ___mulsf3
+                  0x0019ae                  ___mulsf3x
+                  0x0017c6                  ___mulsi3
+                  0x0017d2                  ___subsf3
+                  0x0017d2                  ___subsf3x
+                  0x001770                  ___truncdfsf2
+                  0x0004f4                  ___udivsi3
+                  0x001c44                  __dPropagateNaN
                   0x000152                  __data_init
                   0x000152                  __data_init_da
-                  0x001e0c                  __dnrmpackf
-                  0x001f40                  __dreturnNaN
-                  0x001ed0                  __dunpack
-                  0x001f1e                  __dunpack2
-                  0x001f46                  __dunpack2exit
-                  0x001f50                  __fcompare
-                  0x000b9e                  __fpack
-                  0x000582                  __funpack
-                  0x001f86                  __funpack2
-                  0x001ebe                  __propnanf
+                  0x001aba                  __dnrmpackf
+                  0x001bee                  __dreturnNaN
+                  0x001b7e                  __dunpack
+                  0x001bcc                  __dunpack2
+                  0x001bf4                  __dunpack2exit
+                  0x001bfe                  __fcompare
+                  0x000890                  __fpack
+                  0x0004ca                  __funpack
+                  0x001c34                  __funpack2
+                  0x001b6c                  __propnanf
                   0x00013c                  __psv_init
                   0x000100                  __resetPRI
-                  0x00075e                  __sdivf
-                  0x0007be                  __spackf
-                  0x00078a                  __typef
-                  0x001e60                  __unpackdnrmf
-                  0x000864                  __unpackf
-                  0x006c52                  _do_ADC
-                  0x006c6c                  _do_ADC_avg
-                  0x001942                  _fabs
-                  0x00478a                  _main
-                  0x00195a                  _memcmp
-                  0x001976                  _memcpy
-                  0x001984                  _memset
-                  0x002aaa                  _pcTaskGetName
-                  0x005e5a                  _pcTimerGetName
-                  0x000c2e                  _pow
-                  0x003b9e                  _prvAddCurrentTaskToDelayedList
-                  0x00233c                  _prvAddNewTaskToReadyList
-                  0x00665c                  _prvCheckDelayedList
-                  0x006604                  _prvCheckPendingReadyList
-                  0x003126                  _prvCheckTasksWaitingTermination
-                  0x00281e                  _prvCreateIdleTasks
-                  0x0021de                  _prvCreateTask
-                  0x003ce2                  _prvHardwareSetup
-                  0x0030d8                  _prvIdleTask
-                  0x006776                  _prvInitialiseCoRoutineLists
-                  0x002272                  _prvInitialiseNewTask
-                  0x0030ee                  _prvInitialiseTaskLists
-                  0x00312c                  _prvResetNextTaskUnblockTime
-                  0x00266a                  _prvTaskIsTaskSuspended
-                  0x006ca4                  _pvPortMalloc
-                  0x003430                  _pvTaskIncrementMutexHeldCount
-                  0x0061a0                  _pvTimerGetTimerID
-                  0x0069a6                  _pxPortInitialiseStack
-                  0x001648                  _scalbn
-                  0x00169c                  _sqrt
-                  0x001a4c                  _strlen
-                  0x006e06                  _timerInit
-                  0x00344c                  _ulTaskGenericNotifyTake
-                  0x003b34                  _ulTaskGenericNotifyValueClear
-                  0x006bb4                  _uxListRemove
-                  0x005020                  _uxQueueGetQueueItemSize
-                  0x00502c                  _uxQueueGetQueueLength
-                  0x004fca                  _uxQueueMessagesWaiting
-                  0x004ffc                  _uxQueueMessagesWaitingFromISR
-                  0x004fde                  _uxQueueSpacesAvailable
-                  0x005c74                  _uxStreamBufferGetStreamBufferNotificationIndex
-                  0x002aa2                  _uxTaskGetNumberOfTasks
-                  0x003418                  _uxTaskResetEventItemValue
-                  0x005e36                  _uxTimerGetReloadMode
-                  0x0021ae                  _uxTopUsedPriority
-                  0x003c60                  _vApplicationIdleHook
-                  0x003c66                  _vApplicationStackOverflowHook
-                  0x0065be                  _vCoRoutineAddToDelayedList
-                  0x0067e2                  _vCoRoutineResetState
-                  0x006708                  _vCoRoutineSchedule
-                  0x0064de                  _vEventGroupClearBitsCallback
-                  0x0064a2                  _vEventGroupDelete
-                  0x0064cc                  _vEventGroupSetBitsCallback
-                  0x006ad4                  _vListInitialise
-                  0x006b06                  _vListInitialiseItem
-                  0x006b50                  _vListInsert
-                  0x006b14                  _vListInsertEnd
-                  0x006a70                  _vPortEndScheduler
-                  0x006a9e                  _vPortEnterCritical
-                  0x006ab8                  _vPortExitCritical
-                  0x006d16                  _vPortFree
-                  0x006d32                  _vPortHeapResetState
-                  0x006d1e                  _vPortInitialiseBlocks
-                  0x006e44                  _vPortYield
-                  0x005010                  _vQueueDelete
-                  0x00549e                  _vQueueWaitForMessageRestricted
-                  0x005552                  _vStreamBufferDelete
-                  0x005c84                  _vStreamBufferSetStreamBufferNotificationIndex
-                  0x003c84                  _vTask1
-                  0x003ca2                  _vTask2
-                  0x003cc0                  _vTask3
-                  0x002482                  _vTaskDelay
-                  0x0028e2                  _vTaskEndScheduler
-                  0x0039ae                  _vTaskGenericNotifyGiveFromISR
-                  0x003044                  _vTaskInternalSetTimeOutState
-                  0x0030ce                  _vTaskMissedYield
-                  0x002d16                  _vTaskPlaceOnEventList
-                  0x002d80                  _vTaskPlaceOnEventListRestricted
-                  0x002d30                  _vTaskPlaceOnUnorderedEventList
-                  0x003336                  _vTaskPriorityDisinheritAfterTimeout
-                  0x0024ac                  _vTaskPrioritySet
-                  0x002f20                  _vTaskRemoveFromUnorderedEventList
-                  0x003c2c                  _vTaskResetState
-                  0x0026c0                  _vTaskResume
-                  0x00302c                  _vTaskSetTimeOutState
-                  0x0028ac                  _vTaskStartScheduler
-                  0x0025da                  _vTaskSuspend
-                  0x0028fa                  _vTaskSuspendAll
-                  0x002c78                  _vTaskSwitchContext
-                  0x0061d0                  _vTimerResetState
-                  0x005ddc                  _vTimerSetReloadMode
-                  0x0061b8                  _vTimerSetTimerID
-                  0x00415c                  _v_blink_callback_alternating
-                  0x004130                  _v_blink_callback_count
-                  0x003d9c                  _v_button_task
-                  0x0041bc                  _v_countdown_task
-                  0x0042a0                  _v_display_task
-                  0x004194                  _v_end_callback
-                  0x0042f4                  _v_main_state_task
-                  0x003cf2                  _v_timer_callback
-                  0x006528                  _xCoRoutineCreate
-                  0x0067aa                  _xCoRoutineRemoveFromEventList
-                  0x006394                  _xEventGroupClearBits
-                  0x0061da                  _xEventGroupCreate
-                  0x0063bc                  _xEventGroupGetBitsFromISR
-                  0x0063d4                  _xEventGroupSetBits
-                  0x0061f8                  _xEventGroupSync
-                  0x0062b4                  _xEventGroupWaitBits
-                  0x006d26                  _xPortGetFreeHeapSize
-                  0x006a40                  _xPortStartScheduler
-                  0x005302                  _xQueueCRReceive
-                  0x00541e                  _xQueueCRReceiveFromISR
-                  0x005258                  _xQueueCRSend
-                  0x0053dc                  _xQueueCRSendFromISR
-                  0x004a54                  _xQueueCreateMutex
-                  0x00498e                  _xQueueGenericCreate
-                  0x0048d8                  _xQueueGenericReset
-                  0x004a74                  _xQueueGenericSend
-                  0x004b52                  _xQueueGenericSendFromISR
-                  0x004bd8                  _xQueueGiveFromISR
-                  0x0051f0                  _xQueueIsQueueEmptyFromISR
-                  0x005234                  _xQueueIsQueueFullFromISR
-                  0x004e38                  _xQueuePeek
-                  0x004f92                  _xQueuePeekFromISR
-                  0x004c52                  _xQueueReceive
-                  0x004f14                  _xQueueReceiveFromISR
-                  0x004d2a                  _xQueueSemaphoreTake
-                  0x00568e                  _xStreamBufferBytesAvailable
-                  0x0054e4                  _xStreamBufferGenericCreate
-                  0x005a72                  _xStreamBufferIsEmpty
-                  0x005a9a                  _xStreamBufferIsFull
-                  0x005946                  _xStreamBufferNextMessageLengthBytes
-                  0x005874                  _xStreamBufferReceive
-                  0x005b12                  _xStreamBufferReceiveCompletedFromISR
-                  0x00598e                  _xStreamBufferReceiveFromISR
-                  0x005578                  _xStreamBufferReset
-                  0x0055ca                  _xStreamBufferResetFromISR
-                  0x0056a2                  _xStreamBufferSend
-                  0x005ad4                  _xStreamBufferSendCompletedFromISR
-                  0x005798                  _xStreamBufferSendFromISR
-                  0x00561c                  _xStreamBufferSetTriggerLevel
-                  0x005650                  _xStreamBufferSpacesAvailable
-                  0x002ac4                  _xTaskCatchUpTicks
-                  0x003058                  _xTaskCheckForTimeOut
-                  0x00223a                  _xTaskCreate
-                  0x002404                  _xTaskDelayUntil
-                  0x00362a                  _xTaskGenericNotify
-                  0x0037ca                  _xTaskGenericNotifyFromISR
-                  0x003af4                  _xTaskGenericNotifyStateClear
-                  0x003516                  _xTaskGenericNotifyWait
-                  0x003148                  _xTaskGetCurrentTaskHandle
-                  0x003154                  _xTaskGetCurrentTaskHandleForCore
-                  0x00316c                  _xTaskGetSchedulerState
-                  0x002a86                  _xTaskGetTickCount
-                  0x002a92                  _xTaskGetTickCountFromISR
-                  0x002ae0                  _xTaskIncrementTick
-                  0x003276                  _xTaskPriorityDisinherit
-                  0x003190                  _xTaskPriorityInherit
-                  0x002dd2                  _xTaskRemoveFromEventList
-                  0x002906                  _xTaskResumeAll
-                  0x002766                  _xTaskResumeFromISR
-                  0x005cbc                  _xTimerCreate
-                  0x005c98                  _xTimerCreateTimerTask
-                  0x005d84                  _xTimerGenericCommandFromISR
-                  0x005d30                  _xTimerGenericCommandFromTask
-                  0x005e46                  _xTimerGetExpiryTime
-                  0x005dcc                  _xTimerGetPeriod
-                  0x005e0e                  _xTimerGetReloadMode
-                  0x005dc4                  _xTimerGetTimerDaemonTaskHandle
-                  0x006178                  _xTimerIsTimerActive
-                  0x005ee0                  build/default/debug/FreeRTOS/timers.o:_prvTimerTask
+                  0x0006a6                  __sdivf
+                  0x000706                  __spackf
+                  0x0006d2                  __typef
+                  0x001b0e                  __unpackdnrmf
+                  0x0007ac                  __unpackf
+                  0x006604                  _do_ADC
+                  0x00661e                  _do_ADC_avg
+                  0x0015f0                  _fabs
+                  0x004746                  _int_to_str_dec
+                  0x004d5a                  _main
+                  0x001608                  _memcmp
+                  0x001624                  _memcpy
+                  0x001632                  _memset
+                  0x002728                  _pcTaskGetName
+                  0x00580c                  _pcTimerGetName
+                  0x0008dc                  _pow
+                  0x00381c                  _prvAddCurrentTaskToDelayedList
+                  0x001fba                  _prvAddNewTaskToReadyList
+                  0x00600e                  _prvCheckDelayedList
+                  0x005fb6                  _prvCheckPendingReadyList
+                  0x002da4                  _prvCheckTasksWaitingTermination
+                  0x00249c                  _prvCreateIdleTasks
+                  0x001e5c                  _prvCreateTask
+                  0x00450e                  _prvHardwareSetup
+                  0x002d56                  _prvIdleTask
+                  0x006128                  _prvInitialiseCoRoutineLists
+                  0x001ef0                  _prvInitialiseNewTask
+                  0x002d6c                  _prvInitialiseTaskLists
+                  0x002daa                  _prvResetNextTaskUnblockTime
+                  0x0022e8                  _prvTaskIsTaskSuspended
+                  0x006656                  _pvPortMalloc
+                  0x0030ae                  _pvTaskIncrementMutexHeldCount
+                  0x005b52                  _pvTimerGetTimerID
+                  0x006358                  _pxPortInitialiseStack
+                  0x0012f6                  _scalbn
+                  0x00134a                  _sqrt
+                  0x0016fa                  _strlen
+                  0x0067ba                  _timerInit
+                  0x0030ca                  _ulTaskGenericNotifyTake
+                  0x0037b2                  _ulTaskGenericNotifyValueClear
+                  0x006566                  _uxListRemove
+                  0x004026                  _uxQueueGetQueueItemSize
+                  0x004032                  _uxQueueGetQueueLength
+                  0x003fd0                  _uxQueueMessagesWaiting
+                  0x004002                  _uxQueueMessagesWaitingFromISR
+                  0x003fe4                  _uxQueueSpacesAvailable
+                  0x005626                  _uxStreamBufferGetStreamBufferNotificationIndex
+                  0x002720                  _uxTaskGetNumberOfTasks
+                  0x003096                  _uxTaskResetEventItemValue
+                  0x0057e8                  _uxTimerGetReloadMode
+                  0x001e2c                  _uxTopUsedPriority
+                  0x0044ea                  _vApplicationIdleHook
+                  0x0044f0                  _vApplicationStackOverflowHook
+                  0x005f70                  _vCoRoutineAddToDelayedList
+                  0x006194                  _vCoRoutineResetState
+                  0x0060ba                  _vCoRoutineSchedule
+                  0x005e90                  _vEventGroupClearBitsCallback
+                  0x005e54                  _vEventGroupDelete
+                  0x005e7e                  _vEventGroupSetBitsCallback
+                  0x006486                  _vListInitialise
+                  0x0064b8                  _vListInitialiseItem
+                  0x006502                  _vListInsert
+                  0x0064c6                  _vListInsertEnd
+                  0x006422                  _vPortEndScheduler
+                  0x006450                  _vPortEnterCritical
+                  0x00646a                  _vPortExitCritical
+                  0x0066c8                  _vPortFree
+                  0x0066e4                  _vPortHeapResetState
+                  0x0066d0                  _vPortInitialiseBlocks
+                  0x0067f8                  _vPortYield
+                  0x004016                  _vQueueDelete
+                  0x0044a4                  _vQueueWaitForMessageRestricted
+                  0x004f04                  _vStreamBufferDelete
+                  0x005636                  _vStreamBufferSetStreamBufferNotificationIndex
+                  0x002100                  _vTaskDelay
+                  0x002560                  _vTaskEndScheduler
+                  0x00362c                  _vTaskGenericNotifyGiveFromISR
+                  0x002cc2                  _vTaskInternalSetTimeOutState
+                  0x002d4c                  _vTaskMissedYield
+                  0x002994                  _vTaskPlaceOnEventList
+                  0x0029fe                  _vTaskPlaceOnEventListRestricted
+                  0x0029ae                  _vTaskPlaceOnUnorderedEventList
+                  0x002fb4                  _vTaskPriorityDisinheritAfterTimeout
+                  0x00212a                  _vTaskPrioritySet
+                  0x002b9e                  _vTaskRemoveFromUnorderedEventList
+                  0x0038aa                  _vTaskResetState
+                  0x00233e                  _vTaskResume
+                  0x002caa                  _vTaskSetTimeOutState
+                  0x00252a                  _vTaskStartScheduler
+                  0x002258                  _vTaskSuspend
+                  0x002578                  _vTaskSuspendAll
+                  0x0028f6                  _vTaskSwitchContext
+                  0x005b82                  _vTimerResetState
+                  0x00578e                  _vTimerSetReloadMode
+                  0x005b6a                  _vTimerSetTimerID
+                  0x0046e6                  _v_blink_callback_alternating
+                  0x0046ba                  _v_blink_callback_count
+                  0x00451e                  _v_button_task
+                  0x0047e0                  _v_countdown_task
+                  0x004906                  _v_display_task
+                  0x00471e                  _v_end_callback
+                  0x004982                  _v_main_state_task
+                  0x005eda                  _xCoRoutineCreate
+                  0x00615c                  _xCoRoutineRemoveFromEventList
+                  0x005d46                  _xEventGroupClearBits
+                  0x005b8c                  _xEventGroupCreate
+                  0x005d6e                  _xEventGroupGetBitsFromISR
+                  0x005d86                  _xEventGroupSetBits
+                  0x005baa                  _xEventGroupSync
+                  0x005c66                  _xEventGroupWaitBits
+                  0x0066d8                  _xPortGetFreeHeapSize
+                  0x0063f2                  _xPortStartScheduler
+                  0x004308                  _xQueueCRReceive
+                  0x004424                  _xQueueCRReceiveFromISR
+                  0x00425e                  _xQueueCRSend
+                  0x0043e2                  _xQueueCRSendFromISR
+                  0x003a5a                  _xQueueCreateMutex
+                  0x003994                  _xQueueGenericCreate
+                  0x0038de                  _xQueueGenericReset
+                  0x003a7a                  _xQueueGenericSend
+                  0x003b58                  _xQueueGenericSendFromISR
+                  0x003bde                  _xQueueGiveFromISR
+                  0x0041f6                  _xQueueIsQueueEmptyFromISR
+                  0x00423a                  _xQueueIsQueueFullFromISR
+                  0x003e3e                  _xQueuePeek
+                  0x003f98                  _xQueuePeekFromISR
+                  0x003c58                  _xQueueReceive
+                  0x003f1a                  _xQueueReceiveFromISR
+                  0x003d30                  _xQueueSemaphoreTake
+                  0x005040                  _xStreamBufferBytesAvailable
+                  0x004e96                  _xStreamBufferGenericCreate
+                  0x005424                  _xStreamBufferIsEmpty
+                  0x00544c                  _xStreamBufferIsFull
+                  0x0052f8                  _xStreamBufferNextMessageLengthBytes
+                  0x005226                  _xStreamBufferReceive
+                  0x0054c4                  _xStreamBufferReceiveCompletedFromISR
+                  0x005340                  _xStreamBufferReceiveFromISR
+                  0x004f2a                  _xStreamBufferReset
+                  0x004f7c                  _xStreamBufferResetFromISR
+                  0x005054                  _xStreamBufferSend
+                  0x005486                  _xStreamBufferSendCompletedFromISR
+                  0x00514a                  _xStreamBufferSendFromISR
+                  0x004fce                  _xStreamBufferSetTriggerLevel
+                  0x005002                  _xStreamBufferSpacesAvailable
+                  0x002742                  _xTaskCatchUpTicks
+                  0x002cd6                  _xTaskCheckForTimeOut
+                  0x001eb8                  _xTaskCreate
+                  0x002082                  _xTaskDelayUntil
+                  0x0032a8                  _xTaskGenericNotify
+                  0x003448                  _xTaskGenericNotifyFromISR
+                  0x003772                  _xTaskGenericNotifyStateClear
+                  0x003194                  _xTaskGenericNotifyWait
+                  0x002dc6                  _xTaskGetCurrentTaskHandle
+                  0x002dd2                  _xTaskGetCurrentTaskHandleForCore
+                  0x002dea                  _xTaskGetSchedulerState
+                  0x002704                  _xTaskGetTickCount
+                  0x002710                  _xTaskGetTickCountFromISR
+                  0x00275e                  _xTaskIncrementTick
+                  0x002ef4                  _xTaskPriorityDisinherit
+                  0x002e0e                  _xTaskPriorityInherit
+                  0x002a50                  _xTaskRemoveFromEventList
+                  0x002584                  _xTaskResumeAll
+                  0x0023e4                  _xTaskResumeFromISR
+                  0x00566e                  _xTimerCreate
+                  0x00564a                  _xTimerCreateTimerTask
+                  0x005736                  _xTimerGenericCommandFromISR
+                  0x0056e2                  _xTimerGenericCommandFromTask
+                  0x0057f8                  _xTimerGetExpiryTime
+                  0x00577e                  _xTimerGetPeriod
+                  0x0057c0                  _xTimerGetReloadMode
+                  0x005776                  _xTimerGetTimerDaemonTaskHandle
+                  0x005b2a                  _xTimerIsTimerActive
+                  0x005892                  build/default/debug/FreeRTOS/timers.o:_prvTimerTask
 
 Memory Configuration
 
@@ -939,8 +925,8 @@ LOAD build/default/debug/FreeRTOS/tasks.o
 LOAD build/default/debug/FreeRTOS/timers.o
 LOAD build/default/debug/uart.o
 LOAD build/default/debug/init.o
-LOAD build/default/debug/another_testmain_v3_current_work.o
 LOAD build/default/debug/adc.o
+LOAD build/default/debug/main_but_new_debounce_current.o
                     0x0001                  __MPLAB_BUILD = 0x1
                     0x0001                  __MPLAB_DEBUG = 0x1
                     0x0001                  __DEBUG = 0x1
@@ -967,7 +953,7 @@ LOAD c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libfx-elf.a
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000100       0x1eb2
+.text             0x000100       0x1b60
  *(.init)
  .init            0x000100         0x4c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_extended24.o)
                   0x000100                  __resetPRI
@@ -978,145 +964,121 @@ LOAD c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libfx-elf.a
                   0x000152                  __data_init_da
  *(.user_init)
  *(.handle)
- .handle          0x000204         0x28 jump_table
+ .handle          0x000204         0x24 jump_table
  *(.isr*)
- .isr.text        0x00022c         0x38 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
-                  0x00022c                  __T1Interrupt
- .isr.text        0x000264         0x48 build/default/debug/uart.o
-                  0x000264                  __U2RXInterrupt
-                  0x0002a4                  __U2TXInterrupt
- .isr.text        0x0002ac        0x290 build/default/debug/another_testmain_v3_current_work.o
-                  0x0002ac                  __T2Interrupt
-                  0x000378                  __IOCInterrupt
-                  0x000490                  __ADC1Interrupt
- .isr             0x00053c          0x4 default_isr
-                  0x00053c                  __DefaultInterrupt
+ .isr.text        0x000228         0x38 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
+                  0x000228                  __T1Interrupt
+ .isr.text        0x000260         0x48 build/default/debug/uart.o
+                  0x000260                  __U2RXInterrupt
+                  0x0002a0                  __U2TXInterrupt
+ .isr.text        0x0002a8        0x1dc build/default/debug/main_but_new_debounce_current.o
+                  0x0002a8                  __T2Interrupt
+                  0x000384                  __IOCInterrupt
+                  0x0003bc                  __ADC1Interrupt
+ .isr             0x000484          0x4 default_isr
+                  0x000484                  __DefaultInterrupt
  *(.libc)
  *(.libm)
  *(.libdsp)
  *(.lib*)
  .libpic30_crt_start_mode
-                  0x000540          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt_start_mode_normalda.Meo)
-                  0x000540                  __crt_start_mode
-                  0x000540                  __crt_start_mode_normal
+                  0x000488          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt_start_mode_normalda.Meo)
+                  0x000488                  __crt_start_mode
+                  0x000488                  __crt_start_mode_normal
  .libm.fixunssfsi
-                  0x000542         0x36 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
-                  0x000542                  ___fixunssfsi
+                  0x00048a         0x36 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
+                  0x00048a                  ___fixunssfsi
  .libm.floatsisf
-                  0x000578          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
-                  0x000578                  ___floatsisf
+                  0x0004c0          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
+                  0x0004c0                  ___floatsisf
  .libm.floatunsisf
-                  0x00057e          0x4 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
-                  0x00057e                  ___floatunsisf
- .libm.funpack    0x000582         0x2a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
-                  0x000582                  __funpack
- .libm.udivsi3    0x0005ac         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
-                  0x0005ac                  ___udivsi3
- .libmx           0x0005cc        0x1be c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
-                  0x0005cc                  ___divsf3x
-                  0x0005cc                  ___divsf3
-                  0x00075e                  __sdivf
- .libmx           0x00078a         0x34 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
-                  0x00078a                  __typef
- .libmx           0x0007be         0xa6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
-                  0x0007be                  __spackf
- .libmx           0x000864         0x66 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
-                  0x000864                  __unpackf
- .libm.__PplusBdi
-                  0x0008ca         0x26 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
- .libm.__PminusBdi
-                  0x0008f0         0x26 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
- .libm.__udivmoddi3
-                  0x000916         0xe6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
-                  0x000916                  ___udivmoddi3
- .libm.__udivdi3
-                  0x0009fc          0xe c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
-                  0x0009fc                  ___udivdi3
- .libm.__umoddi3
-                  0x000a0a          0x8 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
-                  0x000a0a                  ___umoddi3
- .libm.__divdi3
-                  0x000a12         0x60 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
-                  0x000a12                  ___divdi3
- .libm.__moddi3
-                  0x000a72         0x5c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
-                  0x000a72                  ___moddi3
- .libm.__muldi3
-                  0x000ace         0x52 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(muldi3.DA_o)
-                  0x000ace                  ___muldi3
+                  0x0004c6          0x4 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
+                  0x0004c6                  ___floatunsisf
+ .libm.funpack    0x0004ca         0x2a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
+                  0x0004ca                  __funpack
+ .libm.udivsi3    0x0004f4         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
+                  0x0004f4                  ___udivsi3
+ .libmx           0x000514        0x1be c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
+                  0x000514                  ___divsf3x
+                  0x000514                  ___divsf3
+                  0x0006a6                  __sdivf
+ .libmx           0x0006d2         0x34 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
+                  0x0006d2                  __typef
+ .libmx           0x000706         0xa6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
+                  0x000706                  __spackf
+ .libmx           0x0007ac         0x66 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
+                  0x0007ac                  __unpackf
  .libm.floatdisf
-                  0x000b20         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
-                  0x000b20                  ___floatdisf
+                  0x000812         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
+                  0x000812                  ___floatdisf
  .libm.floatundisf
-                  0x000b40         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
-                  0x000b40                  ___floatundisf
- .libm.fpack      0x000b9e         0x4c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
-                  0x000b9e                  __fpack
- .libm.umuldi3    0x000bea         0x44 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
-                  0x000bea                  ___umuldi3
- .libc.pow        0x000c2e        0xa1a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
-                  0x000c2e                  _pow
- .libc.scalbn     0x001648         0x54 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(scalbn.DA_o)
-                  0x001648                  _scalbn
- .libc.sqrt       0x00169c        0x2a6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(sqrt.DA_o)
-                  0x00169c                  _sqrt
- .libc.fabs       0x001942         0x18 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(fabs.DA_o)
-                  0x001942                  _fabs
- .libc.memcmp     0x00195a         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcmp.DA_o)
-                  0x00195a                  _memcmp
- .libc.memcpy     0x001976          0xe c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.DA_o)
-                  0x001976                  _memcpy
- .libc.memset     0x001984         0xc8 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.DA_o)
-                  0x001984                  _memset
- .libc.strlen     0x001a4c         0x30 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(strlen.DA_o)
-                  0x001a4c                  _strlen
+                  0x000832         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
+                  0x000832                  ___floatundisf
+ .libm.fpack      0x000890         0x4c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
+                  0x000890                  __fpack
+ .libc.pow        0x0008dc        0xa1a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
+                  0x0008dc                  _pow
+ .libc.scalbn     0x0012f6         0x54 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(scalbn.DA_o)
+                  0x0012f6                  _scalbn
+ .libc.sqrt       0x00134a        0x2a6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(sqrt.DA_o)
+                  0x00134a                  _sqrt
+ .libc.fabs       0x0015f0         0x18 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(fabs.DA_o)
+                  0x0015f0                  _fabs
+ .libc.memcmp     0x001608         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcmp.DA_o)
+                  0x001608                  _memcmp
+ .libc.memcpy     0x001624          0xe c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.DA_o)
+                  0x001624                  _memcpy
+ .libc.memset     0x001632         0xc8 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.DA_o)
+                  0x001632                  _memset
+ .libc.strlen     0x0016fa         0x30 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(strlen.DA_o)
+                  0x0016fa                  _strlen
  .libm.extendsfdf2
-                  0x001a7c         0x3e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
-                  0x001a7c                  ___extendsfdf2
- .libm.eqsf2      0x001aba          0x4 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
-                  0x001aba                  ___eqsf2
-                  0x001aba                  ___ltsf2
-                  0x001aba                  ___lesf2
- .libm.gtsf2      0x001abe          0x4 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
-                  0x001abe                  ___gesf2
-                  0x001abe                  ___gtsf2
+                  0x00172a         0x3e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+                  0x00172a                  ___extendsfdf2
+ .libm.eqsf2      0x001768          0x4 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
+                  0x001768                  ___eqsf2
+                  0x001768                  ___ltsf2
+                  0x001768                  ___lesf2
+ .libm.gtsf2      0x00176c          0x4 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+                  0x00176c                  ___gesf2
+                  0x00176c                  ___gtsf2
  .libm.truncdfsf2
-                  0x001ac2         0x56 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
-                  0x001ac2                  ___truncdfsf2
- .libm.mulsi3     0x001b18          0xc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
-                  0x001b18                  ___mulp32peds3
-                  0x001b18                  ___mulsi3
-                  0x001b18                  ___mulp32eds3
- .libmx           0x001b24        0x1dc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
-                  0x001b24                  ___subsf3x
-                  0x001b24                  ___subsf3
-                  0x001b36                  ___addsf3x
-                  0x001b36                  ___addsf3
- .libmx           0x001d00        0x10c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
-                  0x001d00                  ___mulsf3x
-                  0x001d00                  ___mulsf3
- .libmx           0x001e0c         0x54 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
-                  0x001e0c                  __dnrmpackf
- .libmx           0x001e60         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
-                  0x001e60                  __unpackdnrmf
- .libmx           0x001ebe         0x12 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
-                  0x001ebe                  __propnanf
- .libm.dunpack    0x001ed0         0x4e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
-                  0x001ed0                  __dunpack
+                  0x001770         0x56 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
+                  0x001770                  ___truncdfsf2
+ .libm.mulsi3     0x0017c6          0xc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+                  0x0017c6                  ___mulp32peds3
+                  0x0017c6                  ___mulsi3
+                  0x0017c6                  ___mulp32eds3
+ .libmx           0x0017d2        0x1dc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
+                  0x0017d2                  ___subsf3x
+                  0x0017d2                  ___subsf3
+                  0x0017e4                  ___addsf3x
+                  0x0017e4                  ___addsf3
+ .libmx           0x0019ae        0x10c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
+                  0x0019ae                  ___mulsf3x
+                  0x0019ae                  ___mulsf3
+ .libmx           0x001aba         0x54 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
+                  0x001aba                  __dnrmpackf
+ .libmx           0x001b0e         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
+                  0x001b0e                  __unpackdnrmf
+ .libmx           0x001b6c         0x12 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
+                  0x001b6c                  __propnanf
+ .libm.dunpack    0x001b7e         0x4e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
+                  0x001b7e                  __dunpack
  .libm.dunpack2
-                  0x001f1e         0x32 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
-                  0x001f1e                  __dunpack2
-                  0x001f40                  __dreturnNaN
-                  0x001f46                  __dunpack2exit
+                  0x001bcc         0x32 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
+                  0x001bcc                  __dunpack2
+                  0x001bee                  __dreturnNaN
+                  0x001bf4                  __dunpack2exit
  .libm.fcompare
-                  0x001f50         0x36 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
-                  0x001f50                  __fcompare
+                  0x001bfe         0x36 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
+                  0x001bfe                  __fcompare
  .libm.funpack2
-                  0x001f86         0x10 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
-                  0x001f86                  __funpack2
+                  0x001c34         0x10 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
+                  0x001c34                  __funpack2
  .libm.dPropagateNaN
-                  0x001f96         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
-                  0x001f96                  __dPropagateNaN
+                  0x001c44         0x1c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
+                  0x001c44                  __dPropagateNaN
 
 usercode
  *(usercode)
@@ -1153,7 +1115,7 @@ __FDEVOPT1
 .comment
  *(.comment)
 
-.debug_info       0x000000       0xf4d6
+.debug_info       0x000000       0xf3ea
  *(.debug_info)
  .debug_info      0x000000        0xcb8 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  .debug_info      0x000cb8         0xd7 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o
@@ -1167,39 +1129,38 @@ __FDEVOPT1
  .debug_info      0x007400        0xfae build/default/debug/FreeRTOS/timers.o
  .debug_info      0x0083ae        0xd4b build/default/debug/uart.o
  .debug_info      0x0090f9       0x21db build/default/debug/init.o
- .debug_info      0x00b2d4       0x2510 build/default/debug/another_testmain_v3_current_work.o
- .debug_info      0x00d7e4        0xcd4 build/default/debug/adc.o
- .debug_info      0x00e4b8         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
- .debug_info      0x00e548         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
- .debug_info      0x00e5d7         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
- .debug_info      0x00e668         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
- .debug_info      0x00e6f5         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
- .debug_info      0x00e782         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
- .debug_info      0x00e81f         0x9c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
- .debug_info      0x00e8bb         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
- .debug_info      0x00e958         0x9e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
- .debug_info      0x00e9f6         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
- .debug_info      0x00ea85         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
- .debug_info      0x00eb16         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
- .debug_info      0x00eba1         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
- .debug_info      0x00ec2e         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
- .debug_info      0x00ecbe         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
- .debug_info      0x00ed4b         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
- .debug_info      0x00edd6         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
- .debug_info      0x00ee65         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
- .debug_info      0x00eef1         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
- .debug_info      0x00ef8e         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
- .debug_info      0x00f02b         0xa0 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
- .debug_info      0x00f0cb         0xa2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
- .debug_info      0x00f16d         0x9f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
- .debug_info      0x00f20c         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
- .debug_info      0x00f299         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
- .debug_info      0x00f327         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
- .debug_info      0x00f3b5         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
- .debug_info      0x00f443         0x93 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
+ .debug_info      0x00b2d4        0xcd4 build/default/debug/adc.o
+ .debug_info      0x00bfa8       0x24b1 build/default/debug/main_but_new_debounce_current.o
+ .debug_info      0x00e459         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
+ .debug_info      0x00e4e9         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
+ .debug_info      0x00e578         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
+ .debug_info      0x00e609         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
+ .debug_info      0x00e696         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
+ .debug_info      0x00e723         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
+ .debug_info      0x00e7c0         0x9c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
+ .debug_info      0x00e85c         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
+ .debug_info      0x00e8f9         0x9e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
+ .debug_info      0x00e997         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
+ .debug_info      0x00ea26         0x91 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
+ .debug_info      0x00eab7         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
+ .debug_info      0x00eb42         0x90 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+ .debug_info      0x00ebd2         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
+ .debug_info      0x00ec5f         0x8b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+ .debug_info      0x00ecea         0x8f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
+ .debug_info      0x00ed79         0x8c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+ .debug_info      0x00ee05         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
+ .debug_info      0x00eea2         0x9d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
+ .debug_info      0x00ef3f         0xa0 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
+ .debug_info      0x00efdf         0xa2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
+ .debug_info      0x00f081         0x9f c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
+ .debug_info      0x00f120         0x8d c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
+ .debug_info      0x00f1ad         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
+ .debug_info      0x00f23b         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
+ .debug_info      0x00f2c9         0x8e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
+ .debug_info      0x00f357         0x93 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev     0x000000       0x1620
+.debug_abbrev     0x000000       0x15dd
  *(.debug_abbrev)
  .debug_abbrev    0x000000        0x1e3 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  .debug_abbrev    0x0001e3         0x14 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o
@@ -1213,38 +1174,37 @@ __FDEVOPT1
  .debug_abbrev    0x000bd7        0x1b1 build/default/debug/FreeRTOS/timers.o
  .debug_abbrev    0x000d88        0x1bf build/default/debug/uart.o
  .debug_abbrev    0x000f47         0xe7 build/default/debug/init.o
- .debug_abbrev    0x00102e        0x299 build/default/debug/another_testmain_v3_current_work.o
- .debug_abbrev    0x0012c7        0x129 build/default/debug/adc.o
- .debug_abbrev    0x0013f0         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
- .debug_abbrev    0x001404         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
- .debug_abbrev    0x001418         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
- .debug_abbrev    0x00142c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
- .debug_abbrev    0x001440         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
- .debug_abbrev    0x001454         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
- .debug_abbrev    0x001468         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
- .debug_abbrev    0x00147c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
- .debug_abbrev    0x001490         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
- .debug_abbrev    0x0014a4         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
- .debug_abbrev    0x0014b8         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
- .debug_abbrev    0x0014cc         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
- .debug_abbrev    0x0014e0         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
- .debug_abbrev    0x0014f4         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
- .debug_abbrev    0x001508         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
- .debug_abbrev    0x00151c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
- .debug_abbrev    0x001530         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
- .debug_abbrev    0x001544         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
- .debug_abbrev    0x001558         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
- .debug_abbrev    0x00156c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
- .debug_abbrev    0x001580         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
- .debug_abbrev    0x001594         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
- .debug_abbrev    0x0015a8         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
- .debug_abbrev    0x0015bc         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
- .debug_abbrev    0x0015d0         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
- .debug_abbrev    0x0015e4         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
- .debug_abbrev    0x0015f8         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
- .debug_abbrev    0x00160c         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
+ .debug_abbrev    0x00102e        0x129 build/default/debug/adc.o
+ .debug_abbrev    0x001157        0x26a build/default/debug/main_but_new_debounce_current.o
+ .debug_abbrev    0x0013c1         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
+ .debug_abbrev    0x0013d5         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
+ .debug_abbrev    0x0013e9         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
+ .debug_abbrev    0x0013fd         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
+ .debug_abbrev    0x001411         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
+ .debug_abbrev    0x001425         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
+ .debug_abbrev    0x001439         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
+ .debug_abbrev    0x00144d         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
+ .debug_abbrev    0x001461         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
+ .debug_abbrev    0x001475         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
+ .debug_abbrev    0x001489         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
+ .debug_abbrev    0x00149d         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
+ .debug_abbrev    0x0014b1         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+ .debug_abbrev    0x0014c5         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
+ .debug_abbrev    0x0014d9         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+ .debug_abbrev    0x0014ed         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
+ .debug_abbrev    0x001501         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+ .debug_abbrev    0x001515         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
+ .debug_abbrev    0x001529         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
+ .debug_abbrev    0x00153d         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
+ .debug_abbrev    0x001551         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
+ .debug_abbrev    0x001565         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
+ .debug_abbrev    0x001579         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
+ .debug_abbrev    0x00158d         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
+ .debug_abbrev    0x0015a1         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
+ .debug_abbrev    0x0015b5         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
+ .debug_abbrev    0x0015c9         0x14 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
 
-.debug_line       0x000000       0x2a57
+.debug_line       0x000000       0x2962
  *(.debug_line)
  .debug_line      0x000000        0x1cd build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  .debug_line      0x0001cd         0x88 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o
@@ -1258,39 +1218,38 @@ __FDEVOPT1
  .debug_line      0x001420        0x22f build/default/debug/FreeRTOS/timers.o
  .debug_line      0x00164f        0x1e7 build/default/debug/uart.o
  .debug_line      0x001836        0x12f build/default/debug/init.o
- .debug_line      0x001965        0x43f build/default/debug/another_testmain_v3_current_work.o
- .debug_line      0x001da4        0x11e build/default/debug/adc.o
- .debug_line      0x001ec2         0x53 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
- .debug_line      0x001f15         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
- .debug_line      0x001f4f         0x3b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
- .debug_line      0x001f8a         0x4a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
- .debug_line      0x001fd4         0x45 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
- .debug_line      0x002019        0x124 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
- .debug_line      0x00213d         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
- .debug_line      0x00219b         0x98 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
- .debug_line      0x002233         0x79 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
- .debug_line      0x0022ac         0x1a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
- .debug_line      0x0022c6         0x47 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
- .debug_line      0x00230d         0x6c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
- .debug_line      0x002379         0x5a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
- .debug_line      0x0023d3         0x57 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
- .debug_line      0x00242a         0x59 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
- .debug_line      0x002483         0x37 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
- .debug_line      0x0024ba         0x35 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
- .debug_line      0x0024ef         0x66 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
- .debug_line      0x002555         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
- .debug_line      0x00258f        0x136 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
- .debug_line      0x0026c5         0xcc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
- .debug_line      0x002791         0x72 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
- .debug_line      0x002803         0x7a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
- .debug_line      0x00287d         0x51 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
- .debug_line      0x0028ce         0x5c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
- .debug_line      0x00292a         0x53 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
- .debug_line      0x00297d         0x53 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
- .debug_line      0x0029d0         0x3e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
- .debug_line      0x002a0e         0x49 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
+ .debug_line      0x001965        0x11e build/default/debug/adc.o
+ .debug_line      0x001a83        0x3a1 build/default/debug/main_but_new_debounce_current.o
+ .debug_line      0x001e24         0x53 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
+ .debug_line      0x001e77         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
+ .debug_line      0x001eb1         0x3b c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
+ .debug_line      0x001eec         0x4a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
+ .debug_line      0x001f36         0x45 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
+ .debug_line      0x001f7b        0x124 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divsf3x.DA_o)
+ .debug_line      0x00209f         0x5e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(typefx.DA_o)
+ .debug_line      0x0020fd         0x98 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(spackfx.DA_o)
+ .debug_line      0x002195         0x79 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackfx.DA_o)
+ .debug_line      0x00220e         0x1a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
+ .debug_line      0x002228         0x47 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
+ .debug_line      0x00226f         0x6c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
+ .debug_line      0x0022db         0x5a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
+ .debug_line      0x002335         0x59 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+ .debug_line      0x00238e         0x37 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
+ .debug_line      0x0023c5         0x35 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+ .debug_line      0x0023fa         0x66 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
+ .debug_line      0x002460         0x3a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+ .debug_line      0x00249a        0x136 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
+ .debug_line      0x0025d0         0xcc c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
+ .debug_line      0x00269c         0x72 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
+ .debug_line      0x00270e         0x7a c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
+ .debug_line      0x002788         0x51 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
+ .debug_line      0x0027d9         0x5c c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
+ .debug_line      0x002835         0x53 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
+ .debug_line      0x002888         0x53 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
+ .debug_line      0x0028db         0x3e c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
+ .debug_line      0x002919         0x49 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
 
-.debug_frame      0x000000       0x1666
+.debug_frame      0x000000       0x15fe
  *(.debug_frame)
  .debug_frame     0x000000         0xf6 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  .debug_frame     0x0000f6         0x96 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
@@ -1303,10 +1262,10 @@ __FDEVOPT1
  .debug_frame     0x000f7e        0x2b8 build/default/debug/FreeRTOS/timers.o
  .debug_frame     0x001236        0x110 build/default/debug/uart.o
  .debug_frame     0x001346         0x48 build/default/debug/init.o
- .debug_frame     0x00138e        0x276 build/default/debug/another_testmain_v3_current_work.o
- .debug_frame     0x001604         0x62 build/default/debug/adc.o
+ .debug_frame     0x00138e         0x62 build/default/debug/adc.o
+ .debug_frame     0x0013f0        0x20e build/default/debug/main_but_new_debounce_current.o
 
-.debug_str        0x000000        0xda9
+.debug_str        0x000000        0xda3
  *(.debug_str)
  .debug_str       0x000000         0x37 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  .debug_str       0x000037        0x131 build/default/debug/FreeRTOS/croutine.o
@@ -1318,8 +1277,8 @@ __FDEVOPT1
  .debug_str       0x0008ab        0x10a build/default/debug/FreeRTOS/timers.o
  .debug_str       0x0009b5         0x6a build/default/debug/uart.o
  .debug_str       0x000a1f         0xcf build/default/debug/init.o
- .debug_str       0x000aee        0x271 build/default/debug/another_testmain_v3_current_work.o
- .debug_str       0x000d5f         0x4a build/default/debug/adc.o
+ .debug_str       0x000aee         0x4a build/default/debug/adc.o
+ .debug_str       0x000b38        0x26b build/default/debug/main_but_new_debounce_current.o
 
 .debug_loc
  *(.debug_loc)
@@ -1328,7 +1287,7 @@ __FDEVOPT1
  *(.debug_macinfo)
 
 .debug_pubnames
-                  0x000000       0x1778
+                  0x000000       0x17c1
  *(.debug_pubnames)
  .debug_pubnames
                   0x000000         0xd6 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
@@ -1353,14 +1312,14 @@ __FDEVOPT1
  .debug_pubnames
                   0x0012e0         0x2b build/default/debug/init.o
  .debug_pubnames
-                  0x00130b        0x433 build/default/debug/another_testmain_v3_current_work.o
+                  0x00130b         0x3a build/default/debug/adc.o
  .debug_pubnames
-                  0x00173e         0x3a build/default/debug/adc.o
+                  0x001345        0x47c build/default/debug/main_but_new_debounce_current.o
 
 .debug_ranges
  *(.debug_ranges)
 
-.debug_aranges    0x000000        0x4d8
+.debug_aranges    0x000000        0x4b8
  *(.debug_aranges)
  .debug_aranges
                   0x000000         0x18 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
@@ -1387,9 +1346,9 @@ __FDEVOPT1
  .debug_aranges
                   0x000110         0x18 build/default/debug/init.o
  .debug_aranges
-                  0x000128         0x18 build/default/debug/another_testmain_v3_current_work.o
+                  0x000128         0x18 build/default/debug/adc.o
  .debug_aranges
-                  0x000140         0x18 build/default/debug/adc.o
+                  0x000140         0x18 build/default/debug/main_but_new_debounce_current.o
  .debug_aranges
                   0x000158         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
  .debug_aranges
@@ -1415,37 +1374,35 @@ __FDEVOPT1
  .debug_aranges
                   0x0002b8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
  .debug_aranges
-                  0x0002d8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
+                  0x0002d8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
  .debug_aranges
-                  0x0002f8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+                  0x0002f8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
  .debug_aranges
-                  0x000318         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
+                  0x000318         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
  .debug_aranges
-                  0x000338         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+                  0x000338         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
  .debug_aranges
-                  0x000358         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
+                  0x000358         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
  .debug_aranges
-                  0x000378         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+                  0x000378         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
  .debug_aranges
-                  0x000398         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(addsf3x.DA_o)
+                  0x000398         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
  .debug_aranges
-                  0x0003b8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsf3x.DA_o)
+                  0x0003b8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
  .debug_aranges
-                  0x0003d8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dnrmpackfx.DA_o)
+                  0x0003d8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
  .debug_aranges
-                  0x0003f8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(unpackdnrmfx.DA_o)
+                  0x0003f8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
  .debug_aranges
-                  0x000418         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(propnanfx.DA_o)
+                  0x000418         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
  .debug_aranges
-                  0x000438         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
+                  0x000438         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
  .debug_aranges
-                  0x000458         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
+                  0x000458         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
  .debug_aranges
-                  0x000478         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
+                  0x000478         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
  .debug_aranges
-                  0x000498         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
- .debug_aranges
-                  0x0004b8         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
+                  0x000498         0x20 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
                     0x0000                  WREG0 = 0x0
                     0x0000                  _WREG0 = 0x0
                     0x0002                  WREG1 = 0x2
@@ -2789,134 +2746,129 @@ LOAD default_isr
 LOAD data_init
 
 .debug_pubtypes
-                  0x0004d8       0x1111
+                  0x0004b8       0x1140
  .debug_pubtypes
-                  0x0004d8        0x10c build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
+                  0x0004b8        0x10c build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  .debug_pubtypes
-                  0x0005e4         0x29 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
+                  0x0005c4         0x29 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
  .debug_pubtypes
-                  0x00060d        0x113 build/default/debug/FreeRTOS/croutine.o
+                  0x0005ed        0x113 build/default/debug/FreeRTOS/croutine.o
  .debug_pubtypes
-                  0x000720        0x100 build/default/debug/FreeRTOS/event_groups.o
+                  0x000700        0x100 build/default/debug/FreeRTOS/event_groups.o
  .debug_pubtypes
-                  0x000820         0x98 build/default/debug/FreeRTOS/list.o
+                  0x000800         0x98 build/default/debug/FreeRTOS/list.o
  .debug_pubtypes
-                  0x0008b8        0x198 build/default/debug/FreeRTOS/queue.o
+                  0x000898        0x198 build/default/debug/FreeRTOS/queue.o
  .debug_pubtypes
-                  0x000a50        0x103 build/default/debug/FreeRTOS/stream_buffer.o
+                  0x000a30        0x103 build/default/debug/FreeRTOS/stream_buffer.o
  .debug_pubtypes
-                  0x000b53        0x1a4 build/default/debug/FreeRTOS/tasks.o
+                  0x000b33        0x1a4 build/default/debug/FreeRTOS/tasks.o
  .debug_pubtypes
-                  0x000cf7        0x18c build/default/debug/FreeRTOS/timers.o
+                  0x000cd7        0x18c build/default/debug/FreeRTOS/timers.o
  .debug_pubtypes
-                  0x000e83        0x125 build/default/debug/uart.o
+                  0x000e63        0x125 build/default/debug/uart.o
  .debug_pubtypes
-                  0x000fa8        0x2a4 build/default/debug/init.o
+                  0x000f88        0x2a4 build/default/debug/init.o
  .debug_pubtypes
-                  0x00124c        0x2a1 build/default/debug/another_testmain_v3_current_work.o
+                  0x00122c         0xfc build/default/debug/adc.o
  .debug_pubtypes
-                  0x0014ed         0xfc build/default/debug/adc.o
+                  0x001328        0x2d0 build/default/debug/main_but_new_debounce_current.o
 
 __c30_signature
-                  0x0015e9        0x114
+                  0x0015f8        0x102
  __c30_signature
-                  0x0015e9          0x6 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
+                  0x0015f8          0x6 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
  __c30_signature
-                  0x0015ef          0x6 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
+                  0x0015fe          0x6 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
  __c30_signature
-                  0x0015f5          0x6 build/default/debug/FreeRTOS/croutine.o
+                  0x001604          0x6 build/default/debug/FreeRTOS/croutine.o
  __c30_signature
-                  0x0015fb          0x6 build/default/debug/FreeRTOS/event_groups.o
+                  0x00160a          0x6 build/default/debug/FreeRTOS/event_groups.o
  __c30_signature
-                  0x001601          0x6 build/default/debug/FreeRTOS/list.o
+                  0x001610          0x6 build/default/debug/FreeRTOS/list.o
  __c30_signature
-                  0x001607          0x6 build/default/debug/FreeRTOS/queue.o
+                  0x001616          0x6 build/default/debug/FreeRTOS/queue.o
  __c30_signature
-                  0x00160d          0x6 build/default/debug/FreeRTOS/stream_buffer.o
+                  0x00161c          0x6 build/default/debug/FreeRTOS/stream_buffer.o
  __c30_signature
-                  0x001613          0x6 build/default/debug/FreeRTOS/tasks.o
+                  0x001622          0x6 build/default/debug/FreeRTOS/tasks.o
  __c30_signature
-                  0x001619          0x6 build/default/debug/FreeRTOS/timers.o
+                  0x001628          0x6 build/default/debug/FreeRTOS/timers.o
  __c30_signature
-                  0x00161f          0x6 build/default/debug/uart.o
+                  0x00162e          0x6 build/default/debug/uart.o
  __c30_signature
-                  0x001625          0x6 build/default/debug/init.o
+                  0x001634          0x6 build/default/debug/init.o
  __c30_signature
-                  0x00162b          0x6 build/default/debug/another_testmain_v3_current_work.o
+                  0x00163a          0x6 build/default/debug/adc.o
  __c30_signature
-                  0x001631          0x6 build/default/debug/adc.o
+                  0x001640          0x6 build/default/debug/main_but_new_debounce_current.o
  __c30_signature
-                  0x001637          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_extended24.o)
+                  0x001646          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(crt0_extended24.o)
  __c30_signature
-                  0x00163d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_24.o)
+                  0x00164c          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(data_init_24.o)
  __c30_signature
-                  0x001643          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
+                  0x001652          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fixunssfsi.DA_o)
  __c30_signature
-                  0x001649          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
+                  0x001658          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatsisf.DA_o)
  __c30_signature
-                  0x00164f          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
+                  0x00165e          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatunsisf.DA_o)
  __c30_signature
-                  0x001655          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
+                  0x001664          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack.DA_o)
  __c30_signature
-                  0x00165b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
+                  0x00166a          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(udivsi3.DA_o)
  __c30_signature
-                  0x001661          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(divmoddi3.DA_o)
+                  0x001670          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
  __c30_signature
-                  0x001667          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(muldi3.DA_o)
+                  0x001676          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
  __c30_signature
-                  0x00166d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
+                  0x00167c          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
  __c30_signature
-                  0x001673          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatdisf.DA_o)
+                  0x001682          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
  __c30_signature
-                  0x001679          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(floatundisf.DA_o)
+                  0x001688          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
  __c30_signature
-                  0x00167f          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fpack.DA_o)
+                  0x00168e          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(scalbn.DA_o)
  __c30_signature
-                  0x001685          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(umuldi3.DA_o)
+                  0x001694          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(sqrt.DA_o)
  __c30_signature
-                  0x00168b          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
+                  0x00169a          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(fabs.DA_o)
  __c30_signature
-                  0x001691          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(scalbn.DA_o)
+                  0x0016a0          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.DA_o)
  __c30_signature
-                  0x001697          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(sqrt.DA_o)
+                  0x0016a6          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcmp.DA_o)
  __c30_signature
-                  0x00169d          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(fabs.DA_o)
+                  0x0016ac          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.DA_o)
  __c30_signature
-                  0x0016a3          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.DA_o)
+                  0x0016b2          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.DA_o)
  __c30_signature
-                  0x0016a9          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcmp.DA_o)
+                  0x0016b8          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(strlen.DA_o)
  __c30_signature
-                  0x0016af          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memcpy.DA_o)
+                  0x0016be          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
  __c30_signature
-                  0x0016b5          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(memset.DA_o)
+                  0x0016c4          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
  __c30_signature
-                  0x0016bb          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(strlen.DA_o)
+                  0x0016ca          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
  __c30_signature
-                  0x0016c1          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(extendsfdf.DA_o)
+                  0x0016d0          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
  __c30_signature
-                  0x0016c7          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(feqltle.DA_o)
+                  0x0016d6          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
  __c30_signature
-                  0x0016cd          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fgtge.DA_o)
+                  0x0016dc          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
  __c30_signature
-                  0x0016d3          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(truncdfsf.DA_o)
+                  0x0016e2          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
  __c30_signature
-                  0x0016d9          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(mulsi3.DA_o)
+                  0x0016e8          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
  __c30_signature
-                  0x0016df          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack.DA_o)
+                  0x0016ee          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
  __c30_signature
-                  0x0016e5          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dunpack2.DA_o)
- __c30_signature
-                  0x0016eb          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(fcompare.DA_o)
- __c30_signature
-                  0x0016f1          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(funpack2.DA_o)
- __c30_signature
-                  0x0016f7          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
+                  0x0016f4          0x6 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(dpropagateNaN.DA_o)
 
-.nbss               0x0850         0x56
- .nbss              0x0850         0x2c build/default/debug/another_testmain_v3_current_work.o
+.nbss               0x0850         0x60
+ .nbss              0x0850         0x36 build/default/debug/main_but_new_debounce_current.o
                     0x0850                  _uart_sem
                     0x0852                  _led2_sem
-                    0x0854                  _broked
+                    0x0854                  _button_sem
+                    0x0856                  _broked
                     0x0858                  _led_blink_timer
                     0x085a                  _led_alternate_timer
                     0x085c                  _led2_mode
@@ -2929,101 +2881,106 @@ __c30_signature
                     0x0868                  _UartRxQueue
                     0x086a                  _DisplayQueue
                     0x086c                  _adcQueue
-                    0x086e                  _main_state_task_handler
-                    0x0870                  _time_ready
-                    0x0871                  _time_entry_index
-                    0x0872                  _time_seconds
-                    0x0874                  _countdown_running
-                    0x0876                  _end_timer
-                    0x0878                  _adc_result
-                    0x087a                  _led2_intensity
- .nbss              0x087c         0x1c build/default/debug/FreeRTOS/tasks.o
-                    0x087c                  _pxCurrentTCB
-                    0x087e                  _pxDelayedTaskList
-                    0x0880                  _pxOverflowDelayedTaskList
-                    0x0882                  _uxCurrentNumberOfTasks
-                    0x0884                  _xTickCount
-                    0x0886                  _uxTopReadyPriority
-                    0x0888                  _xSchedulerRunning
-                    0x088a                  _xPendedTicks
-                    0x088c                  _xYieldPendings
-                    0x088e                  _xNumOfOverflows
-                    0x0890                  _uxTaskNumber
-                    0x0892                  _xNextTaskUnblockTime
-                    0x0894                  _xIdleTaskHandles
-                    0x0896                  _uxSchedulerSuspended
- .nbss              0x0898          0xe build/default/debug/FreeRTOS/croutine.o
-                    0x0898                  _pxDelayedCoRoutineList
-                    0x089a                  _pxOverflowDelayedCoRoutineList
-                    0x089c                  _pxCurrentCoRoutine
-                    0x089e                  _uxTopCoRoutineReadyPriority
-                    0x08a0                  _xCoRoutineTickCount
-                    0x08a2                  _xLastTickCount
-                    0x08a4                  _xPassedTicks
+                    0x086e                  _DebounceQueue
+                    0x0870                  _main_state_task_handler
+                    0x0872                  _active_press
+                    0x0876                  _time_ready
+                    0x0877                  _time_entry_index
+                    0x0878                  _time_seconds
+                    0x087a                  _countdown_running
+                    0x087c                  _end_timer
+                    0x087e                  _raw_adc_result
+                    0x0880                  _adc_result
+                    0x0882                  _led2_intensity
+                    0x0884                  _display_mode
+ .nbss              0x0886         0x1c build/default/debug/FreeRTOS/tasks.o
+                    0x0886                  _pxCurrentTCB
+                    0x0888                  _pxDelayedTaskList
+                    0x088a                  _pxOverflowDelayedTaskList
+                    0x088c                  _uxCurrentNumberOfTasks
+                    0x088e                  _xTickCount
+                    0x0890                  _uxTopReadyPriority
+                    0x0892                  _xSchedulerRunning
+                    0x0894                  _xPendedTicks
+                    0x0896                  _xYieldPendings
+                    0x0898                  _xNumOfOverflows
+                    0x089a                  _uxTaskNumber
+                    0x089c                  _xNextTaskUnblockTime
+                    0x089e                  _xIdleTaskHandles
+                    0x08a0                  _uxSchedulerSuspended
+ .nbss              0x08a2          0xe build/default/debug/FreeRTOS/croutine.o
+                    0x08a2                  _pxDelayedCoRoutineList
+                    0x08a4                  _pxOverflowDelayedCoRoutineList
+                    0x08a6                  _pxCurrentCoRoutine
+                    0x08a8                  _uxTopCoRoutineReadyPriority
+                    0x08aa                  _xCoRoutineTickCount
+                    0x08ac                  _xLastTickCount
+                    0x08ae                  _xPassedTicks
 
-.ndata              0x08a6          0xc
- .ndata             0x08a6          0xc build/default/debug/another_testmain_v3_current_work.o
-                    0x08a6                  _PWM_TON
-                    0x08a8                  _PWM_TOFF
-                    0x08aa                  _PWM_PER
-                    0x08ac                  _pwm_on
-                    0x08ad                  _dec
-                    0x08ae                  _pulse
-                    0x08b0                  _led2_variable_duty
+.ndata              0x08b0          0xe
+ .ndata             0x08b0          0xe build/default/debug/main_but_new_debounce_current.o
+                    0x08b0                  _PWM_TON
+                    0x08b2                  _PWM_TOFF
+                    0x08b4                  _PWM_PER
+                    0x08b6                  _pwm_on
+                    0x08b7                  _dec
+                    0x08b8                  _pulse
+                    0x08ba                  _led2_variable_duty
+                    0x08bc                  _last_stable_state
 
-.nbss               0x08b2          0xe
- .nbss              0x08b2          0xa build/default/debug/FreeRTOS/timers.o
- .nbss              0x08bc          0x4 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
+.nbss               0x08be          0xe
+ .nbss              0x08be          0xa build/default/debug/FreeRTOS/timers.o
+ .nbss              0x08c8          0x4 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
 
 .ndata              0x0828          0x2
  .ndata             0x0828          0x2 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
                     0x0828                  _uxCriticalNesting
 
-.nbss               0x08c0          0x4
- .nbss              0x08c0          0x2 build/default/debug/uart.o
-                    0x08c0                  _received_char
-                    0x08c1                  _RXFlag
- .nbss              0x08c2          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
-                    0x08c2                  _errno
+.nbss               0x08cc          0x4
+ .nbss              0x08cc          0x2 build/default/debug/uart.o
+                    0x08cc                  _received_char
+                    0x08cd                  _RXFlag
+ .nbss              0x08ce          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-pic30-elf.a(errno.DA_o)
+                    0x08ce                  _errno
 
-.bss                0x08c4       0x14ae
- .bss               0x08c4       0x1400 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
- .bss               0x1cc4         0x50 build/default/debug/FreeRTOS/tasks.o
-                    0x1cc4                  _pxReadyTasksLists
-                    0x1cec                  _xDelayedTaskList1
-                    0x1cf6                  _xDelayedTaskList2
-                    0x1d00                  _xPendingReadyList
-                    0x1d0a                  _xSuspendedTaskList
- .bss               0x1d14         0x32 build/default/debug/FreeRTOS/croutine.o
-                    0x1d14                  _pxReadyCoRoutineLists
-                    0x1d28                  _xDelayedCoRoutineList1
-                    0x1d32                  _xDelayedCoRoutineList2
-                    0x1d3c                  _xPendingReadyCoRoutineList
- .bss               0x1d46         0x2c build/default/debug/another_testmain_v3_current_work.o
-                    0x1d46                  _DebounceTimers
-                    0x1d4c                  _b_before_debounce
-                    0x1d4f                  _b_after_debounce
-                    0x1d52                  _b_press_times
-                    0x1d58                  _b_release_times
-                    0x1d5e                  _debounce_active
-                    0x1d61                  _debounce_done
-                    0x1d64                  _time_entry
-                    0x1d68                  _time_string
+.bss                0x08d0       0x14ae
+ .bss               0x08d0       0x1400 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
+ .bss               0x1cd0         0x50 build/default/debug/FreeRTOS/tasks.o
+                    0x1cd0                  _pxReadyTasksLists
+                    0x1cf8                  _xDelayedTaskList1
+                    0x1d02                  _xDelayedTaskList2
+                    0x1d0c                  _xPendingReadyList
+                    0x1d16                  _xSuspendedTaskList
+ .bss               0x1d20         0x32 build/default/debug/FreeRTOS/croutine.o
+                    0x1d20                  _pxReadyCoRoutineLists
+                    0x1d34                  _xDelayedCoRoutineList1
+                    0x1d3e                  _xDelayedCoRoutineList2
+                    0x1d48                  _xPendingReadyCoRoutineList
+ .bss               0x1d52         0x2c build/default/debug/main_but_new_debounce_current.o
+                    0x1d52                  _DebounceTimers
+                    0x1d58                  _b_before_debounce
+                    0x1d5b                  _b_after_debounce
+                    0x1d5e                  _b_press_times
+                    0x1d64                  _b_release_times
+                    0x1d6a                  _debounce_active
+                    0x1d6d                  _debounce_done
+                    0x1d70                  _time_entry
+                    0x1d74                  _time_string
 
-.data               0x1d72         0x18
- .data              0x1d72         0x18 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
+.data               0x1d7e         0x18
+ .data              0x1d7e         0x18 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libm-elf.a(pow.DA_o)
 
-.bss                0x1d8a         0x14
- .bss               0x1d8a         0x14 build/default/debug/FreeRTOS/timers.o
+.bss                0x1d96         0x14
+ .bss               0x1d96         0x14 build/default/debug/FreeRTOS/timers.o
 
-.data               0x1d9e          0x6
- .data              0x1d9e          0x6 build/default/debug/another_testmain_v3_current_work.o
-                    0x1d9e                  _b_last_valid
-                    0x1da1                  _b_handled
+.data               0x1daa          0x6
+ .data              0x1daa          0x6 build/default/debug/main_but_new_debounce_current.o
+                    0x1daa                  _b_last_valid
+                    0x1dad                  _b_handled
 
-.bss                0x1da4          0x2
- .bss               0x1da4          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.DA_o)
-                    0x1da4                  ___errno_val
+.bss                0x1db0          0x2
+ .bss               0x1db0          0x2 c:/program files/microchip/xc16/v2.10/bin/bin/../../lib\libc99-elf.a(__errno_location.DA_o)
+                    0x1db0                  ___errno_val
 
 .ivt._T1Interrupt
                   0x00001a          0x2
@@ -3043,240 +3000,237 @@ __c30_signature
 .config_ALTI2C1
                   0x02af2c          0x2
  .config_ALTI2C1
-                  0x02af2c          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x02af2c          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .config_JTAGEN    0x02af28          0x2
  .config_JTAGEN
-                  0x02af28          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x02af28          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .config_DNVPEN    0x02af24          0x2
  .config_DNVPEN
-                  0x02af24          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x02af24          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .config_WDTCLK    0x02af20          0x2
  .config_WDTCLK
-                  0x02af20          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x02af20          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .config_FCKSM     0x02af1c          0x2
- .config_FCKSM    0x02af1c          0x2 build/default/debug/another_testmain_v3_current_work.o
+ .config_FCKSM    0x02af1c          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .config_IESO      0x02af18          0x2
- .config_IESO     0x02af18          0x2 build/default/debug/another_testmain_v3_current_work.o
+ .config_IESO     0x02af18          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .config_BSLIM     0x02af10          0x2
- .config_BSLIM    0x02af10          0x2 build/default/debug/another_testmain_v3_current_work.o
+ .config_BSLIM    0x02af10          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .ivt._T2Interrupt
                   0x000022          0x2
  .ivt._T2Interrupt
-                  0x000022          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x000022          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .ivt._IOCInterrupt
                   0x00003a          0x2
  .ivt._IOCInterrupt
-                  0x00003a          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x00003a          0x2 build/default/debug/main_but_new_debounce_current.o
 
 .ivt._ADC1Interrupt
                   0x00002e          0x2
  .ivt._ADC1Interrupt
-                  0x00002e          0x2 build/default/debug/another_testmain_v3_current_work.o
+                  0x00002e          0x2 build/default/debug/main_but_new_debounce_current.o
 
-.const              0x9fb2        0x22c load address 0x001fb2  
- .const             0x9fb2        0x1dc build/default/debug/another_testmain_v3_current_work.o
- .const             0xa18e         0x20 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
- .const             0xa1ae         0x1c build/default/debug/FreeRTOS/tasks.o
-                    0xa1ae                  _uxTopUsedPriority
- .const             0xa1ca          0xc build/default/debug/uart.o
- .const             0xa1d6          0x8 build/default/debug/FreeRTOS/timers.o
+.const              0x9c60        0x1fc load address 0x001c60  
+ .const             0x9c60        0x1ac build/default/debug/main_but_new_debounce_current.o
+ .const             0x9e0c         0x20 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
+ .const             0x9e2c         0x1c build/default/debug/FreeRTOS/tasks.o
+                    0x9e2c                  _uxTopUsedPriority
+ .const             0x9e48          0xc build/default/debug/uart.o
+ .const             0x9e54          0x8 build/default/debug/FreeRTOS/timers.o
 
-.text             0x0021de       0x4b5c
- .text            0x0021de       0x1a82 build/default/debug/FreeRTOS/tasks.o
-                  0x0021de                  _prvCreateTask
-                  0x00223a                  _xTaskCreate
-                  0x002272                  _prvInitialiseNewTask
-                  0x00233c                  _prvAddNewTaskToReadyList
-                  0x002404                  _xTaskDelayUntil
-                  0x002482                  _vTaskDelay
-                  0x0024ac                  _vTaskPrioritySet
-                  0x0025da                  _vTaskSuspend
-                  0x00266a                  _prvTaskIsTaskSuspended
-                  0x0026c0                  _vTaskResume
-                  0x002766                  _xTaskResumeFromISR
-                  0x00281e                  _prvCreateIdleTasks
-                  0x0028ac                  _vTaskStartScheduler
-                  0x0028e2                  _vTaskEndScheduler
-                  0x0028fa                  _vTaskSuspendAll
-                  0x002906                  _xTaskResumeAll
-                  0x002a86                  _xTaskGetTickCount
-                  0x002a92                  _xTaskGetTickCountFromISR
-                  0x002aa2                  _uxTaskGetNumberOfTasks
-                  0x002aaa                  _pcTaskGetName
-                  0x002ac4                  _xTaskCatchUpTicks
-                  0x002ae0                  _xTaskIncrementTick
-                  0x002c78                  _vTaskSwitchContext
-                  0x002d16                  _vTaskPlaceOnEventList
-                  0x002d30                  _vTaskPlaceOnUnorderedEventList
-                  0x002d80                  _vTaskPlaceOnEventListRestricted
-                  0x002dd2                  _xTaskRemoveFromEventList
-                  0x002f20                  _vTaskRemoveFromUnorderedEventList
-                  0x00302c                  _vTaskSetTimeOutState
-                  0x003044                  _vTaskInternalSetTimeOutState
-                  0x003058                  _xTaskCheckForTimeOut
-                  0x0030ce                  _vTaskMissedYield
-                  0x0030d8                  _prvIdleTask
-                  0x0030ee                  _prvInitialiseTaskLists
-                  0x003126                  _prvCheckTasksWaitingTermination
-                  0x00312c                  _prvResetNextTaskUnblockTime
-                  0x003148                  _xTaskGetCurrentTaskHandle
-                  0x003154                  _xTaskGetCurrentTaskHandleForCore
-                  0x00316c                  _xTaskGetSchedulerState
-                  0x003190                  _xTaskPriorityInherit
-                  0x003276                  _xTaskPriorityDisinherit
-                  0x003336                  _vTaskPriorityDisinheritAfterTimeout
-                  0x003418                  _uxTaskResetEventItemValue
-                  0x003430                  _pvTaskIncrementMutexHeldCount
-                  0x00344c                  _ulTaskGenericNotifyTake
-                  0x003516                  _xTaskGenericNotifyWait
-                  0x00362a                  _xTaskGenericNotify
-                  0x0037ca                  _xTaskGenericNotifyFromISR
-                  0x0039ae                  _vTaskGenericNotifyGiveFromISR
-                  0x003af4                  _xTaskGenericNotifyStateClear
-                  0x003b34                  _ulTaskGenericNotifyValueClear
-                  0x003b9e                  _prvAddCurrentTaskToDelayedList
-                  0x003c2c                  _vTaskResetState
- .text            0x003c60        0xc78 build/default/debug/another_testmain_v3_current_work.o
-                  0x003c60                  _vApplicationIdleHook
-                  0x003c66                  _vApplicationStackOverflowHook
-                  0x003c84                  _vTask1
-                  0x003ca2                  _vTask2
-                  0x003cc0                  _vTask3
-                  0x003ce2                  _prvHardwareSetup
-                  0x003cf2                  _v_timer_callback
-                  0x003d9c                  _v_button_task
-                  0x004130                  _v_blink_callback_count
-                  0x00415c                  _v_blink_callback_alternating
-                  0x004194                  _v_end_callback
-                  0x0041bc                  _v_countdown_task
-                  0x0042a0                  _v_display_task
-                  0x0042f4                  _v_main_state_task
-                  0x00478a                  _main
- .text            0x0048d8        0xc0c build/default/debug/FreeRTOS/queue.o
-                  0x0048d8                  _xQueueGenericReset
-                  0x00498e                  _xQueueGenericCreate
-                  0x004a54                  _xQueueCreateMutex
-                  0x004a74                  _xQueueGenericSend
-                  0x004b52                  _xQueueGenericSendFromISR
-                  0x004bd8                  _xQueueGiveFromISR
-                  0x004c52                  _xQueueReceive
-                  0x004d2a                  _xQueueSemaphoreTake
-                  0x004e38                  _xQueuePeek
-                  0x004f14                  _xQueueReceiveFromISR
-                  0x004f92                  _xQueuePeekFromISR
-                  0x004fca                  _uxQueueMessagesWaiting
-                  0x004fde                  _uxQueueSpacesAvailable
-                  0x004ffc                  _uxQueueMessagesWaitingFromISR
-                  0x005010                  _vQueueDelete
-                  0x005020                  _uxQueueGetQueueItemSize
-                  0x00502c                  _uxQueueGetQueueLength
-                  0x0051f0                  _xQueueIsQueueEmptyFromISR
-                  0x005234                  _xQueueIsQueueFullFromISR
-                  0x005258                  _xQueueCRSend
-                  0x005302                  _xQueueCRReceive
-                  0x0053dc                  _xQueueCRSendFromISR
-                  0x00541e                  _xQueueCRReceiveFromISR
-                  0x00549e                  _vQueueWaitForMessageRestricted
- .text            0x0054e4        0x7b4 build/default/debug/FreeRTOS/stream_buffer.o
-                  0x0054e4                  _xStreamBufferGenericCreate
-                  0x005552                  _vStreamBufferDelete
-                  0x005578                  _xStreamBufferReset
-                  0x0055ca                  _xStreamBufferResetFromISR
-                  0x00561c                  _xStreamBufferSetTriggerLevel
-                  0x005650                  _xStreamBufferSpacesAvailable
-                  0x00568e                  _xStreamBufferBytesAvailable
-                  0x0056a2                  _xStreamBufferSend
-                  0x005798                  _xStreamBufferSendFromISR
-                  0x005874                  _xStreamBufferReceive
-                  0x005946                  _xStreamBufferNextMessageLengthBytes
-                  0x00598e                  _xStreamBufferReceiveFromISR
-                  0x005a72                  _xStreamBufferIsEmpty
-                  0x005a9a                  _xStreamBufferIsFull
-                  0x005ad4                  _xStreamBufferSendCompletedFromISR
-                  0x005b12                  _xStreamBufferReceiveCompletedFromISR
-                  0x005c74                  _uxStreamBufferGetStreamBufferNotificationIndex
-                  0x005c84                  _vStreamBufferSetStreamBufferNotificationIndex
- .text            0x005c98        0x542 build/default/debug/FreeRTOS/timers.o
-                  0x005c98                  _xTimerCreateTimerTask
-                  0x005cbc                  _xTimerCreate
-                  0x005d30                  _xTimerGenericCommandFromTask
-                  0x005d84                  _xTimerGenericCommandFromISR
-                  0x005dc4                  _xTimerGetTimerDaemonTaskHandle
-                  0x005dcc                  _xTimerGetPeriod
-                  0x005ddc                  _vTimerSetReloadMode
-                  0x005e0e                  _xTimerGetReloadMode
-                  0x005e36                  _uxTimerGetReloadMode
-                  0x005e46                  _xTimerGetExpiryTime
-                  0x005e5a                  _pcTimerGetName
-                  0x005ee0                  build/default/debug/FreeRTOS/timers.o:_prvTimerTask
-                  0x006178                  _xTimerIsTimerActive
-                  0x0061a0                  _pvTimerGetTimerID
-                  0x0061b8                  _vTimerSetTimerID
-                  0x0061d0                  _vTimerResetState
- .text            0x0061da        0x34e build/default/debug/FreeRTOS/event_groups.o
-                  0x0061da                  _xEventGroupCreate
-                  0x0061f8                  _xEventGroupSync
-                  0x0062b4                  _xEventGroupWaitBits
-                  0x006394                  _xEventGroupClearBits
-                  0x0063bc                  _xEventGroupGetBitsFromISR
-                  0x0063d4                  _xEventGroupSetBits
-                  0x0064a2                  _vEventGroupDelete
-                  0x0064cc                  _vEventGroupSetBitsCallback
-                  0x0064de                  _vEventGroupClearBitsCallback
- .text            0x006528        0x2ce build/default/debug/FreeRTOS/croutine.o
-                  0x006528                  _xCoRoutineCreate
-                  0x0065be                  _vCoRoutineAddToDelayedList
-                  0x006604                  _prvCheckPendingReadyList
-                  0x00665c                  _prvCheckDelayedList
-                  0x006708                  _vCoRoutineSchedule
-                  0x006776                  _prvInitialiseCoRoutineLists
-                  0x0067aa                  _xCoRoutineRemoveFromEventList
-                  0x0067e2                  _vCoRoutineResetState
- .text            0x0067f6        0x1b0 build/default/debug/uart.o
-                  0x0067f6                  _InitUART2
-                  0x00684a                  _Disp2String
-                  0x00686c                  _XmitUART2
-                  0x0068a4                  _RecvUart
-                  0x0068fc                  _RecvUartChar
-                  0x006946                  _Disp2Dec
- .text            0x0069a6        0x12e build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
-                  0x0069a6                  _pxPortInitialiseStack
-                  0x006a40                  _xPortStartScheduler
-                  0x006a70                  _vPortEndScheduler
-                  0x006a76                  _vApplicationSetupTickTimerInterrupt
-                  0x006a9e                  _vPortEnterCritical
-                  0x006ab8                  _vPortExitCritical
- .text            0x006ad4        0x128 build/default/debug/FreeRTOS/list.o
-                  0x006ad4                  _vListInitialise
-                  0x006b06                  _vListInitialiseItem
-                  0x006b14                  _vListInsertEnd
-                  0x006b50                  _vListInsert
-                  0x006bb4                  _uxListRemove
- .text            0x006bfc         0xa8 build/default/debug/adc.o
-                  0x006bfc                  _ADC1_init
-                  0x006c52                  _do_ADC
-                  0x006c6c                  _do_ADC_avg
- .text            0x006ca4         0x96 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
-                  0x006ca4                  _pvPortMalloc
-                  0x006d16                  _vPortFree
-                  0x006d1e                  _vPortInitialiseBlocks
-                  0x006d26                  _xPortGetFreeHeapSize
-                  0x006d32                  _vPortHeapResetState
+.text             0x001e5c       0x4890
+ .text            0x001e5c       0x1a82 build/default/debug/FreeRTOS/tasks.o
+                  0x001e5c                  _prvCreateTask
+                  0x001eb8                  _xTaskCreate
+                  0x001ef0                  _prvInitialiseNewTask
+                  0x001fba                  _prvAddNewTaskToReadyList
+                  0x002082                  _xTaskDelayUntil
+                  0x002100                  _vTaskDelay
+                  0x00212a                  _vTaskPrioritySet
+                  0x002258                  _vTaskSuspend
+                  0x0022e8                  _prvTaskIsTaskSuspended
+                  0x00233e                  _vTaskResume
+                  0x0023e4                  _xTaskResumeFromISR
+                  0x00249c                  _prvCreateIdleTasks
+                  0x00252a                  _vTaskStartScheduler
+                  0x002560                  _vTaskEndScheduler
+                  0x002578                  _vTaskSuspendAll
+                  0x002584                  _xTaskResumeAll
+                  0x002704                  _xTaskGetTickCount
+                  0x002710                  _xTaskGetTickCountFromISR
+                  0x002720                  _uxTaskGetNumberOfTasks
+                  0x002728                  _pcTaskGetName
+                  0x002742                  _xTaskCatchUpTicks
+                  0x00275e                  _xTaskIncrementTick
+                  0x0028f6                  _vTaskSwitchContext
+                  0x002994                  _vTaskPlaceOnEventList
+                  0x0029ae                  _vTaskPlaceOnUnorderedEventList
+                  0x0029fe                  _vTaskPlaceOnEventListRestricted
+                  0x002a50                  _xTaskRemoveFromEventList
+                  0x002b9e                  _vTaskRemoveFromUnorderedEventList
+                  0x002caa                  _vTaskSetTimeOutState
+                  0x002cc2                  _vTaskInternalSetTimeOutState
+                  0x002cd6                  _xTaskCheckForTimeOut
+                  0x002d4c                  _vTaskMissedYield
+                  0x002d56                  _prvIdleTask
+                  0x002d6c                  _prvInitialiseTaskLists
+                  0x002da4                  _prvCheckTasksWaitingTermination
+                  0x002daa                  _prvResetNextTaskUnblockTime
+                  0x002dc6                  _xTaskGetCurrentTaskHandle
+                  0x002dd2                  _xTaskGetCurrentTaskHandleForCore
+                  0x002dea                  _xTaskGetSchedulerState
+                  0x002e0e                  _xTaskPriorityInherit
+                  0x002ef4                  _xTaskPriorityDisinherit
+                  0x002fb4                  _vTaskPriorityDisinheritAfterTimeout
+                  0x003096                  _uxTaskResetEventItemValue
+                  0x0030ae                  _pvTaskIncrementMutexHeldCount
+                  0x0030ca                  _ulTaskGenericNotifyTake
+                  0x003194                  _xTaskGenericNotifyWait
+                  0x0032a8                  _xTaskGenericNotify
+                  0x003448                  _xTaskGenericNotifyFromISR
+                  0x00362c                  _vTaskGenericNotifyGiveFromISR
+                  0x003772                  _xTaskGenericNotifyStateClear
+                  0x0037b2                  _ulTaskGenericNotifyValueClear
+                  0x00381c                  _prvAddCurrentTaskToDelayedList
+                  0x0038aa                  _vTaskResetState
+ .text            0x0038de        0xc0c build/default/debug/FreeRTOS/queue.o
+                  0x0038de                  _xQueueGenericReset
+                  0x003994                  _xQueueGenericCreate
+                  0x003a5a                  _xQueueCreateMutex
+                  0x003a7a                  _xQueueGenericSend
+                  0x003b58                  _xQueueGenericSendFromISR
+                  0x003bde                  _xQueueGiveFromISR
+                  0x003c58                  _xQueueReceive
+                  0x003d30                  _xQueueSemaphoreTake
+                  0x003e3e                  _xQueuePeek
+                  0x003f1a                  _xQueueReceiveFromISR
+                  0x003f98                  _xQueuePeekFromISR
+                  0x003fd0                  _uxQueueMessagesWaiting
+                  0x003fe4                  _uxQueueSpacesAvailable
+                  0x004002                  _uxQueueMessagesWaitingFromISR
+                  0x004016                  _vQueueDelete
+                  0x004026                  _uxQueueGetQueueItemSize
+                  0x004032                  _uxQueueGetQueueLength
+                  0x0041f6                  _xQueueIsQueueEmptyFromISR
+                  0x00423a                  _xQueueIsQueueFullFromISR
+                  0x00425e                  _xQueueCRSend
+                  0x004308                  _xQueueCRReceive
+                  0x0043e2                  _xQueueCRSendFromISR
+                  0x004424                  _xQueueCRReceiveFromISR
+                  0x0044a4                  _vQueueWaitForMessageRestricted
+ .text            0x0044ea        0x9ac build/default/debug/main_but_new_debounce_current.o
+                  0x0044ea                  _vApplicationIdleHook
+                  0x0044f0                  _vApplicationStackOverflowHook
+                  0x00450e                  _prvHardwareSetup
+                  0x00451e                  _v_button_task
+                  0x0046ba                  _v_blink_callback_count
+                  0x0046e6                  _v_blink_callback_alternating
+                  0x00471e                  _v_end_callback
+                  0x004746                  _int_to_str_dec
+                  0x0047e0                  _v_countdown_task
+                  0x004906                  _v_display_task
+                  0x004982                  _v_main_state_task
+                  0x004d5a                  _main
+ .text            0x004e96        0x7b4 build/default/debug/FreeRTOS/stream_buffer.o
+                  0x004e96                  _xStreamBufferGenericCreate
+                  0x004f04                  _vStreamBufferDelete
+                  0x004f2a                  _xStreamBufferReset
+                  0x004f7c                  _xStreamBufferResetFromISR
+                  0x004fce                  _xStreamBufferSetTriggerLevel
+                  0x005002                  _xStreamBufferSpacesAvailable
+                  0x005040                  _xStreamBufferBytesAvailable
+                  0x005054                  _xStreamBufferSend
+                  0x00514a                  _xStreamBufferSendFromISR
+                  0x005226                  _xStreamBufferReceive
+                  0x0052f8                  _xStreamBufferNextMessageLengthBytes
+                  0x005340                  _xStreamBufferReceiveFromISR
+                  0x005424                  _xStreamBufferIsEmpty
+                  0x00544c                  _xStreamBufferIsFull
+                  0x005486                  _xStreamBufferSendCompletedFromISR
+                  0x0054c4                  _xStreamBufferReceiveCompletedFromISR
+                  0x005626                  _uxStreamBufferGetStreamBufferNotificationIndex
+                  0x005636                  _vStreamBufferSetStreamBufferNotificationIndex
+ .text            0x00564a        0x542 build/default/debug/FreeRTOS/timers.o
+                  0x00564a                  _xTimerCreateTimerTask
+                  0x00566e                  _xTimerCreate
+                  0x0056e2                  _xTimerGenericCommandFromTask
+                  0x005736                  _xTimerGenericCommandFromISR
+                  0x005776                  _xTimerGetTimerDaemonTaskHandle
+                  0x00577e                  _xTimerGetPeriod
+                  0x00578e                  _vTimerSetReloadMode
+                  0x0057c0                  _xTimerGetReloadMode
+                  0x0057e8                  _uxTimerGetReloadMode
+                  0x0057f8                  _xTimerGetExpiryTime
+                  0x00580c                  _pcTimerGetName
+                  0x005892                  build/default/debug/FreeRTOS/timers.o:_prvTimerTask
+                  0x005b2a                  _xTimerIsTimerActive
+                  0x005b52                  _pvTimerGetTimerID
+                  0x005b6a                  _vTimerSetTimerID
+                  0x005b82                  _vTimerResetState
+ .text            0x005b8c        0x34e build/default/debug/FreeRTOS/event_groups.o
+                  0x005b8c                  _xEventGroupCreate
+                  0x005baa                  _xEventGroupSync
+                  0x005c66                  _xEventGroupWaitBits
+                  0x005d46                  _xEventGroupClearBits
+                  0x005d6e                  _xEventGroupGetBitsFromISR
+                  0x005d86                  _xEventGroupSetBits
+                  0x005e54                  _vEventGroupDelete
+                  0x005e7e                  _vEventGroupSetBitsCallback
+                  0x005e90                  _vEventGroupClearBitsCallback
+ .text            0x005eda        0x2ce build/default/debug/FreeRTOS/croutine.o
+                  0x005eda                  _xCoRoutineCreate
+                  0x005f70                  _vCoRoutineAddToDelayedList
+                  0x005fb6                  _prvCheckPendingReadyList
+                  0x00600e                  _prvCheckDelayedList
+                  0x0060ba                  _vCoRoutineSchedule
+                  0x006128                  _prvInitialiseCoRoutineLists
+                  0x00615c                  _xCoRoutineRemoveFromEventList
+                  0x006194                  _vCoRoutineResetState
+ .text            0x0061a8        0x1b0 build/default/debug/uart.o
+                  0x0061a8                  _InitUART2
+                  0x0061fc                  _Disp2String
+                  0x00621e                  _XmitUART2
+                  0x006256                  _RecvUart
+                  0x0062ae                  _RecvUartChar
+                  0x0062f8                  _Disp2Dec
+ .text            0x006358        0x12e build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o
+                  0x006358                  _pxPortInitialiseStack
+                  0x0063f2                  _xPortStartScheduler
+                  0x006422                  _vPortEndScheduler
+                  0x006428                  _vApplicationSetupTickTimerInterrupt
+                  0x006450                  _vPortEnterCritical
+                  0x00646a                  _vPortExitCritical
+ .text            0x006486        0x128 build/default/debug/FreeRTOS/list.o
+                  0x006486                  _vListInitialise
+                  0x0064b8                  _vListInitialiseItem
+                  0x0064c6                  _vListInsertEnd
+                  0x006502                  _vListInsert
+                  0x006566                  _uxListRemove
+ .text            0x0065ae         0xa8 build/default/debug/adc.o
+                  0x0065ae                  _ADC1_init
+                  0x006604                  _do_ADC
+                  0x00661e                  _do_ADC_avg
+ .text            0x006656         0x96 build/default/debug/FreeRTOS/portable/MemMang/heap_1.o
+                  0x006656                  _pvPortMalloc
+                  0x0066c8                  _vPortFree
+                  0x0066d0                  _vPortInitialiseBlocks
+                  0x0066d8                  _xPortGetFreeHeapSize
+                  0x0066e4                  _vPortHeapResetState
 
-.dinit            0x006d3a         0x86
- .dinit           0x006d3a         0x86 data_init
+.dinit            0x0066ec         0x88
+ .dinit           0x0066ec         0x88 data_init
 
-.text             0x006dc0         0xd8
- .text            0x006dc0         0x84 build/default/debug/init.o
-                  0x006dc0                  _IOinit
-                  0x006e06                  _timerInit
- .text            0x006e44         0x54 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o
-                  0x006e44                  _vPortYield
+.text             0x006774         0xd8
+ .text            0x006774         0x84 build/default/debug/init.o
+                  0x006774                  _IOinit
+                  0x0067ba                  _timerInit
+ .text            0x0067f8         0x54 build/default/debug/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o
+                  0x0067f8                  _vPortYield

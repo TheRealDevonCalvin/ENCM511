@@ -51,17 +51,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.c FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.S FreeRTOS/portable/MemMang/heap_1.c FreeRTOS/croutine.c FreeRTOS/event_groups.c FreeRTOS/list.c FreeRTOS/queue.c FreeRTOS/stream_buffer.c FreeRTOS/tasks.c FreeRTOS/timers.c uart.c init.c another_testmain_v3_current_work.c adc.c
+SOURCEFILES_QUOTED_IF_SPACED=FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.c FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.S FreeRTOS/portable/MemMang/heap_1.c FreeRTOS/croutine.c FreeRTOS/event_groups.c FreeRTOS/list.c FreeRTOS/queue.c FreeRTOS/stream_buffer.c FreeRTOS/tasks.c FreeRTOS/timers.c uart.c init.c adc.c main_but_new_debounce_current.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o ${OBJECTDIR}/FreeRTOS/portable/MemMang/heap_1.o ${OBJECTDIR}/FreeRTOS/croutine.o ${OBJECTDIR}/FreeRTOS/event_groups.o ${OBJECTDIR}/FreeRTOS/list.o ${OBJECTDIR}/FreeRTOS/queue.o ${OBJECTDIR}/FreeRTOS/stream_buffer.o ${OBJECTDIR}/FreeRTOS/tasks.o ${OBJECTDIR}/FreeRTOS/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/init.o ${OBJECTDIR}/another_testmain_v3_current_work.o ${OBJECTDIR}/adc.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o.d ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o.d ${OBJECTDIR}/FreeRTOS/portable/MemMang/heap_1.o.d ${OBJECTDIR}/FreeRTOS/croutine.o.d ${OBJECTDIR}/FreeRTOS/event_groups.o.d ${OBJECTDIR}/FreeRTOS/list.o.d ${OBJECTDIR}/FreeRTOS/queue.o.d ${OBJECTDIR}/FreeRTOS/stream_buffer.o.d ${OBJECTDIR}/FreeRTOS/tasks.o.d ${OBJECTDIR}/FreeRTOS/timers.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/another_testmain_v3_current_work.o.d ${OBJECTDIR}/adc.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o ${OBJECTDIR}/FreeRTOS/portable/MemMang/heap_1.o ${OBJECTDIR}/FreeRTOS/croutine.o ${OBJECTDIR}/FreeRTOS/event_groups.o ${OBJECTDIR}/FreeRTOS/list.o ${OBJECTDIR}/FreeRTOS/queue.o ${OBJECTDIR}/FreeRTOS/stream_buffer.o ${OBJECTDIR}/FreeRTOS/tasks.o ${OBJECTDIR}/FreeRTOS/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/init.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/main_but_new_debounce_current.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o.d ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o.d ${OBJECTDIR}/FreeRTOS/portable/MemMang/heap_1.o.d ${OBJECTDIR}/FreeRTOS/croutine.o.d ${OBJECTDIR}/FreeRTOS/event_groups.o.d ${OBJECTDIR}/FreeRTOS/list.o.d ${OBJECTDIR}/FreeRTOS/queue.o.d ${OBJECTDIR}/FreeRTOS/stream_buffer.o.d ${OBJECTDIR}/FreeRTOS/tasks.o.d ${OBJECTDIR}/FreeRTOS/timers.o.d ${OBJECTDIR}/uart.o.d ${OBJECTDIR}/init.o.d ${OBJECTDIR}/adc.o.d ${OBJECTDIR}/main_but_new_debounce_current.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o ${OBJECTDIR}/FreeRTOS/portable/MemMang/heap_1.o ${OBJECTDIR}/FreeRTOS/croutine.o ${OBJECTDIR}/FreeRTOS/event_groups.o ${OBJECTDIR}/FreeRTOS/list.o ${OBJECTDIR}/FreeRTOS/queue.o ${OBJECTDIR}/FreeRTOS/stream_buffer.o ${OBJECTDIR}/FreeRTOS/tasks.o ${OBJECTDIR}/FreeRTOS/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/init.o ${OBJECTDIR}/another_testmain_v3_current_work.o ${OBJECTDIR}/adc.o
+OBJECTFILES=${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.o ${OBJECTDIR}/FreeRTOS/portable/MemMang/heap_1.o ${OBJECTDIR}/FreeRTOS/croutine.o ${OBJECTDIR}/FreeRTOS/event_groups.o ${OBJECTDIR}/FreeRTOS/list.o ${OBJECTDIR}/FreeRTOS/queue.o ${OBJECTDIR}/FreeRTOS/stream_buffer.o ${OBJECTDIR}/FreeRTOS/tasks.o ${OBJECTDIR}/FreeRTOS/timers.o ${OBJECTDIR}/uart.o ${OBJECTDIR}/init.o ${OBJECTDIR}/adc.o ${OBJECTDIR}/main_but_new_debounce_current.o
 
 # Source Files
-SOURCEFILES=FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.c FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.S FreeRTOS/portable/MemMang/heap_1.c FreeRTOS/croutine.c FreeRTOS/event_groups.c FreeRTOS/list.c FreeRTOS/queue.c FreeRTOS/stream_buffer.c FreeRTOS/tasks.c FreeRTOS/timers.c uart.c init.c another_testmain_v3_current_work.c adc.c
+SOURCEFILES=FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.c FreeRTOS/portable/MPLAB/PIC24_dsPIC/portasm_PIC24.S FreeRTOS/portable/MemMang/heap_1.c FreeRTOS/croutine.c FreeRTOS/event_groups.c FreeRTOS/list.c FreeRTOS/queue.c FreeRTOS/stream_buffer.c FreeRTOS/tasks.c FreeRTOS/timers.c uart.c init.c adc.c main_but_new_debounce_current.c
 
 
 
@@ -155,17 +155,17 @@ ${OBJECTDIR}/init.o: init.c  .generated_files/flags/default/d4508fe66c6985e8b40d
 	@${RM} ${OBJECTDIR}/init.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  init.c  -o ${OBJECTDIR}/init.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/init.o.d"      -g -D__DEBUG   -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/another_testmain_v3_current_work.o: another_testmain_v3_current_work.c  .generated_files/flags/default/afb98ade9305c35452e2d058346ae332ba58f06d .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/another_testmain_v3_current_work.o.d 
-	@${RM} ${OBJECTDIR}/another_testmain_v3_current_work.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  another_testmain_v3_current_work.c  -o ${OBJECTDIR}/another_testmain_v3_current_work.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/another_testmain_v3_current_work.o.d"      -g -D__DEBUG   -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/adc.o: adc.c  .generated_files/flags/default/a6c6557458d9851d241587e626794f3e785cd29 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/adc.o.d 
 	@${RM} ${OBJECTDIR}/adc.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  adc.c  -o ${OBJECTDIR}/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/adc.o.d"      -g -D__DEBUG   -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/main_but_new_debounce_current.o: main_but_new_debounce_current.c  .generated_files/flags/default/8c34a88d378dced9c4945a9b76b64568c58ea312 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main_but_new_debounce_current.o.d 
+	@${RM} ${OBJECTDIR}/main_but_new_debounce_current.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  main_but_new_debounce_current.c  -o ${OBJECTDIR}/main_but_new_debounce_current.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/main_but_new_debounce_current.o.d"      -g -D__DEBUG   -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
 ${OBJECTDIR}/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.o: FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.c  .generated_files/flags/default/c01bbd5d7a82ee7132e2a216fca191d0a89397cf .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
@@ -234,17 +234,17 @@ ${OBJECTDIR}/init.o: init.c  .generated_files/flags/default/a50d238ad696d5663442
 	@${RM} ${OBJECTDIR}/init.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  init.c  -o ${OBJECTDIR}/init.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/init.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/another_testmain_v3_current_work.o: another_testmain_v3_current_work.c  .generated_files/flags/default/d139dfe28623b2b60bd7338117d55054ae0e2f2b .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/another_testmain_v3_current_work.o.d 
-	@${RM} ${OBJECTDIR}/another_testmain_v3_current_work.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  another_testmain_v3_current_work.c  -o ${OBJECTDIR}/another_testmain_v3_current_work.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/another_testmain_v3_current_work.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/adc.o: adc.c  .generated_files/flags/default/cbe72eabaf408d0da0ce26bfee39230f9c754b83 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/adc.o.d 
 	@${RM} ${OBJECTDIR}/adc.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  adc.c  -o ${OBJECTDIR}/adc.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/adc.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/main_but_new_debounce_current.o: main_but_new_debounce_current.c  .generated_files/flags/default/d214e77a133e322d257215fdd6f8c36e68b3b0c7 .generated_files/flags/default/da39a3ee5e6b4b0d3255bfef95601890afd80709
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/main_but_new_debounce_current.o.d 
+	@${RM} ${OBJECTDIR}/main_but_new_debounce_current.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  main_but_new_debounce_current.c  -o ${OBJECTDIR}/main_but_new_debounce_current.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/main_but_new_debounce_current.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)    $(COMPARISON_BUILD)  -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

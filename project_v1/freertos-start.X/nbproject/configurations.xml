@@ -61,13 +61,15 @@
       <itemPath>init.c</itemPath>
       <itemPath>init.h</itemPath>
       <itemPath>FreeRTOS/test_main_v2.c</itemPath>
-      <itemPath>main.c</itemPath>
       <itemPath>FreeRTOS/main_v2_okish.c</itemPath>
       <itemPath>newmain_v4_debounce_ok.c</itemPath>
-      <itemPath>another_testmain_v3_current_work.c</itemPath>
       <itemPath>ok_nov16_save.c</itemPath>
       <itemPath>adc.c</itemPath>
       <itemPath>adc.h</itemPath>
+      <itemPath>old_main.c</itemPath>
+      <itemPath>another_testmain_v3_good_nov27.c</itemPath>
+      <itemPath>main_but_new_debounce_current.c</itemPath>
+      <itemPath>main_but_diff_state_machine.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -363,7 +365,7 @@
         <property key="toolpack.updateoptions.packversion"
                   value="Press to select which tool pack to use"/>
       </Tool>
-      <item path="another_testmain_v3_current_work.c" ex="false" overriding="false">
+      <item path="another_testmain_v3_good_nov27.c" ex="true" overriding="false">
         <C30>
         </C30>
         <C30-AR>
@@ -377,7 +379,21 @@
         <C30Global>
         </C30Global>
       </item>
-      <item path="main.c" ex="true" overriding="false">
+      <item path="main_but_diff_state_machine.c" ex="true" overriding="false">
+        <C30>
+        </C30>
+        <C30-AR>
+        </C30-AR>
+        <C30-AS>
+        </C30-AS>
+        <C30-CO>
+        </C30-CO>
+        <C30-LD>
+        </C30-LD>
+        <C30Global>
+        </C30Global>
+      </item>
+      <item path="main_but_new_debounce_current.c" ex="false" overriding="false">
         <C30>
         </C30>
         <C30-AR>
@@ -406,6 +422,20 @@
         </C30Global>
       </item>
       <item path="ok_nov16_save.c" ex="true" overriding="false">
+        <C30>
+        </C30>
+        <C30-AR>
+        </C30-AR>
+        <C30-AS>
+        </C30-AS>
+        <C30-CO>
+        </C30-CO>
+        <C30-LD>
+        </C30-LD>
+        <C30Global>
+        </C30Global>
+      </item>
+      <item path="old_main.c" ex="true" overriding="false">
         <C30>
         </C30>
         <C30-AR>

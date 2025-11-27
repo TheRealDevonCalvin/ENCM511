@@ -6,13 +6,14 @@
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/FreeRTOS/timers.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/FreeRTOS/portable/MPLAB/PIC24_dsPIC/port.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/init.h</file>
-            <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/another_testmain_v3_current_work.c</file>
+            <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/old_main.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/FreeRTOS/portable/MPLAB/PIC24_dsPIC/portmacro.h</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/FreeRTOS/include/task.h</file>
+            <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/main_but_new_debounce_current.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/uart.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/adc.c</file>
-            <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/main.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/FreeRTOS/main_v2_okish.c</file>
+            <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/main_but_diff_state_machine.c</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/uart.h</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/adc.h</file>
             <file>file:/C:/Users/fulbr/Documents/School%20Documents/ENCM511/ENCM511/project_v1/freertos-start.X/init.c</file>
