@@ -1,62 +1,146 @@
 #include "xc.h"
 #include "init.h"
 
-// this file has not changed from previous lab 3
 
-void IOinit(){
-    /*
-     * This function initializes the IOs used in the lab
-     * This includes the LEDs and buttons. 
-     */
+void IOinit(void){
     
-    // set pins for LEDs as outputs
+    // configure LED pins as outputs
     TRISBbits.TRISB5 = 0;
     TRISBbits.TRISB6 = 0;
     TRISBbits.TRISB7 = 0;
-    
-    // set LEDs to off
+    // default the LEDs off
     LED0 = 0;
     LED1 = 0;
     LED2 = 0;
-    
-    
-    // button inits! (includes the IOC setups)
 
-    // these are global IOC interrupt controllers
-    PADCONbits.IOCON = 1;       // enables interrupt on change
-    IFS1bits.IOCIF = 0;         // clear IOC interrupt flag
-    IPC4bits.IOCIP = 3;         // set IOC priority to 3
-    IEC1bits.IOCIE = 1;         // enable the interrupt
+    // change all pins that can be analog to be digital for the IOs
+    // we set the ADC pin to analog elsewhere
+    ANSELA = 0x0000; 
+    ANSELB = 0x0000; 
+
+    // set the button IOs as inputs
+    TRISAbits.TRISA4 = 1;   // PB1 (RA4)
+    TRISBbits.TRISB8 = 1;   // PB2 (RB8)
+    TRISBbits.TRISB9 = 1;   // PB3 (RB9)
+
+    // pull-ups on each button pin so the active low works
+    IOCPUAbits.CNPUA4 = 1;
+    IOCPUBbits.CNPUB8 = 1;
+    IOCPUBbits.CNPUB9 = 1;
     
+    // clear flag bits on each pin
+    IOCFAbits.IOCFA4 = 0;   // RA4
+    IOCFBbits.IOCFB8 = 0;   // RB8
+    IOCFBbits.IOCFB9 = 0;   // RB9
+
+    // clear port flag bits
+    IOCSTATbits.IOCPAF = 0;
+    IOCSTATbits.IOCPBF = 0;
+
+    // clear global IOC flag
+    IFS1bits.IOCIF = 0;
+
+    // read ports once to latch
+    // -----------------------------------------------------------------
+    // this is what was causing the pb3 behaviour on startup. a mc reference manual
+    //    https://ww1.microchip.com/downloads/aemDocuments/documents/OTH/ProductDocuments/ReferenceManuals/70005186a.pdf
+    // says that sometimes odd behaviour will occur if the port is not read before IOC is enabled
+    // so this is to help fix that and cause latching for the IOC change comparison
+    // -----------------------------------------------------------------
+    volatile uint16_t dummyA = PORTA;
+    volatile uint16_t dummyB = PORTB;
     
-    // RB8 is button1 (the top one)
-    TRISBbits.TRISB8 = 1;       // set RB8 as input
-    IOCPUBbits.CNPUB8 = 1;      // pullup RB8 (so button to ground works)
-    
-    IOCNBbits.IOCNB8 = 1;       // enable interrupt on negative edge
-    IOCPBbits.IOCPB8 = 1;       // enable interrupt positive edge
-    IOCSTATbits.IOCPBF = 0;     // clear flags in IOC status register for port B
-    IOCFBbits.IOCFB8 = 0;         // clear RB8 flag
-    
-    
-    // RA4 is button0 (middle)
-    TRISAbits.TRISA4 = 1;       // set RA4 as input
-    IOCPUAbits.CNPUA4 = 1;      // pullup on RA4 (again, so button to ground works)
-    
-    IOCNAbits.IOCNA4 = 1;       // enable interrupt negative edge transition 
-    IOCPAbits.IOCPA4 = 1;       // enable interrupt positive edge
-    IOCSTATbits.IOCPAF = 0;     // clear port A status flags for IOC
-    
-    
-    // RB9 is button 2 (bottom)
-    TRISBbits.TRISB9 = 1;       // set RB9 as input
-    IOCPUBbits.CNPUB9 = 1;      // pullup RB9
-    
-    IOCNBbits.IOCNB9 = 1;       // interrupt on negative edge
-    IOCPBbits.IOCPB9 = 1;
-    IOCSTATbits.IOCPBF = 0;     // clear flags (again?)
-    IOCFBbits.IOCFB9 = 0;         // clear RB9 flag
+    // --------------------------------------------------------------------------------------
+    // check if we actually need these or not
+    // lowkey i dont think we do its just to stop an error from throwing bcs unused vars
+    // --------------------------------------------------------------------------------------
+//    (void)dummyA;
+//    (void)dummyB;
+
+    // configure edges for the interrupts
+    IOCNAbits.IOCNA4 = 1;   // negative edge RA4
+    IOCPAbits.IOCPA4 = 1;   // positive edge RA4
+
+    IOCNBbits.IOCNB8 = 1;   // negative edge RB8
+    IOCPBbits.IOCPB8 = 1;   // positive edge RB8
+
+    IOCNBbits.IOCNB9 = 1;   // negative edge RB9
+    IOCPBbits.IOCPB9 = 1;   // positive edge RB9
+
+    // enable IOC
+    PADCONbits.IOCON = 1;   // enable IOC module (if your device requires PADCON)
+    IPC4bits.IOCIP = 3;     // priority
+    IEC1bits.IOCIE = 1;     // enable global IOC interrupt
+
+    // clear flags again for safety
+    IOCFAbits.IOCFA4 = 0;
+    IOCFBbits.IOCFB8 = 0;
+    IOCFBbits.IOCFB9 = 0;
+    IFS1bits.IOCIF = 0;
 }
+
+//void IOinit(){
+//    /*
+//     * This function initializes the IOs used in the lab
+//     * This includes the LEDs and buttons. 
+//     */
+//    
+//    // set pins for LEDs as outputs
+//    TRISBbits.TRISB5 = 0;
+//    TRISBbits.TRISB6 = 0;
+//    TRISBbits.TRISB7 = 0;
+//    
+//    // set LEDs to off
+//    LED0 = 0;
+//    LED1 = 0;
+//    LED2 = 0;
+//    
+//    
+//    // button inits! (includes the IOC setups)
+//
+//    // these are global IOC interrupt controllers
+////    PADCONbits.IOCON = 1;       // enables interrupt on change
+//    PADCONbits.IOCON = 0;       // disables interrupt on change
+//    IFS1bits.IOCIF = 0;         // clear IOC interrupt flag
+//    IPC4bits.IOCIP = 3;         // set IOC priority to 3
+//    IEC1bits.IOCIE = 0;         // enable the interrupt
+//    
+//    
+//    // RB8 is button1 (the top one)
+//    TRISBbits.TRISB8 = 1;       // set RB8 as input
+//    IOCPUBbits.CNPUB8 = 1;      // pullup RB8 (so button to ground works)
+//    
+//    IOCNBbits.IOCNB8 = 1;       // enable interrupt on negative edge
+//    IOCPBbits.IOCPB8 = 1;       // enable interrupt positive edge
+//    IOCSTATbits.IOCPBF = 0;     // clear flags in IOC status register for port B
+//    IOCFBbits.IOCFB8 = 0;         // clear RB8 flag
+//    
+//    
+//    // RA4 is button0 (middle)
+//    TRISAbits.TRISA4 = 1;       // set RA4 as input
+//    IOCPUAbits.CNPUA4 = 1;      // pullup on RA4 (again, so button to ground works)
+//    
+//    IOCNAbits.IOCNA4 = 1;       // enable interrupt negative edge transition 
+//    IOCPAbits.IOCPA4 = 1;       // enable interrupt positive edge
+//    IOCSTATbits.IOCPAF = 0;     // clear port A status flags for IOC
+//    IOCFAbits.IOCFA4 = 0;         // clear RA4flag
+//    
+//    
+//    // RB9 is button 2 (bottom)
+//    TRISBbits.TRISB9 = 1;       // set RB9 as input
+//    IOCPUBbits.CNPUB9 = 1;      // pullup RB9
+//    
+//    IOCNBbits.IOCNB9 = 1;       // interrupt on negative edge
+//    IOCPBbits.IOCPB9 = 1;
+//    IOCSTATbits.IOCPBF = 0;     // clear flags (again?)
+//    IOCFBbits.IOCFB9 = 0;         // clear RB9 flag
+//    
+//    IFS1bits.IOCIF = 0; // clear global
+//    
+//    PADCONbits.IOCON = 1;
+//    
+//    IEC1bits.IOCIE = 1; // enable IOC now
+//}
 
 void timerInit(){
     /*

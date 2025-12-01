@@ -73,7 +73,7 @@
 
 #define NUM_ENTRY 4
 
-//#define LED4 LATBbits.LATB15
+#define LED4 LATBbits.LATB15
 #define LED5 LATBbits.LATB14
 
 #define TASK_STACK_SIZE 200
@@ -110,7 +110,7 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
 
 void prvHardwareSetup(void){
     // this function calls the initializer functions required for the application
-    TRISBbits.TRISB5 = 0;
+    //TRISBbits.TRISB5 = 0;
     InitUART2();
     IOinit();
     timerInit();
@@ -120,8 +120,6 @@ void prvHardwareSetup(void){
 /*--------------- LED vars --------------------*/
 
 volatile uint16_t PWM_TON = 400;
-volatile uint16_t PWM_TOFF = 1;       // these may need to be vars not macros to be editable
-                                        // note that we can NOT set these to be 0 (janks the timer)
 volatile uint16_t PWM_PER = 400;
 volatile uint8_t pwm_on = 1;
 
@@ -163,15 +161,11 @@ typedef enum{
 volatile state_t curr_state = STATE_WAIT;
 
 
-QueueHandle_t ButtonQueueHandle;
-QueueHandle_t ProcessedButtonQueue;
+QueueHandle_t processed_button_queue;
 
-QueueHandle_t UartRxQueue;
+QueueHandle_t uart_rx_queue;
 
-QueueHandle_t DisplayQueue;
-
-QueueHandle_t adcQueue;
-QueueHandle_t DebounceQueue;
+QueueHandle_t display_queue;
 
 TaskHandle_t main_state_task_handler;
 
@@ -212,14 +206,6 @@ typedef struct{
 } processed_event_t;
 
 
-volatile uint8_t b_before_debounce[NUM_BUTTONS];      // value sampled in ISR
-volatile uint8_t b_after_debounce[NUM_BUTTONS];       // value after debounce
-volatile uint8_t b_last_valid[NUM_BUTTONS] = {1,1,1}; // last handled (stable) state (1=released)
-volatile TickType_t b_press_times[NUM_BUTTONS];      // last press time
-volatile TickType_t b_release_times[NUM_BUTTONS];    // last release time
-volatile uint8_t b_handled[NUM_BUTTONS] = {1,1,1};    // 0 = this press/release not yet handled by v_button_task
-volatile uint8_t debounce_active[NUM_BUTTONS] = {0,0,0}; // timers started
-volatile uint8_t debounce_done[NUM_BUTTONS] = {0,0,0};
 
 
 #define PB1_MASK (1 << 0)
@@ -258,48 +244,6 @@ typedef enum{
 
 /*-------------- ADC vars -----------------*/
 
-// currently, a big decision to be made is whether the ADC should be sampled periodically or as an on-change kind of thing
-// additionally, should the ADC do polling, or is it better to use the ADC interrupt
-    // doing the interrupt would require investigation into how it works
-    // i guess the consideration comes to CPU time/usage and if we think we can afford to busy-wait poll the ADC flag.
-    // BUT, will the adc isr run continuously and cause problems there? or is it disable-able so it can run periodic??
-    // another potential issue, cant call functions from that ADC ISR, but I assume this isnt a huge deal bc just read flag and store result?
-    //
-
-    // interrupt has buffer fill stuff going on (SMPI register)
-        // SMPI sets a number of samples to obtain before interrupting. 
-        // stores them in a series of ADC1BUFx registers, that could hypothetically be averaged????
-        // eliminates the need for the do_adc_avg things, and shouldnt have a busy-wait????
-        // this could then probably run in the background??? 
-        // BUT the isr would need to be coordinated so it doesnt hurt any other operation
-        // this could be tricky, bc priority, UART use, etc. 
-        // AND the user input can happen at any time, so what happens then???? if they twist at a bad time??
-        
-        // is it worth enabling/disabling the interrupts as needed? or can we pause(?) it somehow?
-
-// even then, does ADC go in background and run main, or should it have a task? 
-    // given a task, more modular, easier separability. 
-        // also potentially easier delays with vTaskDelay(until?)()
-    // in main, potential to jank up main???
-
-// then, another thing is the repeated updating
-    // should the ADC only update the screen as the countdown updates the screen, or should it update on change
-    // problems with both imo. 
-    // if update only on countdown change, we'd have problems with the responsiveness of the screen, meaning that the
-    // brightness may change, but the screen won't update that until the next countdown
-    // but if update consistently, will we have collision or races?? or just jitter in the screen???
-
-
-// ALSO may need to consider timing for the ADC
-    // ADC takes some amount of time to get through the SAR, so need to make sure that this does not interfere with 
-    // with other things happening in the system, and that it has enough time to appropriately sample
-    // and how does this play into the periodic vs aperiodic tasks thoughts, polling vs ISR, etc???
-
-// ^^ on the above:
-    // we are NOT polling the done flag, just pulling straight from the interrupt!!
-    // so far (as of Nov 23 when i wrote this), things seem to be working decently with this. 
-
-
 #define tmr5ms pdMS_TO_TICKS(5)
 
 volatile uint16_t raw_adc_result;
@@ -322,19 +266,12 @@ typedef enum{
 
 typedef struct{
     display_cmd_t cmd;
-    
-//    uint16_t val1;
-//    uint16_t val2;
-    
     char time[10];
     uint16_t adc;
     uint16_t intensity;
     
-//    char text[32];
-    
 } display_msg_t;
 
-// vv currently used (above not rn)
 typedef enum{
     DISP_MODE_TIME,
     DISP_MODE_FULL,
@@ -349,28 +286,16 @@ volatile disp_mode_t display_mode = DISP_MODE_TIME;
 //function prototype see if fix
 void v_main_state_task(void *pvParameters);
 
-//volatile uint8_t last_stable_state = 0b111;
 void v_button_task(void *pvParameters){
-    vTaskDelay(100); // let hardware stabilize
-    uint8_t pb1 = PB1;
-    uint8_t pb2 = PB2;
-    uint8_t pb3 = PB3;
-    uint8_t last_stable_state = (~((pb3<<2)|(pb2<<1)|pb1)) & 0b111;  // all released (assuming active-low)
-//    last_stable_state = 0b111;
-    
-   xSemaphoreTake(uart_sem, portMAX_DELAY);
-    Disp2String("Initial button state: ");
-    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-        if(last_stable_state & (1<<i)) Disp2String("R "); // released
-        else Disp2String("P "); // pressed
-    }
-    Disp2String("\n\r");
-    xSemaphoreGive(uart_sem);
+//    vTaskDelay(100); // let hardware stabilize
+    uint8_t pb1 = PORTAbits.RA4;
+    uint8_t pb2 = PORTBbits.RB8;
+    uint8_t pb3 = PORTBbits.RB9;
+    uint8_t last_stable_state = (~((pb3 << 2) | (pb2 << 1) | (pb1 << 0))) & 0b111; 
+
     for(;;){
         // Wait for ISR to signal an edge occurred
         if (xSemaphoreTake(button_sem, portMAX_DELAY) == pdTRUE){
-
-            
             // Delay for debounce window
             vTaskDelay(DEBOUNCE_DELAY);
            
@@ -407,32 +332,32 @@ void v_button_task(void *pvParameters){
                     if(num_pressed == 1){
                         if(dur >= LONG_PRESS_DUR){
                             pevt.type = EVT_LONG;
-                            Disp2String("LONG PB: ");
+//                            Disp2String("LONG PB: ");
                         }
                         else{
                             pevt.type = EVT_CLICK;
-                            Disp2String("Click PB: ");
+//                            Disp2String("Click PB: ");
                         }
                     }
                     else{
                         if(dur >= LONG_PRESS_DUR){
                             pevt.type = EVT_LONG_COMBO;
-                            Disp2String("Long Combo: ");
+//                            Disp2String("Long Combo: ");
                         }
                         else{
                             pevt.type = EVT_COMBO;
-                            Disp2String("Combo: ");
+//                            Disp2String("Combo: ");
                         }
                     }
-                    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-                        if(active_press.mask & (1<<i)){
-                            Disp2Dec(i+1);
-                            Disp2String(" ");
-                        }
-                    }
-                    Disp2String("\n\r");
+//                    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
+//                        if(active_press.mask & (1<<i)){
+//                            Disp2Dec(i+1);
+//                            Disp2String(" ");
+//                        }
+//                    }
+//                    Disp2String("\r\n");
                     
-                    xQueueSend(ProcessedButtonQueue, &pevt, 0);
+                    xQueueSend(processed_button_queue, &pevt, 0);
                     active_press.active = 0;
                 }
             }
@@ -553,27 +478,9 @@ void v_countdown_task(void *pvParameters){
             // also eventually do one-line display or overwriting so its less spammy on the uart
             // ------------------------------------------------------------------------------------
             if(display_mode == DISP_MODE_TIME){
-//                xSemaphoreTake(uart_sem, portMAX_DELAY);
-//                Disp2String(time_string);
-//                Disp2String("\n\r");
-//                xSemaphoreGive(uart_sem);
                 msg.cmd = DISP_TIME;
             }
             else if(display_mode == DISP_MODE_FULL){
-//                xSemaphoreTake(uart_sem, portMAX_DELAY);
-//                Disp2String(time_string);
-//                XmitUART2(' ', 1);
-//                Disp2String("ADC reading: ");
-//                char adc_str[10];
-//                int_to_str_dec(raw_adc_result, adc_str);
-//                Disp2String(adc_str);
-//                Disp2String(" LED2 Intensity: ");
-//                char led_intensity_str[10];
-//                led2_intensity = led2_variable_duty * 100 / 400;
-//                int_to_str_dec(led2_intensity, led_intensity_str);
-//                Disp2String(led_intensity_str);
-//                Disp2String("%\n\r");
-//                xSemaphoreGive(uart_sem);
                 msg.cmd = DISP_FULL;
             }
             
@@ -583,7 +490,7 @@ void v_countdown_task(void *pvParameters){
 //            }
 //            msg.text[i] = '\0';
 //            msg.cmd = DISP_TIME;
-            xQueueSend(DisplayQueue, &msg, 0);
+            xQueueSend(display_queue, &msg, 0);
                 
             if(time_seconds == 0){
                 // once the timer has run out, notify the main task, and turn off the countdown
@@ -600,13 +507,13 @@ void v_countdown_task(void *pvParameters){
     }
 }
 
-void v_display_task(void *pvParametes){
+void v_display_task(void *pvParameters){
     // gonna use this to control the display im thinking
     
     display_msg_t msg;
     
     for(;;){
-        if(xQueueReceive(DisplayQueue, &msg, portMAX_DELAY) == pdTRUE){ // should we use blocking portMAX_DELAY???
+        if(xQueueReceive(display_queue, &msg, portMAX_DELAY) == pdTRUE){ // should we use blocking portMAX_DELAY???
             
             xSemaphoreTake(uart_sem, portMAX_DELAY);    // again, portMAX????
             
@@ -616,7 +523,7 @@ void v_display_task(void *pvParametes){
                     break;
                 case DISP_TIME:
                     Disp2String(msg.time);
-                    Disp2String("\n\r");
+                    Disp2String("\r\n");
                     break;
                 case DISP_FULL:
                     Disp2String(msg.time);
@@ -630,7 +537,7 @@ void v_display_task(void *pvParametes){
 //                    led2_intensity = led2_variable_duty * 100 / 400;
                     int_to_str_dec(msg.intensity, led_intensity_str);
                     Disp2String(led_intensity_str);
-                    Disp2String("%\n\r");
+                    Disp2String("%\r\n");
                     
                     break;
                 case DISP_TEXT:
@@ -638,7 +545,7 @@ void v_display_task(void *pvParametes){
                     break;
                     
                 default:
-                    Disp2String("oops\n\r");    // debug again, remove
+                    Disp2String("oops\r\n");    // debug again, remove
                     break;
                 
             }// end switch
@@ -658,7 +565,7 @@ void v_main_state_task(void *pvParameters){
     processed_event_t pevt;
     uint32_t ulNotifiedValue = 0;
     for(;;){
-        uint8_t got_button = xQueueReceive(ProcessedButtonQueue, &pevt, 0) == pdTRUE;
+        uint8_t got_button = xQueueReceive(processed_button_queue, &pevt, 0) == pdTRUE;
         uint8_t got_notify = xTaskNotifyWait(0x00, 0xFFFFFFFFUL, &ulNotifiedValue, 0) == pdTRUE;
         
         switch(curr_state){
@@ -709,7 +616,7 @@ void v_main_state_task(void *pvParameters){
                             curr_state = STATE_COUNT;       // transition state to the count state
                             
                             // DEBUG ---------------------------------------------------------
-                            Disp2String("yay count!\n\r");
+                            Disp2String("yay count!\r\n");
                             //----------------------------------------------------------------
                             
                             countdown_running = 1;  // set the countdown running flag on
@@ -731,7 +638,7 @@ void v_main_state_task(void *pvParameters){
                             time_ready = 0;         // set time ready flag to 0
                             time_entry_index = 0;   // reset the time entry index for input collection
                             xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore print message, return semaphore
-                            Disp2String("oops, time not ready!\n\r");
+                            Disp2String("oops, time not ready!\r\n");
                             Disp2String("Enter a Time: mm:ss");
                             Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
                                                             // (the 15th character in the display)
@@ -740,7 +647,7 @@ void v_main_state_task(void *pvParameters){
                                 // loop over the time entry buffer and reset all of the values back to zero
                                 time_entry[j] = 0;
                             }
-                            xQueueReset(UartRxQueue);       // clears the UART receive queue so no carryover of prev. chars
+                            xQueueReset(uart_rx_queue);       // clears the UART receive queue so no carryover of prev. chars
                         }
                     }
                     // deal w long PB2/PB3 to reset input in STATE_INPUT
@@ -750,7 +657,7 @@ void v_main_state_task(void *pvParameters){
                         time_ready = 0;             // set the ready flag to 0, as time is not ready
                         time_entry_index = 0;       // reset the time entry index
                         xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore, print, and return semaphore
-                        Disp2String("Enter a Time: mm:ss");
+                        Disp2String("\r\nEnter a Time: mm:ss");
                         Disp2String("\033[15G");        // escape sequence to place the cursor at the tens place
                                                         // (the 15th character in the display)
                         xSemaphoreGive(uart_sem);
@@ -758,13 +665,13 @@ void v_main_state_task(void *pvParameters){
                             // loop over the time entry buffer to reset it back to zero
                             time_entry[j] = 0;
                         }
-                        xQueueReset(UartRxQueue);   // clear the uart receive queue 
+                        xQueueReset(uart_rx_queue);   // clear the uart receive queue 
                     }
                 }// end if(got_button)
                 
                 uint8_t recv_byte;
                 if(!time_ready){
-                    if(xQueueReceive(UartRxQueue, &recv_byte, 10) == pdTRUE){
+                    if(xQueueReceive(uart_rx_queue, &recv_byte, 10) == pdTRUE){
                         // ^ queue is used to avoid blocking
                         char c = (char)recv_byte;
                         
@@ -821,7 +728,7 @@ void v_main_state_task(void *pvParameters){
                         if(countdown_running == 0){
                             // if the countdown is no longer running, 
                             xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the UART semaphore
-                            Disp2String("Countdown Paused\n\r");        // print that the countdown has been paused
+                            Disp2String("Countdown Paused\r\n");        // print that the countdown has been paused
                             xSemaphoreGive(uart_sem);                   // return the semaphore!
                             if(xTimerIsTimerActive(led_blink_timer) == pdTRUE){
                                 // if the blinking timer is running, we want to stop it, as on countdown pause the 
@@ -832,7 +739,7 @@ void v_main_state_task(void *pvParameters){
                         else if(countdown_running == 1){
                             // otherwise if the countdown is now running, 
                             xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the UART semaphore
-                            Disp2String("Countdown Resumed\n\r");       // print that the countdown has resumed
+                            Disp2String("Countdown Resumed\r\n");       // print that the countdown has resumed
                             xSemaphoreGive(uart_sem);                   // give the semaphore back
                             if(xTimerIsTimerActive(led_blink_timer) == pdFALSE){
                                 // if the blinking timer is NOT running, we need to start it up again
@@ -862,7 +769,7 @@ void v_main_state_task(void *pvParameters){
                         countdown_running = 0;  // stop the counter running
 
                         xSemaphoreTake(uart_sem, portMAX_DELAY);    // take semaphore, print that countdown aborted, and return sem
-                        Disp2String("Countdown Aborted\n\r");
+                        Disp2String("Countdown Aborted\r\n");
                         xSemaphoreGive(uart_sem);
 
                         curr_state = STATE_END;     // transition the current state to STATE_END
@@ -884,28 +791,28 @@ void v_main_state_task(void *pvParameters){
                     }
 
                     xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the semaphore, print completion message, give back sem
-                    Disp2String("Countdown Complete\n\r");
+                    Disp2String("Countdown Complete\r\n");
                     xSemaphoreGive(uart_sem);
 
                     curr_state = STATE_END; // transition the state to the end state
                 }
                 
-                if(xQueueReceive(UartRxQueue, &recv_byte, 10) == pdTRUE){
+                if(xQueueReceive(uart_rx_queue, &recv_byte, 10) == pdTRUE){
                     
                     char c = (char)recv_byte;
                     if(c == 'b'){
-                        Disp2String("char b was entered\n\r");
+                        Disp2String("char b was entered\r\n");
                         if(led2_mode == LED_MODE_ON) led2_mode = LED_MODE_BLINK;
                         else if(led2_mode == LED_MODE_BLINK) led2_mode = LED_MODE_ON;
                     }
                     if(c == 'i'){
-                        Disp2String("char i was entered\n\r");
+                        Disp2String("char i was entered\r\n");
                         // handle display changes
                         
                         if(display_mode == DISP_MODE_TIME) display_mode = DISP_MODE_FULL;
                         else if(display_mode == DISP_MODE_FULL) display_mode = DISP_MODE_TIME;
                     }              
-                    xQueueReset(UartRxQueue);       // idk if this is exactly how this should be??
+                    xQueueReset(uart_rx_queue);       // idk if this is exactly how this should be??
                 }                
                 break;
                 
@@ -928,7 +835,7 @@ void v_main_state_task(void *pvParameters){
                     }
                     
                     xSemaphoreTake(uart_sem, portMAX_DELAY);    // take the semaphore, print the wait state message, and return sem
-                    Disp2String("Press PB1 to begin!\n\r");
+                    Disp2String("Press PB1 to begin!\r\n");
                     xSemaphoreGive(uart_sem);
                     curr_state = STATE_WAIT;    // transition back to the waiting state                   
                 }                
@@ -942,47 +849,20 @@ int main(void) {
     
     prvHardwareSetup();
     
-    ANSELA = 0x0000; /* keep this line as it sets I/O pins that can also be analog to be digital */
-    ANSELB = 0x0000; /* keep this line as it sets I/O pins that can also be analog to be digital */
+//    ANSELA = 0x0000; /* keep this line as it sets I/O pins that can also be analog to be digital */
+//    ANSELB = 0x0000; /* keep this line as it sets I/O pins that can also be analog to be digital */
     
     ANSELB |= 0b1000; // set RB3 (pin 7) to be analog input for ADC potentiometer
     
     // DEBUGS again, take them out!!!
     // ----------------------------------------------------------------
-    TRISBbits.TRISB9 = 1;
+    //TRISBbits.TRISB9 = 1;
     TRISBbits.TRISB15 = 0;
     TRISBbits.TRISB14 = 0;
-    LED4 = 0;
+    LED4 = 1;
     LED5 = 0;
     // ----------------------------------------------------------------
 
-    // help w init bounce maybe?
-    b_after_debounce[0] = PORTAbits.RA4;
-    b_after_debounce[1] = PORTBbits.RB8;
-    b_after_debounce[2] = PORTBbits.RB9;
-    
-    
-    IFS1bits.IOCIF = 0;
-    IOCFAbits.IOCFA4 = 0;
-    IOCFBbits.IOCFB8 = 0;
-    IOCFBbits.IOCFB9 = 0;
-    IEC1bits.IOCIE = 1; // if not already set, enable IOC interrupt
-  
-    uart_sem = xSemaphoreCreateMutex();
-    led2_sem = xSemaphoreCreateMutex();
-    
-    button_sem = xSemaphoreCreateBinary();
-    
-    xSemaphoreGive(button_sem);
-    
-    ButtonQueueHandle = xQueueCreate(10, sizeof(button_event_t));
-    ProcessedButtonQueue = xQueueCreate(10, sizeof(processed_event_t));
-    UartRxQueue = xQueueCreate(32, sizeof(uint8_t));    // uint8_t == char so all is well
-    DisplayQueue = xQueueCreate(10, sizeof(display_msg_t));
-
-    
-    DebounceQueue = xQueueCreate(10, sizeof(uint8_t));
-    //xTaskCreate(v_debounce_task, "Debounce Task", configMINIMAL_STACK_SIZE * 2, NULL, 5, NULL);
     
     // CONSIDER if we swap prio of button and countdown, do we fix that overflow stuff?
     xTaskCreate(v_button_task, "Button Task", configMINIMAL_STACK_SIZE * 2, NULL, 3, NULL);
@@ -993,12 +873,6 @@ int main(void) {
     xTaskCreate(v_display_task, "Display Task", configMINIMAL_STACK_SIZE * 2, NULL, 1, NULL);
     
     
-    static uint8_t timer_ids[NUM_BUTTONS];
-//    for(uint8_t i = 0; i < NUM_BUTTONS; i++){
-//        timer_ids[i] = i;
-//        DebounceTimers[i] = xTimerCreate("Debounce Timer", DEBOUNCE_DELAY, pdFALSE, (void *)(uintptr_t)i, v_timer_callback);
-//    }
-    
     led_blink_timer = xTimerCreate("Blink Timer", BLINK_RATE, pdTRUE, (void *)0, v_blink_callback_count);
     xTimerStart(led_blink_timer, 0);
     
@@ -1007,14 +881,26 @@ int main(void) {
     
     end_timer = xTimerCreate("End Timer", END_TIMEOUT, pdFALSE, (void*)0, v_end_callback);
     
+    curr_state = STATE_WAIT;
+    
+    uart_sem = xSemaphoreCreateMutex();
+    led2_sem = xSemaphoreCreateMutex();
+    
+    button_sem = xSemaphoreCreateBinary();
+    
+    processed_button_queue = xQueueCreate(10, sizeof(processed_event_t));
+    uart_rx_queue = xQueueCreate(32, sizeof(uint8_t));    // uint8_t == char so all is well
+    display_queue = xQueueCreate(10, sizeof(display_msg_t));
+    
     xSemaphoreTake(uart_sem, portMAX_DELAY);
-    Disp2String("Press PB1 to begin!\n\r");
+
+    Disp2String("Press PB1 to begin!\r\n");
     xSemaphoreGive(uart_sem);
     
     // some of this is DEBUG
     LED1 = 0;
-    LED0 = 1;
-    LED5 = 1;
+//    LED0 = 1;
+//    LED5 = 1;
     LED4 = 0;
     
     
@@ -1029,7 +915,18 @@ int main(void) {
     T3CONbits.TON = 1;
     AD1CON1bits.ADON = 1;
 
+    
+    
+    IFS1bits.IOCIF = 0;
+    IOCFAbits.IOCFA4 = 0;
+    IOCFBbits.IOCFB8 = 0;
+    IOCFBbits.IOCFB9 = 0;
+    
+    IEC1bits.IOCIE = 1; // if not already set, enable IOC interrupt
+    
+    
     vTaskStartScheduler();
+    
     
     for(;;);
 }
@@ -1119,42 +1016,34 @@ void __attribute__((interrupt, no_auto_psv)) _T2Interrupt(void){
 
 
 void __attribute__ ((interrupt, no_auto_psv)) _IOCInterrupt(void){
-
+    /*
+     * The IOC interrupt handles detection of button events for all of the three pushbuttons.
+     * For this application, the debounce strategy is to give a semaphore in the ISR, which is taken from 
+     * a button task that waits for a debouncing period, and then events are handled from there. 
+     */
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
-
-    if(IOCFAbits.IOCFA4 || IOCFBbits.IOCFB8 || IOCFBbits.IOCFB9)
-    xSemaphoreGiveFromISR(button_sem, &xHigherPriorityTaskWoken);
-//    IOCFAbits.IOCFA4 = 0;
-//    IOCFBbits.IOCFB8 = 0;
-//    IOCFBbits.IOCFB9 = 0;
-//    // PB1 RA4
-//    if(IOCFAbits.IOCFA4){
-//        IOCFAbits.IOCFA4 = 0;
-//        uint8_t id = 0;
-//        xQueueSendFromISR(DebounceQueue, &id, &xHigherPriorityTaskWoken);
-//    }
-//
-//    // PB2 RB8
-//    if(IOCFBbits.IOCFB8){
-//        IOCFBbits.IOCFB8 = 0;
-//        uint8_t id = 1;
-//        xQueueSendFromISR(DebounceQueue, &id, &xHigherPriorityTaskWoken);
-//    }
     
-//
-//    // PB3 RB9
-//    if(IOCFBbits.IOCFB9){
-//        IOCFBbits.IOCFB9 = 0;
-//        uint8_t id = 2;
-//        xQueueSendFromISR(DebounceQueue, &id, &xHigherPriorityTaskWoken);
-//    }
-   
+    if(IOCFAbits.IOCFA4){
+        // if the edge was on pin RA4 (PB1), clear flag and give button semaphore
+        IOCFAbits.IOCFA4 = 0;
+        xSemaphoreGiveFromISR(button_sem, &xHigherPriorityTaskWoken);
+    }
+    if(IOCFBbits.IOCFB8){
+        // same as above but if edge was on pin RB8 (PB2)
+        IOCFBbits.IOCFB8 = 0;
+        xSemaphoreGiveFromISR(button_sem, &xHigherPriorityTaskWoken);
+    }
+    
+    if(IOCFBbits.IOCFB9){
+        // same as above but if edge was on pin RB9 (PB3)
+        IOCFBbits.IOCFB9 = 0;
+        xSemaphoreGiveFromISR(button_sem, &xHigherPriorityTaskWoken);
+    }
     
     IFS1bits.IOCIF = 0;  // clear global IOC flags 
     if(xHigherPriorityTaskWoken) {
         portYIELD();  // triggers context switch
     }
-       
 }
 
 
@@ -1197,8 +1086,6 @@ void __attribute__((interrupt, no_auto_psv)) _ADC1Interrupt(void){
     led2_variable_duty = (uint16_t)temp;
     led2_intensity = led2_variable_duty * 100 / 400;
     xSemaphoreGiveFromISR(led2_sem, &xHigherPriorityTaskWoken);
-    
-    
     
     IFS0bits.AD1IF = 0; // clear the adc interrupt flag
     

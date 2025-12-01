@@ -1,0 +1,1 @@
+ -c -mcpu=$(MP_PROCESSOR_OPTION)  -omf=elf -DXPRJ_default=$(CND_CONF)    -I"./FreeRTOS/include" -I"." -I"./FreeRTOS/portable/MPLAB/PIC24_dsPIC" -Wa,-g,--no-relax$(MP_EXTRA_AS_POST)  -mdfp="${DFP_DIR}/xc16"C:\Users\fulbr\Documents\School Documents\ENCM511\ENCM511\project_v2\project_v2.X\FreeRTOS\portable\MPLAB\PIC24_dsPIC\portasm_PIC24.S

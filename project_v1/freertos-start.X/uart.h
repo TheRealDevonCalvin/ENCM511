@@ -67,7 +67,7 @@
 #include "task.h"
 #include "semphr.h"
 
-extern QueueHandle_t UartRxQueue;
+extern QueueHandle_t uart_rx_queue;
 
 void InitUART2(void);
 void Disp2String(char *str);

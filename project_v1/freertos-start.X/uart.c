@@ -173,23 +173,13 @@ void Disp2Dec(uint16_t Dec_num) {
 
 void __attribute__ ((interrupt, no_auto_psv)) _U2RXInterrupt(void) {
 
-//	IFS1bits.U2RXIF = 0;
-//    
-//    received_char = U2RXREG;
-//    
-//    RXFlag = 1;
-//    
-////    _LATB5 ^= 1;
-    
-    
-    // ^^ was given
-    
+
     BaseType_t xHigherPriorityTaskWoken = pdFALSE;
     uint8_t c;
     
     c = U2RXREG;
     
-    xQueueSendFromISR(UartRxQueue, &c, &xHigherPriorityTaskWoken);
+    xQueueSendFromISR(uart_rx_queue, &c, &xHigherPriorityTaskWoken);
     
     IFS1bits.U2RXIF = 0;
     RXFlag = 1;
