@@ -69,6 +69,7 @@
       <itemPath>uart.h</itemPath>
       <itemPath>countdown_module.c</itemPath>
       <itemPath>countdown_module.h</itemPath>
+      <itemPath>main_try_something.c</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -1280,6 +1281,8 @@
                   value=""/>
         <property key="warningmessagebreakoptions.warningmessages" value="holdstate"/>
       </Tool>
+      <item path="main_try_something.c" ex="true" overriding="false">
+      </item>
       <snap>
         <property key="ADC 1" value="true"/>
         <property key="AutoSelectMemRanges" value="auto"/>
@@ -1346,6 +1349,8 @@
                   value="${memories.instruction.ram.ranges}"/>
         <property key="memories.programmemory" value="true"/>
         <property key="memories.programmemory.ranges" value="0-2aeff"/>
+        <property key="programmerToGoFilePath"
+                  value="C:/Users/fulbr/Documents/School Documents/ENCM511/ENCM511/project_v2/project_v2.X/debug/default/project_v2_ptg"/>
         <property key="programoptions.donoteraseauxmem" value="false"/>
         <property key="programoptions.eraseb4program" value="true"/>
         <property key="programoptions.pgmentry.voltage" value="low"/>

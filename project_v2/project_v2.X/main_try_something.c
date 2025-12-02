@@ -72,8 +72,6 @@
 #include "uart.h"
 #include "init.h"
 
-#define ADC_SAMPLE_TRIGGER 200
-
 // an enum type for the state machine
 typedef enum{
     STATE_WAIT,
@@ -99,9 +97,8 @@ void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
 	/* Run time stack overflow checking is performed if
 	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
 	function is called if a stack overflow is detected. */
-	Disp2String(pcTaskName);
-    taskDISABLE_INTERRUPTS();
-    
+	taskDISABLE_INTERRUPTS();
+    Disp2String(pcTaskName);
 	for( ;; );
 }
 
@@ -130,10 +127,8 @@ void v_main_state_task(void *pvParameters){
         // if there's something to receive in the queue, or a task notified main, set the respective got flag
         uint8_t got_button = xQueueReceive(processed_button_queue, &pevt, 0) == pdTRUE;
         uint8_t got_notify = xTaskNotifyWait(0x00, 0xFFFFFFFFUL, &ulNotifiedValue, 0) == pdTRUE;
-        
-        if(!got_button && !got_notify){
-            vTaskDelay(1);  // task will yield control of the cpu if nothing is happening
-        }
+        uint8_t got_something = (xQueueReceive(processed_button_queue, &pevt, portMAX_DELAY) == pdTRUE) || (xTaskNotifyWait(0x00, 0xFFFFFFFFUL, &ulNotifiedValue, portMAX_DELAY) == pdTRUE)
+                                || (xQueueReceive(uart_rx_queue, &recv_byte, portMAX_DELAY) == pdTRUE);
         
         switch(curr_state){
             // switch over curr_state to run the state machine
@@ -145,9 +140,10 @@ void v_main_state_task(void *pvParameters){
                  * Transition out of this state is caused by a click of PB1
                  */
                 
-                led2_mode = LED_MODE_PULSE; // set LED2 to pulse according to the timer2
+                pulse = 1;      // set LED2 to pulse according to the timer2
+                led2_mode = LED_MODE_PULSE;
                 
-                if(got_button){
+                if(got_something){
                     // deal with transition out of STATE_WAIT
                     if(pevt.type == EVT_CLICK && (pevt.buttons_mask == PB1_MASK)){
                         // transition occurs when PB1 is clicked in STATE_WAIT
@@ -173,10 +169,11 @@ void v_main_state_task(void *pvParameters){
                  * Transition out of this state is cause by a combo click of PB2/PB3 and begins the countdown
                  */
                 
+                pulse = 0;      // turn off the pulsing of LED2
                 LED2 = 0;       // and ensure LED2 itself gets turned off
-                led2_mode = LED_MODE_OFF;   // transition led2_mode to off
+                led2_mode = LED_MODE_OFF;
                 
-                if(got_button){
+                if(got_something){
                     // deal with pb2/pb3 clicks out of STATE_INPUT
                     if(pevt.type == EVT_COMBO && (pevt.buttons_mask == PB2_PB3_MASK)){
                         // if in state input, and the combo event was on PB2 and PB3, 
@@ -300,7 +297,7 @@ void v_main_state_task(void *pvParameters){
                  * of PB3 that aborts the timer. 
                  */
                 
-                if(got_button){
+                if(got_something){
                     // deal w the pause/restart of the count
                     if(pevt.type == EVT_CLICK && (pevt.buttons_mask == PB3_MASK)){
                         // if event was a click, and mask was PB3, a PB3 click has occurred
@@ -361,7 +358,7 @@ void v_main_state_task(void *pvParameters){
                     }                    
                 }// end if(got_button)
                 
-                if(got_notify && (ulNotifiedValue & (1<<NOTIFY_COUNTDOWN))){
+                if(got_something && (ulNotifiedValue & (1<<NOTIFY_COUNTDOWN))){
                     // if the current state is the countdown state and main is notified that the countdown has ended
                     led1_blink_en = 0;          // enable the led1 to blink 
                     led2_mode = LED_MODE_ON;    // force led2 to constant on
@@ -412,7 +409,7 @@ void v_main_state_task(void *pvParameters){
                  * Transition out of this state occurs when the 5s timeout has elapsed, and we return to wait. 
                  */
                                 
-                if(got_notify && (ulNotifiedValue & (1 << NOTIFY_END_TIMEOUT))){
+                if(got_something && (ulNotifiedValue & (1 << NOTIFY_END_TIMEOUT))){
                     // if the notified value was the timeout end notification (after the 5s timeout after countdown ends)
      
                     LED0 = 0;       // turn LEDs 1 and 0 off
@@ -482,7 +479,7 @@ int main(void) {
     
     // configure timer3 start and stop counts, and enable it and the adc for variable intensity
     TMR3 = 0;
-    PR3 = ADC_SAMPLE_TRIGGER;      
+    PR3 = 200;      
     T3CONbits.TON = 1;
     AD1CON1bits.ADON = 1;   
     
@@ -491,3 +488,4 @@ int main(void) {
     
     for(;;);
 } // end main()
+

@@ -31,7 +31,6 @@ extern "C" {
     
 extern volatile uint16_t PWM_TON;
 extern volatile uint16_t PWM_PER;
-extern volatile uint8_t pulse;
 
 extern TimerHandle_t led_blink_timer;
 extern TimerHandle_t led_alternate_timer;

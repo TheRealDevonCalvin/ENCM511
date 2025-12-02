@@ -40,10 +40,9 @@ void v_countdown_task(void *pvParameters){
     display_msg_t msg;  // to be sent to the display queue
     
     for(;;){
-        if(countdown_running && time_seconds > 0 && (xSemaphoreTake(time_sem, portMAX_DELAY) == pdTRUE)){
+        if(countdown_running && time_seconds > 0){
             // if the countdown is running, and there is time left on it,
             // we wait one second (using delayuntil to have better timing)
-            xSemaphoreGive(time_sem);
             vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(1000));
             
             // --------------------------------------------------------------------------
@@ -91,9 +90,8 @@ void v_countdown_task(void *pvParameters){
             
             xQueueSend(display_queue, &msg, 0); // send the compiled message over the queue
                 
-            if(time_seconds == 0 && (xSemaphoreTake(time_sem, portMAX_DELAY) == pdTRUE)){
+            if(time_seconds == 0){
                 // once the timer has run out, notify the main task, and turn off the countdown
-                xSemaphoreGive(time_sem);
                 countdown_running = 0;
                 xTaskNotify(main_state_task_handler, (1<<NOTIFY_COUNTDOWN), eSetBits);
             }

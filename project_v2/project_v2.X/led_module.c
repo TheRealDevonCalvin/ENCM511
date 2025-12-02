@@ -5,8 +5,7 @@ volatile uint16_t PWM_TON = 400;
 volatile uint16_t PWM_PER = 400;
 volatile uint8_t pwm_on = 1;
 
-volatile uint8_t decrease = 1;
-volatile uint8_t pulse = 1;     
+volatile uint8_t decrease = 1;    
 
 // timer and semaphore handles for the LEDs
 TimerHandle_t led_blink_timer;

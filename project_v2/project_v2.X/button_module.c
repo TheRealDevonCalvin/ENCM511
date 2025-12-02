@@ -17,7 +17,7 @@ void v_button_task(void *pvParameters){
 
     for(;;){
         // wait for the button semaphore from the IOC ISR to signal that an edge has occurred
-        if (xSemaphoreTake(button_sem, portMAX_DELAY) == pdTRUE){
+        if(xSemaphoreTake(button_sem, portMAX_DELAY) == pdTRUE){
             vTaskDelay(DEBOUNCE_DELAY); // delay for debounce window
            
             // read debounced states of each button

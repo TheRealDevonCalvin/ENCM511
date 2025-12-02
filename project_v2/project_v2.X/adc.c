@@ -12,7 +12,7 @@ void ADC1_init(void){
     AD1CHSbits.CH0NA = 0;       // neg ref to Vss for channel a
     AD1CHSbits.CH0SA = 5;       // pos ref to AN5 (pin7) for channel a
 
-    AD1CON3bits.ADCS = 1;
+    AD1CON3bits.ADCS = 13;      // conversion clock select
     
     // DMAEN, ASEN are 0
 
@@ -22,14 +22,14 @@ void ADC1_init(void){
     
     AD1CON1bits.SSRC = 2;       // set to use tmr3 trigger
     
-    AD1CON3bits.SAMC = 5;       // 5TAD sample time
+    AD1CON3bits.SAMC = 26;      // auto sample time select
     AD1CON1bits.FORM = 0;       // absolute decimal result
     AD1CON1bits.MODE12 = 0;     // 10 bit mode
     
     IEC0bits.AD1IE = 1;         // enable interrupts
     IFS0bits.AD1IF = 0;         // clear flag
     
-    AD1CON1bits.ASAM = 1;       // auto sample (or can manually set)
+    AD1CON1bits.ASAM = 1;       // auto sample 
         
 }
 
